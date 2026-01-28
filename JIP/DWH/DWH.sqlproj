@@ -123,6 +123,7 @@
     <Build Include="dbo\Stored Procedures\p_LoadDimProduct.sql" />
     <Build Include="dbo\Tables\FactMaterialMovement.sql" />
     <Build Include="dbo\Stored Procedures\p_LoadFactMaterialMovement.sql" />
+    <Build Include="dbo\Views\v_FactProduct.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DWH.publish.xml" />

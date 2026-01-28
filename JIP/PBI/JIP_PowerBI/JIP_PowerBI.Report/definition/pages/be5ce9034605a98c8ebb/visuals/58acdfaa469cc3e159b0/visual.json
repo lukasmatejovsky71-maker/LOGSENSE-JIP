@@ -1,0 +1,170 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "58acdfaa469cc3e159b0",
+  "position": {
+    "x": 0,
+    "y": 452.14285714285717,
+    "z": 4000,
+    "height": 257.14285714285717,
+    "width": 1280,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Branch"
+                    }
+                  },
+                  "Property": "BranchName"
+                }
+              },
+              "queryRef": "Branch.BranchName",
+              "nativeQueryRef": "BranchName"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Fact Material Movement"
+                        }
+                      },
+                      "Property": "Material Movement Turnover Palletes"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Fact Material Movement.MaterialMovementTurnoverPalletes)",
+              "nativeQueryRef": "Počet palet celkem",
+              "displayName": "Počet palet celkem"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Material Movement"
+                    }
+                  },
+                  "Property": "Material Movement External Palletes"
+                }
+              },
+              "queryRef": "Fact Material Movement.Material Movement External Palletes",
+              "nativeQueryRef": "Počet palet - externí",
+              "displayName": "Počet palet - externí"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Material Movement"
+                    }
+                  },
+                  "Property": "Material Movement External Palletes %"
+                }
+              },
+              "queryRef": "Fact Material Movement.Material Movement External Palletes %",
+              "nativeQueryRef": "Počet palet - externí %",
+              "displayName": "Počet palet - externí %"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Fact Material Movement"
+                        }
+                      },
+                      "Property": "Material Movement Turnover Units"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Fact Material Movement.MaterialMovementTurnoverUoM)",
+              "nativeQueryRef": "Počet v měrných jednotkách",
+              "displayName": "Počet v měrných jednotkách"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Material Movement"
+                    }
+                  },
+                  "Property": "Material Movement Turnover Count"
+                }
+              },
+              "queryRef": "Fact Material Movement.Material Movement Turnover Count",
+              "nativeQueryRef": "Četnost",
+              "displayName": "Četnost"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Material Movement"
+                    }
+                  },
+                  "Property": "Material Movement External Count"
+                }
+              },
+              "queryRef": "Fact Material Movement.Material Movement External",
+              "nativeQueryRef": "Četnost externí",
+              "displayName": "Četnost externí"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Material Movement"
+                    }
+                  },
+                  "Property": "Material Movement Internal Count"
+                }
+              },
+              "queryRef": "Fact Material Movement.Material Movement Internal",
+              "nativeQueryRef": "Četnost interní",
+              "displayName": "Četnost interní"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Branch"
+                  }
+                },
+                "Property": "BranchName"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

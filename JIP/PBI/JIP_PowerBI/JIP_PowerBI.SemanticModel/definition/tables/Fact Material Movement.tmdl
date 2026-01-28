@@ -1,0 +1,169 @@
+table 'Fact Material Movement'
+	lineageTag: eb949167-dcbd-47a6-bebd-6aa2de690348
+
+	measure 'Material Movement Turnover Count' = COUNTROWS()
+		formatString: #,0
+		lineageTag: 9049d144-1fda-424c-8c54-7a014797b139
+
+	measure 'Material Movement Internal Count' =
+			CALCULATE(
+			    COUNTROWS(),
+			    Supplier[Supplier Is JIP]
+			)
+		formatString: #,0
+		lineageTag: fdf22aec-26b8-4a7e-8640-ba91029fb5a9
+
+	measure 'Material Movement External Count' =
+			CALCULATE(
+			    COUNTROWS(),
+			    NOT( Supplier[Supplier Is JIP])
+			)
+		formatString: #,0
+		lineageTag: de617168-c517-406a-8465-423c4632d1b9
+
+	measure 'Material Movement External Palletes' =
+			CALCULATE(
+			    SUM('Fact Material Movement'[Material Movement Turnover Palletes]),
+			    NOT( Supplier[Supplier Is JIP])
+			)
+		formatString: #,0.00
+		lineageTag: 75d83dd6-1f28-490f-abd6-6119214229a6
+
+	measure 'Material Movement Internall Palletes' = ```
+			CALCULATE(
+			    SUM('Fact Material Movement'[Material Movement Turnover Palletes]),
+			     Supplier[Supplier Is JIP]
+			)
+			
+			```
+		formatString: #,0.00
+		lineageTag: 2ebe5ba5-2f0e-4a8b-b992-b2d320fd516b
+
+	measure 'Material Movement External Palletes %' = [Material Movement External Palletes] / SUM([Material Movement Turnover Palletes])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 785bd327-0429-4f92-b68c-0d2d6fc9f529
+
+	column MaterialMovementId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 374363f1-a5ff-42f1-940a-b1312deac65d
+		summarizeBy: count
+		sourceColumn: MaterialMovementId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaterialMovement_DateId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ca0cca8c-bd76-4722-aa48-9851004a5a61
+		summarizeBy: none
+		sourceColumn: MaterialMovement_DateId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaterialMovement_DivisionId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 942f63a5-afa7-49fd-8e14-22f1aaf3e225
+		summarizeBy: none
+		sourceColumn: MaterialMovement_DivisionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaterialMovement_BranchId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 94e014a7-83d4-4f28-b163-e8021f4bb201
+		summarizeBy: none
+		sourceColumn: MaterialMovement_BranchId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaterialMovement_DocumentId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 008e1d1a-8298-4f05-911b-ce4cd98e0867
+		summarizeBy: none
+		sourceColumn: MaterialMovement_DocumentId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaterialMovement_ProductId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1209ac3f-2e04-4081-a046-6ad8dda295a2
+		summarizeBy: none
+		sourceColumn: MaterialMovement_ProductId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaterialMovement_SupplierId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2499cd1d-77ed-43fb-bc56-0c28fe3bce56
+		summarizeBy: none
+		sourceColumn: MaterialMovement_SupplierId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Material Movement Turnover Units'
+		dataType: double
+		lineageTag: 939747b7-7e67-417d-b657-6c6feedf055b
+		summarizeBy: sum
+		sourceColumn: Material Movement Turnover Units
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Material Movement Turnover Palletes'
+		dataType: double
+		lineageTag: 8618dd3e-7b1a-43d4-a54d-4d59b177ecff
+		summarizeBy: sum
+		sourceColumn: Material Movement Turnover Palletes
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Fact Material Movement' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("BORGERS.LOCAL", "JIP_DWH"),
+				    dbo_FactMaterialMovement = Source{[Schema="dbo",Item="FactMaterialMovement"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_FactMaterialMovement,{{"MaterialMovementTurnoverPalletes", "Material Movement Turnover Palletes"}, {"MaterialMovementTurnoverUoM", "Material Movement Turnover Units"}})
+				in
+				    #"Renamed Columns"
+
+	changedProperty = IsHidden
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

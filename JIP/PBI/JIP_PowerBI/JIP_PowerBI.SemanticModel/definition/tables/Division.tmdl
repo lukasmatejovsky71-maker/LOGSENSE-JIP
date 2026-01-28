@@ -1,0 +1,43 @@
+table Division
+	lineageTag: 3de3e802-b628-4145-8ba5-11a6e22547c5
+
+	column DivisionId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9ed25679-5540-4a21-be02-76fd5d0f1d44
+		summarizeBy: none
+		sourceColumn: DivisionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivisionName
+		dataType: string
+		lineageTag: 78194b30-1ab4-48c1-8f54-f320d41a6287
+		summarizeBy: none
+		sourceColumn: DivisionName
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivisionDeleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 022cbee8-d9de-49da-9785-6b5a0fed8770
+		summarizeBy: none
+		sourceColumn: DivisionDeleted
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Division = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("BORGERS.LOCAL", "JIP_DWH"),
+				    dbo_DimDivision = Source{[Schema="dbo",Item="DimDivision"]}[Data]
+				in
+				    dbo_DimDivision
+
+	annotation PBI_ResultType = Table
+

@@ -9,6 +9,10 @@
     <Import_RootNamespace>PBI</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)Occupancy.pbip" />
+    <None Include="$(MSBuildThisFileDirectory)SharedReports\JIP_PowerBI.pbix" />
+    <None Include="$(MSBuildThisFileDirectory)JIP_PowerBI\JIP_PowerBI.pbip" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)SharedReports\" />
   </ItemGroup>
 </Project>

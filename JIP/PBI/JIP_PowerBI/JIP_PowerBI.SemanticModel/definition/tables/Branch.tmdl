@@ -1,0 +1,48 @@
+table Branch
+	lineageTag: f0c6129d-6143-40bf-b729-693491295216
+
+	column BranchId
+		dataType: int64
+		formatString: 0
+		lineageTag: b656b0ce-1804-4768-9a3f-3d7c7966569f
+		summarizeBy: none
+		sourceColumn: BranchId
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchCode
+		dataType: string
+		lineageTag: 3d2df4f1-b764-40c4-b4b0-c175ac5a6dac
+		summarizeBy: none
+		sourceColumn: BranchCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchName
+		dataType: string
+		lineageTag: 8f24de71-e78b-49cd-8d88-f26e86cc1139
+		summarizeBy: none
+		sourceColumn: BranchName
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchDeleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d1737398-a24a-40f0-aea0-15f4051d6908
+		summarizeBy: none
+		sourceColumn: BranchDeleted
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Branch = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("BORGERS.LOCAL", "JIP_DWH"),
+				    dbo_DimBranch = Source{[Schema="dbo",Item="DimBranch"]}[Data]
+				in
+				    dbo_DimBranch
+
+	annotation PBI_ResultType = Table
+

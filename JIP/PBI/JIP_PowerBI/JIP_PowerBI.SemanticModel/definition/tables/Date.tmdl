@@ -1,0 +1,91 @@
+table Date
+	lineageTag: 71fb670f-0951-4cfe-8244-194600b96e51
+
+	column DateId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ee0f1391-9bd3-4425-a7fd-5314469d86f9
+		summarizeBy: none
+		sourceColumn: DateId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: da139d52-e796-4077-b1b8-6b055e19ad7f
+		summarizeBy: none
+		sourceColumn: DateDate
+
+		variation Variation
+			isDefault
+			relationship: 3eba4621-8df7-41e7-87e9-93150d8259a1
+			defaultHierarchy: LocalDateTable_1177f4db-4251-4842-aa66-5a04eafae0ce.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateCalendarYear
+		dataType: int64
+		formatString: 0
+		lineageTag: f5cca422-759c-40eb-9f70-9e1af3f0a154
+		summarizeBy: sum
+		sourceColumn: DateCalendarYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateCalendarYearWeekName
+		dataType: string
+		lineageTag: e5a5705d-7ed0-42c6-995a-5fee1310a6f0
+		summarizeBy: none
+		sourceColumn: DateCalendarYearWeekName
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateCalendarYearMonthName
+		dataType: string
+		lineageTag: dd66804f-4f25-447e-b20a-fc6fba22e632
+		summarizeBy: none
+		sourceColumn: DateCalendarYearMonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateCalendarYearMonthSortOrder
+		dataType: int64
+		formatString: 0
+		lineageTag: fb31de7c-92fc-4a89-811e-b44fbd16788f
+		summarizeBy: sum
+		sourceColumn: DateCalendarYearMonthSortOrder
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateMonthNumberOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 549462fd-613f-4669-ae04-43e047e3201c
+		summarizeBy: sum
+		sourceColumn: DateMonthNumberOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateWithToday
+		dataType: string
+		lineageTag: c5d271ac-72bf-44ff-b749-96e47296709e
+		summarizeBy: none
+		sourceColumn: DateWithToday
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("BORGERS.LOCAL", "JIP_DWH"),
+				    dbo_v_DimDate = Source{[Schema="dbo",Item="v_DimDate"]}[Data]
+				in
+				    dbo_v_DimDate
+
+	annotation PBI_ResultType = Table
+

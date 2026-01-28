@@ -1,0 +1,46 @@
+table Product
+	lineageTag: 282f76cb-9194-485e-b4c2-ea58c0a18158
+
+	column ProductId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bb0e66a8-0676-4517-8cb7-eeff5b371276
+		summarizeBy: none
+		sourceColumn: ProductId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductCode
+		dataType: string
+		lineageTag: 375c1e39-c60e-4559-86a4-c0f47ba70dbe
+		summarizeBy: none
+		sourceColumn: ProductCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductDeleted
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 717eaba0-25a3-4585-a78a-d01191d86653
+		summarizeBy: none
+		sourceColumn: ProductDeleted
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Product = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("BORGERS.LOCAL", "JIP_DWH"),
+				    dbo_DimProduct = Source{[Schema="dbo",Item="DimProduct"]}[Data]
+				in
+				    dbo_DimProduct
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,43 @@
+table Document
+	lineageTag: bfe0cede-d0f7-46e1-9ab3-33939fe58cc9
+
+	column DocumentId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2c54eba6-fcf9-4cd5-bdfd-1efc56853888
+		summarizeBy: none
+		sourceColumn: DocumentId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocumentNumber
+		dataType: string
+		lineageTag: a0dd1ac0-a11f-480c-a5f7-3f2a80934526
+		summarizeBy: none
+		sourceColumn: DocumentNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocumentDeleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 789e1d00-45ef-40e5-a301-fdd54447e12a
+		summarizeBy: none
+		sourceColumn: DocumentDeleted
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Document = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("BORGERS.LOCAL", "JIP_DWH"),
+				    dbo_DimDocument = Source{[Schema="dbo",Item="DimDocument"]}[Data]
+				in
+				    dbo_DimDocument
+
+	annotation PBI_ResultType = Table
+

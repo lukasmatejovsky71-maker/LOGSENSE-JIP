@@ -1,0 +1,29 @@
+relationship 3eba4621-8df7-41e7-87e9-93150d8259a1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.DateDate
+	toColumn: LocalDateTable_1177f4db-4251-4842-aa66-5a04eafae0ce.Date
+
+relationship 003c3516-e045-7dd7-fb38-cad81b8459ca
+	fromColumn: 'Fact Material Movement'.MaterialMovement_BranchId
+	toColumn: Branch.BranchId
+
+relationship ce999be4-daba-3e79-27b9-2c9648ba8de5
+	fromColumn: 'Fact Material Movement'.MaterialMovement_DateId
+	toColumn: Date.DateId
+
+relationship 13678c1a-e37f-7640-e822-249c4d77e811
+	fromColumn: 'Fact Material Movement'.MaterialMovement_ProductId
+	toColumn: Product.ProductId
+
+relationship 7173972e-8bb7-214a-c6d2-08896b912b29
+	fromColumn: 'Fact Material Movement'.MaterialMovement_DocumentId
+	toColumn: Document.DocumentId
+
+relationship 7b79361c-7b19-d54e-6c56-da8f1de61399
+	fromColumn: 'Fact Material Movement'.MaterialMovement_DivisionId
+	toColumn: Division.DivisionId
+
+relationship d64d1f94-7163-15c1-dca4-f2feff9822fe
+	fromColumn: 'Fact Material Movement'.MaterialMovement_SupplierId
+	toColumn: Supplier.SupplierId
+

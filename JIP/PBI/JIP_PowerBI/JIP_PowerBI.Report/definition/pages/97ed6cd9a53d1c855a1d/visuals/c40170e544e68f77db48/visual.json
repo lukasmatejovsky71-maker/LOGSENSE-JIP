@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "c40170e544e68f77db48",
+  "position": {
+    "x": 28,
+    "y": 49,
+    "z": 0,
+    "height": 392,
+    "width": 703,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "sankey02300D1BE6F5427989F3DE31CCA9E0F32020",
+    "query": {
+      "queryState": {
+        "Source": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Supplier"
+                    }
+                  },
+                  "Property": "Supplier Is JIP"
+                }
+              },
+              "queryRef": "Supplier.SupplierIsJIP",
+              "nativeQueryRef": "SupplierIsJIP"
+            }
+          ]
+        },
+        "Destination": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Branch"
+                    }
+                  },
+                  "Property": "BranchName"
+                }
+              },
+              "queryRef": "Branch.BranchName",
+              "nativeQueryRef": "BranchName"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

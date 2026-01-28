@@ -1,0 +1,110 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 351.64080183473357,
+        "y": 190.75494154838668
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 426,
+            "y": 240
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "71fb670f-0951-4cfe-8244-194600b96e51",
+          "size": {
+            "height": 167,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 392,
+            "y": 0
+          },
+          "nodeIndex": "Branch",
+          "nodeLineageTag": "f0c6129d-6143-40bf-b729-693491295216",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 790,
+            "y": 0
+          },
+          "nodeIndex": "Division",
+          "nodeLineageTag": "3de3e802-b628-4145-8ba5-11a6e22547c5",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 1136,
+            "y": 108.5
+          },
+          "nodeIndex": "Document",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1143,
+            "y": 288.5
+          },
+          "nodeIndex": "Product",
+          "nodeLineageTag": "282f76cb-9194-485e-b4c2-ea58c0a18158",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 802.33334350585938,
+            "y": 630.83333587646484
+          },
+          "nodeIndex": "Supplier",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 800.6666259765625,
+            "y": 225.5
+          },
+          "nodeIndex": "Fact Material Movement",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 98.206278026905821,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

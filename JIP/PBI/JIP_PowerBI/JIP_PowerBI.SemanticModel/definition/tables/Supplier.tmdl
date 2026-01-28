@@ -1,0 +1,59 @@
+table Supplier
+	lineageTag: c4ac5f4e-ac57-40d0-abb6-a83a2bee7a94
+
+	column SupplierId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3c11c621-01a6-4914-8fdf-b1f3b1eba9e3
+		summarizeBy: none
+		sourceColumn: SupplierId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SupplierICO
+		dataType: string
+		lineageTag: 0b8d7768-5f61-45fe-abba-6303fbe1f063
+		summarizeBy: none
+		sourceColumn: SupplierICO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SupplierDeleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 02844de4-1f73-48ad-ab87-933521bd6670
+		summarizeBy: none
+		sourceColumn: SupplierDeleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Supplier Is JIP'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1b8a9b09-c04e-4bc2-bf98-1546f0da1999
+		summarizeBy: none
+		sourceColumn: Supplier Is JIP
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Supplier Is JIP CZ' = IF(Supplier[Supplier Is JIP], "Ano", "Ne")
+		lineageTag: 7b68d1c4-39cb-4fcd-b6a2-d2f8f050cd1c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Supplier = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("BORGERS.LOCAL", "JIP_DWH"),
+				    dbo_DimSupplier = Source{[Schema="dbo",Item="DimSupplier"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_DimSupplier,{{"SupplierIsJIP", "Supplier Is JIP"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
