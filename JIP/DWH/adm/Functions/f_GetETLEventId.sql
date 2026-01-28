@@ -1,0 +1,15 @@
+﻿CREATE FUNCTION [adm].[f_GetETLEventId] (@ETLEventName NVARCHAR(10))
+RETURNS INT
+
+BEGIN
+
+DECLARE @ETLEventId INT
+
+SELECT TOP 1
+	@ETLEventId = [ETLEventId]
+FROM [adm].[ETLEvent]
+WHERE [ETLEventName] = @ETLEventName
+
+RETURN @ETLEventId
+
+END

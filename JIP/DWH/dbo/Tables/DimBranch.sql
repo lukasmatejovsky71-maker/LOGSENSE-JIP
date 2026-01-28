@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[DimBranch]
+(
+	[BranchId] INT NOT NULL CONSTRAINT [PK_DimBranch] PRIMARY KEY IDENTITY (1,1),
+		[BranchCode] NVARCHAR(50) NOT NULL,
+		[BranchName] NVARCHAR(255) NOT NULL,
+		[BranchDeleted] BIT NOT NULL DEFAULT 0
+)

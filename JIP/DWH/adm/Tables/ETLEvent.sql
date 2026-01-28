@@ -1,0 +1,5 @@
+﻿CREATE TABLE [adm].[ETLEvent]
+(
+	[ETLEventId] INT NOT NULL CONSTRAINT [PK_adm_Event] PRIMARY KEY,
+	[ETLEventName] NVARCHAR (20) NOT NULL
+)

@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dsa].[Json]
+(
+	[SourceFile] NVARCHAR(MAX) NOT NULL,
+	[Data] NVARCHAR(MAX) NULL
+)
