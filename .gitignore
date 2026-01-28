@@ -416,3 +416,8 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+/JIP/Import/9 - Other material movements_Receipts
+/JIP/PBI/Occupancy.Report
+/JIP/PBI/Occupancy.SemanticModel
+/JIP/PBI/Occupancy.pbip
+/JIP/PBI/JIP_PowerBI.pbix
