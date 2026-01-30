@@ -6,7 +6,7 @@
   DTS:CreatorComputerName="SE15-MGMT03"
   DTS:CreatorName="BGAD\lmatejovsky"
   DTS:DelayValidation="True"
-  DTS:DTSID="{179A1275-0F9A-44A6-A047-88F6D7DDDE4E}"
+  DTS:DTSID="{DB7B7E89-5392-43ED-86CF-EA3A95E69D05}"
   DTS:EnableConfig="True"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="17.0.1010.2"
@@ -14,15 +14,15 @@
   DTS:ObjectName="Import"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="29"
-  DTS:VersionGUID="{DB6BC912-FFF2-4CED-8D7C-B6F3A0F16926}">
+  DTS:VersionBuild="30"
+  DTS:VersionGUID="{6A5EF6E5-B6A7-4EDD-9BA4-26E03EF61577}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[DWH]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{4F05287F-AD95-4472-B821-412B99142D17}"
+      DTS:DTSID="{4AFE6000-09BB-418D-9C3A-E63D211F37C5}"
       DTS:ObjectName="DWH">
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[$Project::DWHConnectionString]</DTS:PropertyExpression>
@@ -43,14 +43,14 @@
       DTS:ConfigurationString="&quot;DWH&quot;;&quot;[adm].[ETLConfiguration]&quot;;&quot;Connections&quot;;"
       DTS:ConfigurationType="7"
       DTS:CreationName=""
-      DTS:DTSID="{472B3FB0-B0F4-4B9A-A807-94AD2147926B}"
+      DTS:DTSID="{80B3966E-F789-4366-8133-03DC85F8E936}"
       DTS:ObjectName="Connections" />
   </DTS:Configurations>
   <DTS:PackageParameters>
     <DTS:PackageParameter
       DTS:CreationName=""
       DTS:DataType="3"
-      DTS:DTSID="{DA59BE71-E2A7-47AC-A095-BD7BFB158834}"
+      DTS:DTSID="{D5B7D011-C08D-4BAF-96BE-BF21CC59D73C}"
       DTS:ObjectName="ETLLogId">
       <DTS:Property
         DTS:DataType="3"
@@ -60,7 +60,7 @@
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{53883C2A-B48D-4D8C-9D44-EFB0065B6666}"
+      DTS:DTSID="{833D146B-7C8A-48E3-B389-0FDA747288E4}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="DSAConnectionString">
@@ -73,7 +73,7 @@
       DTS:refId="Package\Log ETL Package Start"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{83580975-7407-4AAC-8DBA-B3D87FC3A7F7}"
+      DTS:DTSID="{B6350DA6-DF89-48BC-82EA-3D98C1644433}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Log ETL Package Start"
@@ -82,7 +82,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{4F05287F-AD95-4472-B821-412B99142D17}"
+          SQLTask:Connection="{4AFE6000-09BB-418D-9C3A-E63D211F37C5}"
           SQLTask:SqlStatementSource="EXEC [adm].[p_LogETLPackageLogStart]&#xA;  @ETLLogId = ?&#xA;  ,@MachineName = ?&#xA;  ,@PackageName = ?&#xA;  ,@UserName = ?&#xA;  ,@ExecutionInstanceGUID = ?&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
@@ -121,7 +121,7 @@
       DTS:refId="Package\Log ETL Package Succeess"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{2BB9A97D-907D-446A-8E2A-0D48FCC5B2F0}"
+      DTS:DTSID="{D158FAAC-CF1C-4C4B-8B79-3E3528D537AA}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Log ETL Package Succeess"
@@ -130,7 +130,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{4F05287F-AD95-4472-B821-412B99142D17}"
+          SQLTask:Connection="{4AFE6000-09BB-418D-9C3A-E63D211F37C5}"
           SQLTask:SqlStatementSource="EXEC [adm].[p_LogETLPackageLogSuccess]&#xA;  @ETLLogId = ?&#xA;  ,@MachineName = ?&#xA;  ,@PackageName = ?&#xA;  ,@UserName = ?&#xA;  ,@ExecutionInstanceGUID = ?&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
@@ -169,26 +169,47 @@
       DTS:refId="Package\Package Content"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:DTSID="{5C85FFA4-F2FF-4AD8-AE16-D7282D9A5194}"
+      DTS:DTSID="{E6E45718-E19F-4FBC-9B9F-A3FF50A9DC8E}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
       DTS:ObjectName="Package Content">
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
-          DTS:refId="Package\Package Content\Exec ImportExcel_JIP"
+          DTS:refId="Package\Package Content\Exec MaterialMovememntReceipt"
           DTS:CreationName="Microsoft.ExecutePackageTask"
           DTS:Description="Execute Package Task"
-          DTS:DTSID="{6EC69C95-3669-478C-AF4A-825A7E5C4322}"
+          DTS:DTSID="{13B5CD0E-A85C-4220-ACA4-E1A51354B0C4}"
           DTS:ExecutableType="Microsoft.ExecutePackageTask"
           DTS:LocaleID="-1"
-          DTS:ObjectName="Exec ImportExcel_JIP"
+          DTS:ObjectName="Exec MaterialMovememntReceipt"
           DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
           <DTS:Variables />
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>ImportExcel_JIP.dtsx</PackageName>
+              <PackageName>ImportExcel_MaterialMovememntReceipt.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ETLLogId</ParameterName>
+                <BindedVariableOrParameterName>$Package::ETLLogId</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Package Content\Exec MaterialMovememntSales"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{d9eae3be-9170-403b-bda4-3276b781039b}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Exec MaterialMovememntSales"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>ImportExcel_MaterialMovememntSales.dtsx</PackageName>
               <ParameterAssignment>
                 <ParameterName>ETLLogId</ParameterName>
                 <BindedVariableOrParameterName>$Package::ETLLogId</BindedVariableOrParameterName>
@@ -203,7 +224,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{296B28A6-7345-40AA-94D5-E56658A23A2B}"
+      DTS:DTSID="{7199BC82-F906-4520-A9C0-2A92335619FA}"
       DTS:From="Package\Log ETL Package Start"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
@@ -211,7 +232,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{E8521F8E-6DDA-483C-BD7D-EBF3830D20A6}"
+      DTS:DTSID="{072F69D4-0A35-478A-8C5F-2416574B246A}"
       DTS:From="Package\Package Content"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
@@ -221,7 +242,7 @@
     <DTS:EventHandler
       DTS:refId="Package.EventHandlers[OnError]"
       DTS:CreationName="OnError"
-      DTS:DTSID="{59229AD0-C5E6-4940-A1E8-CB73A47384B3}"
+      DTS:DTSID="{02C95DEA-63FC-4295-9C9F-1CEDF8A3DF18}"
       DTS:EventID="0"
       DTS:EventName="OnError"
       DTS:LocaleID="-1">
@@ -229,7 +250,7 @@
         <DTS:Variable
           DTS:CreationName=""
           DTS:Description="The propagate property of the event"
-          DTS:DTSID="{DDCDE8BF-1EDD-4D48-8E45-C18F58897283}"
+          DTS:DTSID="{7FF15698-962F-4686-9469-027CFD194FCD}"
           DTS:IncludeInDebugDump="6789"
           DTS:Namespace="System"
           DTS:ObjectName="Propagate">
@@ -242,7 +263,7 @@
           DTS:refId="Package.EventHandlers[OnError]\Log ETL Package Failure"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{D80FFCFE-FEA7-4B37-8DAF-FA8186458821}"
+          DTS:DTSID="{9AF9C0AA-D9BD-42CA-AA05-46AF62999A56}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Log ETL Package Failure"
@@ -250,7 +271,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{4F05287F-AD95-4472-B821-412B99142D17}"
+              SQLTask:Connection="{4AFE6000-09BB-418D-9C3A-E63D211F37C5}"
               SQLTask:SqlStatementSource="EXEC [adm].[p_LogETLPackageLogFailure]&#xA;  @ETLLogId = ?&#xA;  ,@MachineName = ?&#xA;  ,@PackageName = ?&#xA;  ,@UserName = ?&#xA;  ,@ExecutionInstanceGUID = ?&#xA;  ,@SourceName = ?&#xA;  ,@TaskName = ?&#xA;  ,@ErrorCode = ?&#xA;  ,@ErrorMessage = ?&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
@@ -327,36 +348,40 @@
         <NodeLayout
           Size="185.333333333334,42.6666666666667"
           Id="Package\Log ETL Package Start"
-          TopLeft="66.3499956972897,12.7499986633659" />
+          TopLeft="71.083329030623,12.7499986633659" />
         <NodeLayout
           Size="205.333333333334,42.6666666666667"
           Id="Package\Log ETL Package Succeess"
-          TopLeft="56.3499956972897,282.749998663366" />
+          TopLeft="61.083329030623,372.749998663366" />
         <NodeLayout
-          Size="165.333333333334,41.3333333333334"
-          Id="Package\Package Content\Exec ImportExcel_JIP"
-          TopLeft="27.457144183042,21.1058839616479" />
+          Size="234.666666666667,42.6666666666667"
+          Id="Package\Package Content\Exec MaterialMovememntReceipt"
+          TopLeft="17.457144183042,13.1058839616479" />
+        <NodeLayout
+          Size="234.666666666667,42.6666666666667"
+          Id="Package\Package Content\Exec MaterialMovememntSales"
+          TopLeft="17.457144183042,63.7725506283145" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="239.333333333334,130.666666666667"
-          Size="239.333333333334,173.333333333334"
+          PanelSize="267.333333333334,221.333333333334"
+          Size="267.333333333334,264.666666666667"
           Id="Package\Package Content"
-          TopLeft="39.5499956972897,79.1833318339785" />
+          TopLeft="30.083329030623,79.1833318339785" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="159.14999569729,55.1499986633659">
+          TopLeft="163.74999569729,55.4166653300326">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,24.0333331706126"
+              EndConnector="0,23.7666665039459"
               Start="0,0"
-              End="0,16.5333331706126">
+              End="0,16.2666665039459">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,16.5333331706126" />
+                    End="0,16.2666665039459" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -367,18 +392,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="159.14999569729,252.783331833978">
+          TopLeft="163.74999569729,343.849998500645">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.9666668293875"
+              EndConnector="0,28.9000001627209"
               Start="0,0"
-              End="0,22.4666668293875">
+              End="0,21.4000001627209">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22.4666668293875" />
+                    End="0,21.4000001627209" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

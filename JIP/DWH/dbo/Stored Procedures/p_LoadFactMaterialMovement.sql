@@ -1,8 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[p_LoadFactMaterialMovement]
 AS
 
-TRUNCATE TABLE FactMaterialMovement
-
 INSERT INTO FactMaterialMovement
 (
 	 [MaterialMovement_DateId]

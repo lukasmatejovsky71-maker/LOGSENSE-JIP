@@ -9,13 +9,13 @@
   DTS:DTSID="{94178665-883E-4D6C-8F4C-999384E6CED9}"
   DTS:EnableConfig="True"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5270.0"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
   DTS:LocaleID="1033"
   DTS:ObjectName="Load_Facts"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="34"
-  DTS:VersionGUID="{65905B2D-D85C-4E90-8B9C-547C64BB4469}">
+  DTS:VersionBuild="36"
+  DTS:VersionGUID="{F5A4E210-3A4E-466B-8E07-452FC69221C0}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -30,7 +30,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=BORGERS.LOCAL;User ID=lukas;Initial Catalog=Actum_digital_DWH;Provider=SQLOLEDB.1;Application Name=SSIS-ETL_AllETLPackages-{C89952DD-8CB2-4B4C-A496-94C82D42FA05}BORGERS.LOCAL.Actum_digital_DWH.lukas;Auto Translate=False;">
+          DTS:ConnectionString="Data Source=BORGERS.LOCAL;User ID=lukas;Initial Catalog=JIP_DWH;Provider=SQLOLEDB.1;Application Name=SSIS-ETL_AllETLPackages-{C89952DD-8CB2-4B4C-A496-94C82D42FA05}BORGERS.LOCAL.Actum_digital_DWH.lukas;Auto Translate=False;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"></DTS:Password>
@@ -176,40 +176,19 @@
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
-          DTS:refId="Package\Package Content\Exec Load_FactCalendar"
+          DTS:refId="Package\Package Content\Exec Load_FactMaterialMovement"
           DTS:CreationName="Microsoft.ExecutePackageTask"
           DTS:Description="Execute Package Task"
           DTS:DTSID="{3A67DE14-E728-4735-8CB9-F73ECBC3EB5D}"
           DTS:ExecutableType="Microsoft.ExecutePackageTask"
           DTS:LocaleID="-1"
-          DTS:ObjectName="Exec Load_FactCalendar"
+          DTS:ObjectName="Exec Load_FactMaterialMovement"
           DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
           <DTS:Variables />
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>Load_FactCalendar.dtsx</PackageName>
-              <ParameterAssignment>
-                <ParameterName>ETLLogId</ParameterName>
-                <BindedVariableOrParameterName>$Package::ETLLogId</BindedVariableOrParameterName>
-              </ParameterAssignment>
-            </ExecutePackageTask>
-          </DTS:ObjectData>
-        </DTS:Executable>
-        <DTS:Executable
-          DTS:refId="Package\Package Content\Exec Load_FactReviews"
-          DTS:CreationName="Microsoft.ExecutePackageTask"
-          DTS:Description="Execute Package Task"
-          DTS:DTSID="{0d554c73-7a37-438c-b208-ce863540fdb8}"
-          DTS:ExecutableType="Microsoft.ExecutePackageTask"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="Exec Load_FactReviews"
-          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-          <DTS:Variables />
-          <DTS:ObjectData>
-            <ExecutePackageTask>
-              <UseProjectReference>True</UseProjectReference>
-              <PackageName>Load_FactReviews.dtsx</PackageName>
+              <PackageName>Load_FactMaterialMovement.dtsx</PackageName>
               <ParameterAssignment>
                 <ParameterName>ETLLogId</ParameterName>
                 <BindedVariableOrParameterName>$Package::ETLLogId</BindedVariableOrParameterName>
@@ -352,19 +331,15 @@
         <NodeLayout
           Size="205.333333333334,42.6666666666667"
           Id="Package\Log ETL Package Succeess"
-          TopLeft="66.0555541151097,308.749998663366" />
+          TopLeft="66.0555541151097,370.749998663366" />
         <NodeLayout
           Size="194.666666666667,42.6666666666667"
-          Id="Package\Package Content\Exec Load_FactCalendar"
+          Id="Package\Package Content\Exec Load_FactMaterialMovement"
           TopLeft="21.1666666666667,21.1058839616479" />
-        <NodeLayout
-          Size="194.666666666667,42.6666666666667"
-          Id="Package\Package Content\Exec Load_FactReviews"
-          TopLeft="21.1666666666667,123.772550628315" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="251.333333333334,221.333333333334"
+          PanelSize="251.333333333334,222"
           Size="251.333333333334,264.666666666667"
           Id="Package\Package Content"
           TopLeft="43.0555541151097,79.1833318339785" />
@@ -396,14 +371,14 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,-35.0999998372793"
+              EndConnector="0,26.9000001627209"
               Start="0,0"
-              End="0,-27.5999998372793">
+              End="0,19.4000001627209">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,-27.5999998372793" />
+                    End="0,19.4000001627209" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

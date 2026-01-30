@@ -124,6 +124,8 @@
     <Build Include="dbo\Tables\FactMaterialMovement.sql" />
     <Build Include="dbo\Stored Procedures\p_LoadFactMaterialMovement.sql" />
     <Build Include="dbo\Views\v_FactProduct.sql" />
+    <Build Include="dsa\Tables\MaterialMovementMasterData.sql" />
+    <Build Include="dsa\Tables\MaterialMovementSalesData.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DWH.publish.xml" />

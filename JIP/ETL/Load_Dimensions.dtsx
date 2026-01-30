@@ -14,8 +14,8 @@
   DTS:ObjectName="Load_Dimensions"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="33"
-  DTS:VersionGUID="{F8220F7C-B590-423E-8CFD-5C52B18BF816}">
+  DTS:VersionBuild="36"
+  DTS:VersionGUID="{801DF373-CBDA-4B62-81B8-9D8504E8E3BE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -176,6 +176,27 @@
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
+          DTS:refId="Package\Package Content\Exec Load_DimBranch"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{b3d723f1-b62a-445b-b31b-aada5ada924b}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Exec Load_DimBranch"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>Load_DimBranch.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ETLLogId</ParameterName>
+                <BindedVariableOrParameterName>$Package::ETLLogId</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
           DTS:refId="Package\Package Content\Exec Load_DimDate"
           DTS:CreationName="Microsoft.ExecutePackageTask"
           DTS:Description="Execute Package Task"
@@ -189,6 +210,90 @@
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
               <PackageName>Load_DimDate.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ETLLogId</ParameterName>
+                <BindedVariableOrParameterName>$Package::ETLLogId</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Package Content\Exec Load_DimDivision"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{3d1ff847-4605-4d56-865d-58dc61f4905f}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Exec Load_DimDivision"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>Load_DimDivision.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ETLLogId</ParameterName>
+                <BindedVariableOrParameterName>$Package::ETLLogId</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Package Content\Exec Load_DimDocument"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{ce0a2ad6-907e-4ed7-8740-2147b4a3ac60}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Exec Load_DimDocument"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>Load_DimDocument.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ETLLogId</ParameterName>
+                <BindedVariableOrParameterName>$Package::ETLLogId</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Package Content\Exec Load_DimProduct"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{ef0e2e90-0915-4c7a-9c6d-55047654552c}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Exec Load_DimProduct"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>Load_DimProduct.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ETLLogId</ParameterName>
+                <BindedVariableOrParameterName>$Package::ETLLogId</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Package Content\Exec Load_DimSupplier"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{d71ed710-a60b-455f-9b9f-527962ef0021}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Exec Load_DimSupplier"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>Load_DimSupplier.dtsx</PackageName>
               <ParameterAssignment>
                 <ParameterName>ETLLogId</ParameterName>
                 <BindedVariableOrParameterName>$Package::ETLLogId</BindedVariableOrParameterName>
@@ -323,40 +428,60 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="185.333333333334,42.6666666666667"
           Id="Package\Log ETL Package Start"
-          TopLeft="152.833333333333,12.7499986633659" />
+          TopLeft="182.833333333333,12.7499986633659" />
         <NodeLayout
           Size="205.333333333334,42.6666666666667"
           Id="Package\Log ETL Package Succeess"
-          TopLeft="142.833333333333,430.749998663366" />
+          TopLeft="172.833333333333,430.749998663366" />
         <NodeLayout
           Size="172.666666666667,41.3333333333334"
           Id="Package\Package Content\Exec Load_DimDate"
-          TopLeft="59.1666666666667,21.1058839616479" />
+          TopLeft="28.0347222455053,21.1058839616479" />
+        <NodeLayout
+          Size="184,42.6666666666667"
+          Id="Package\Package Content\Exec Load_DimBranch"
+          TopLeft="22.3680555788386,74.9892195575735" />
+        <NodeLayout
+          Size="184,42.6666666666667"
+          Id="Package\Package Content\Exec Load_DimDivision"
+          TopLeft="22.3680555788386,126.955888641804" />
+        <NodeLayout
+          Size="184,42.6666666666667"
+          Id="Package\Package Content\Exec Load_DimDocument"
+          TopLeft="236.368055578839,21.6225553084711" />
+        <NodeLayout
+          Size="184,42.6666666666667"
+          Id="Package\Package Content\Exec Load_DimProduct"
+          TopLeft="236.368055578839,78.2892219751378" />
+        <NodeLayout
+          Size="184,42.6666666666667"
+          Id="Package\Package Content\Exec Load_DimSupplier"
+          TopLeft="236.368055578839,138.055890687436" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="480,350"
-          Size="480,392.666666666667"
+          PanelSize="480,194"
+          Size="480,237.333333333334"
           Id="Package\Package Content"
-          TopLeft="5.5,79.1833318339785" />
+          TopLeft="35.5,79.1833318339785" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="245.5,55.4166653300326">
+          TopLeft="275.5,55.4166653300326">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,23.766666503946"
+              EndConnector="0,23.7666665039459"
               Start="0,0"
-              End="0,16.266666503946">
+              End="0,16.2666665039459">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,16.266666503946" />
+                    End="0,16.2666665039459" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -367,18 +492,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="245.5,471.849998500645">
+          TopLeft="275.5,316.516665167312">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,-41.0999998372793"
+              EndConnector="0,114.233333496054"
               Start="0,0"
-              End="0,-33.5999998372793">
+              End="0,106.733333496054">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,-33.5999998372793" />
+                    End="0,106.733333496054" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

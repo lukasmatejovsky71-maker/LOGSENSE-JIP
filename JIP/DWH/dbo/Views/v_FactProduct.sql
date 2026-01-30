@@ -2,5 +2,4 @@
 AS
 SELECT [ProductId]
 	,[ProductCode]
-	,[ProductDeleted]
 FROM [DimProduct]
