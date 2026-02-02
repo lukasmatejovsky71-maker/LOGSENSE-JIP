@@ -1,0 +1,12 @@
+﻿CREATE VIEW [dbo].[v_FactMaterialMovement]
+AS
+SELECT [MaterialMovementId]
+	,[MaterialMovement_DateId]
+	,[MaterialMovement_DivisionId]
+	,[MaterialMovement_BranchId]
+	,[MaterialMovement_DocumentId]
+	,[MaterialMovement_ProductId]
+	,[MaterialMovement_SupplierId]
+	,[MaterialMovementTurnoverUoM]
+	,[MaterialMovementTurnoverPalletes]
+FROM [FactMaterialMovement]

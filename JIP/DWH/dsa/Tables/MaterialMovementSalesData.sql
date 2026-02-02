@@ -9,3 +9,6 @@
     [Produkt - Kód]    NVARCHAR (255) NULL
 );
 
+GO;
+CREATE NONCLUSTERED INDEX [IX_dsa_MaterialMovementSalesData_Číslo dokladu]
+ON [dsa].[MaterialMovementSalesData] ([Číslo dokladu])

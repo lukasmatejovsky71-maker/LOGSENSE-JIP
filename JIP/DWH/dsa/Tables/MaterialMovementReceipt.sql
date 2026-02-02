@@ -9,5 +9,10 @@
     [Obrat v MJ] float,
     [Obrat v paletách] float
 );
+
 GO
 CREATE INDEX IX_dsa_MaterialMovementReceipt_Diviz ON [dsa].[MaterialMovementReceipt]([Divize])
+
+GO;
+CREATE NONCLUSTERED INDEX [IX_dsa_MaterialMovementrReceipt_Číslo dokladu]
+ON [dsa].[MaterialMovementReceipt] ([Číslo dokladu])

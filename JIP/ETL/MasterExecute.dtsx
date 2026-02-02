@@ -9,13 +9,13 @@
   DTS:DTSID="{A2B9D43E-30A3-409D-A75D-897344B07EE0}"
   DTS:EnableConfig="True"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5270.0"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
   DTS:LocaleID="1033"
   DTS:ObjectName="MasterExecute (ETL_All)"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="45"
-  DTS:VersionGUID="{1B680EF4-D888-42CA-9102-F85292CB0CF0}">
+  DTS:VersionBuild="47"
+  DTS:VersionGUID="{2F8AA6E7-F7F5-4B1A-870E-070B30AD1B5B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -30,7 +30,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=BORGERS.LOCAL;User ID=lukas;Initial Catalog=Actum_digital_DWH;Provider=SQLOLEDB.1;Application Name=SSIS-ETL_AllETLPackages-{C89952DD-8CB2-4B4C-A496-94C82D42FA05}BORGERS.LOCAL.Actum_digital_DWH.lukas;Auto Translate=False;">
+          DTS:ConnectionString="Data Source=BORGERS.LOCAL;User ID=lukas;Initial Catalog=JIP_DWH;Provider=SQLOLEDB.1;Application Name=SSIS-ETL_AllETLPackages-{C89952DD-8CB2-4B4C-A496-94C82D42FA05}BORGERS.LOCAL.Actum_digital_DWH.lukas;Auto Translate=False;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"></DTS:Password>
@@ -440,23 +440,23 @@
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="142.4,41.6"
+          Size="142.666666666667,41.3333333333334"
           Id="Package\Log ETL Start"
           TopLeft="156.645831466032,55.249999012053" />
         <NodeLayout
-          Size="156.8,43.2"
+          Size="156.666666666667,43.3333333333334"
           Id="Package\Log ETL Success"
           TopLeft="150.749997932464,427.766661854784" />
         <NodeLayout
-          Size="159.2,43.2"
+          Size="159.333333333334,43.3333333333334"
           Id="Package\Sequence Container\Execute Package"
           TopLeft="44.2222222222222,74.2666626683872" />
         <NodeLayout
-          Size="184.8,43.2"
+          Size="184.666666666667,43.3333333333334"
           Id="Package\Sequence Container\Log ETL Package Start"
           TopLeft="30.8888888888889,8.93332933505386" />
         <NodeLayout
-          Size="200.8,43.2"
+          Size="200.666666666667,43.3333333333334"
           Id="Package\Sequence Container\Log ETL Package Succees"
           TopLeft="16.8888888888889,140.933329335054" />
         <EdgeLayout
@@ -506,8 +506,8 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="247.2,239.2"
-          Size="247.2,280.8"
+          PanelSize="247.333333333334,239.333333333334"
+          Size="247.333333333334,280.666666666667"
           Id="Package\Sequence Container"
           TopLeft="107.604165013569,122.09999728024" />
         <EdgeLayout

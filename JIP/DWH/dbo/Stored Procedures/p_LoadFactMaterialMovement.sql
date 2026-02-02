@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[p_LoadFactMaterialMovement]
 AS
 
-INSERT INTO FactMaterialMovement
+INSERT INTO FactMaterialMovement WITH (TABLOCKX)
 (
 	 [MaterialMovement_DateId]
 	,[MaterialMovement_DivisionId]

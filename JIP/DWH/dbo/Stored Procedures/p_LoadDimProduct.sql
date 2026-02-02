@@ -15,9 +15,9 @@ INSERT INTO #DimProduct
 	,[ProductDeleted]
 )
 SELECT DISTINCT
-[Produkt - Kód] AS [ProductCode]
-,0 AS [ProductDeleted]
-FROM [dsa].[v_MaterialMovementReceipt]
+[ProductCode]
+,[ProductDeleted]
+FROM [dsa].[v_Product]
 
 ;
 MERGE [DimProduct] AS t

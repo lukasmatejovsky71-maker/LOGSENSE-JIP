@@ -118,7 +118,7 @@
     <Build Include="dbo\Tables\DimDocument.sql" />
     <Build Include="dbo\Stored Procedures\p_LoadDimDocument.sql" />
     <Build Include="dbo\Tables\DimSupplier.sql" />
-    <Build Include="dbo\Stored Procedures\p_LoadDimSuppier.sql" />
+    <Build Include="dbo\Stored Procedures\p_LoadDimSupplier.sql" />
     <Build Include="dbo\Tables\DimProduct.sql" />
     <Build Include="dbo\Stored Procedures\p_LoadDimProduct.sql" />
     <Build Include="dbo\Tables\FactMaterialMovement.sql" />
@@ -126,6 +126,23 @@
     <Build Include="dbo\Views\v_FactProduct.sql" />
     <Build Include="dsa\Tables\MaterialMovementMasterData.sql" />
     <Build Include="dsa\Tables\MaterialMovementSalesData.sql" />
+    <Build Include="dsa\Views\v_Supplier.sql" />
+    <Build Include="dsa\Views\v_Order.sql" />
+    <Build Include="dbo\Stored Procedures\p_LoadDimOrder.sql" />
+    <Build Include="dbo\Tables\DimOrder.sql" />
+    <Build Include="dsa\Views\v_Document.sql" />
+    <Build Include="dbo\Tables\FactMaterialSale.sql" />
+    <Build Include="dbo\Stored Procedures\p_LoadFactMaterialSale.sql" />
+    <Build Include="dsa\Views\v_MaterialSale.sql" />
+    <Build Include="dsa\Views\v_Product.sql" />
+    <Build Include="dbo\Views\v_FactMaterialSale.sql" />
+    <Build Include="dbo\Views\v_FactMaterialMovement.sql" />
+    <Build Include="dbo\Views\v_DimSupplier.sql" />
+    <Build Include="dbo\Views\v_DimBranch.sql" />
+    <Build Include="dbo\Views\v_DimDivision.sql" />
+    <Build Include="dbo\Views\v_DimDocument.sql" />
+    <Build Include="dbo\Views\v_DimOrder.sql" />
+    <Build Include="dbo\Views\v_DimProduct.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DWH.publish.xml" />

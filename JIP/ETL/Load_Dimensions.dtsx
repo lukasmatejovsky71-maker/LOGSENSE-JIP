@@ -14,8 +14,8 @@
   DTS:ObjectName="Load_Dimensions"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="36"
-  DTS:VersionGUID="{801DF373-CBDA-4B62-81B8-9D8504E8E3BE}">
+  DTS:VersionBuild="37"
+  DTS:VersionGUID="{6C5AE0B1-283F-4228-9AF6-51311D815540}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -260,6 +260,27 @@
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
+          DTS:refId="Package\Package Content\Exec Load_DimOrder"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{ceccabbf-204f-4c44-b90e-0655ba15b21e}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Exec Load_DimOrder"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>Load_DimOrder.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ETLLogId</ParameterName>
+                <BindedVariableOrParameterName>$Package::ETLLogId</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
           DTS:refId="Package\Package Content\Exec Load_DimProduct"
           DTS:CreationName="Microsoft.ExecutePackageTask"
           DTS:Description="Execute Package Task"
@@ -438,13 +459,13 @@
           Id="Package\Log ETL Package Succeess"
           TopLeft="172.833333333333,430.749998663366" />
         <NodeLayout
-          Size="172.666666666667,41.3333333333334"
-          Id="Package\Package Content\Exec Load_DimDate"
-          TopLeft="28.0347222455053,21.1058839616479" />
-        <NodeLayout
           Size="184,42.6666666666667"
           Id="Package\Package Content\Exec Load_DimBranch"
           TopLeft="22.3680555788386,74.9892195575735" />
+        <NodeLayout
+          Size="172.666666666667,41.3333333333334"
+          Id="Package\Package Content\Exec Load_DimDate"
+          TopLeft="28.0347222455053,21.1058839616479" />
         <NodeLayout
           Size="184,42.6666666666667"
           Id="Package\Package Content\Exec Load_DimDivision"
@@ -461,11 +482,15 @@
           Size="184,42.6666666666667"
           Id="Package\Package Content\Exec Load_DimSupplier"
           TopLeft="236.368055578839,138.055890687436" />
+        <NodeLayout
+          Size="178.666666666667,42.6666666666667"
+          Id="Package\Package Content\Exec Load_DimOrder"
+          TopLeft="22.3680555788386,182.722557354103" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="480,194"
-          Size="480,237.333333333334"
+          PanelSize="480,248"
+          Size="480,291.333333333334"
           Id="Package\Package Content"
           TopLeft="35.5,79.1833318339785" />
         <EdgeLayout
@@ -492,18 +517,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="275.5,316.516665167312">
+          TopLeft="275.5,370.516665167312">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,114.233333496054"
+              EndConnector="0,60.2333334960542"
               Start="0,0"
-              End="0,106.733333496054">
+              End="0,52.7333334960542">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,106.733333496054" />
+                    End="0,52.7333334960542" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

@@ -14,8 +14,8 @@
   DTS:ObjectName="Load_Facts"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="36"
-  DTS:VersionGUID="{F5A4E210-3A4E-466B-8E07-452FC69221C0}">
+  DTS:VersionBuild="38"
+  DTS:VersionGUID="{D835D5A6-8BE7-4E2B-A083-DCEBAA37A628}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -196,6 +196,27 @@
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Package Content\Exec Load_FactMaterialSale"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{d8beb18a-33dc-4bd6-a1b6-f649fa90393b}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Exec Load_FactMaterialSale"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>Load_FactMaterialSale.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ETLLogId</ParameterName>
+                <BindedVariableOrParameterName>$Package::ETLLogId</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
       </DTS:Executables>
     </DTS:Executable>
   </DTS:Executables>
@@ -333,14 +354,18 @@
           Id="Package\Log ETL Package Succeess"
           TopLeft="66.0555541151097,370.749998663366" />
         <NodeLayout
-          Size="194.666666666667,42.6666666666667"
+          Size="238.666666666667,42.6666666666667"
           Id="Package\Package Content\Exec Load_FactMaterialMovement"
           TopLeft="21.1666666666667,21.1058839616479" />
+        <NodeLayout
+          Size="209.333333333334,42.6666666666667"
+          Id="Package\Package Content\Exec Load_FactMaterialSale"
+          TopLeft="31.1666666666667,81.7725506283145" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="251.333333333334,222"
-          Size="251.333333333334,264.666666666667"
+          PanelSize="274,162"
+          Size="274,205.333333333334"
           Id="Package\Package Content"
           TopLeft="43.0555541151097,79.1833318339785" />
         <EdgeLayout
@@ -349,14 +374,26 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,23.766666503946"
+              EndConnector="11.3333333333333,23.7666665039459"
               Start="0,0"
-              End="0,16.266666503946">
+              End="11.3333333333333,16.2666665039459">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,16.266666503946" />
+                    End="0,7.88333325197296" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,7.88333325197296"
+                    Point2="0,11.883333251973"
+                    Point3="4,11.883333251973" />
+                  <mssgle:LineSegment
+                    End="7.33333333333331,11.883333251973" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7.33333333333331,11.883333251973"
+                    Point2="11.3333333333333,11.883333251973"
+                    Point3="11.3333333333333,15.883333251973" />
+                  <mssgle:LineSegment
+                    End="11.3333333333333,16.2666665039459" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -367,18 +404,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="168.722220781776,343.849998500645">
+          TopLeft="180.05555411511,284.516665167312">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,26.9000001627209"
+              EndConnector="-11.3333333333333,86.2333334960542"
               Start="0,0"
-              End="0,19.4000001627209">
+              End="-11.3333333333333,78.7333334960542">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,19.4000001627209" />
+                    End="0,39.1166667480271" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,39.1166667480271"
+                    Point2="0,43.1166667480271"
+                    Point3="-4,43.1166667480271" />
+                  <mssgle:LineSegment
+                    End="-7.33333333333331,43.1166667480271" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-7.33333333333331,43.1166667480271"
+                    Point2="-11.3333333333333,43.1166667480271"
+                    Point3="-11.3333333333333,47.1166667480271" />
+                  <mssgle:LineSegment
+                    End="-11.3333333333333,78.7333334960542" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

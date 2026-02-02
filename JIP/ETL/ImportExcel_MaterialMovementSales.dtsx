@@ -1,0 +1,2981 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/24/2025 7:23:58 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MATEJOVSKY"
+  DTS:CreatorName="MATEJOVSKY\lukas"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{8C475BBF-89C3-48E7-9D27-DF8744C087D9}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
+  DTS:LocaleID="1029"
+  DTS:ObjectName="ImportExcel_MaterialMovememntSales (PRODEJNÍ OPERACE_Zlín)"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="79"
+  DTS:VersionGUID="{6BA1F596-8D1A-45AE-80E2-89A78B3F4B8B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DWH]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9DCA2CB3-5746-4ECF-903D-63EB7A4FDE7F}"
+      DTS:ObjectName="DWH">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::DWHConnectionString]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=BORGERS.LOCAL;User ID=lukas;Initial Catalog=JIP_DWH;Provider=SQLOLEDB.1;Application Name=SSIS-ETL_AllETLPackages-{C89952DD-8CB2-4B4C-A496-94C82D42FA05}BORGERS.LOCAL.Actum_digital_DWH.lukas;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"></DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Sales]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{E56C6397-B69D-43AB-A727-B9D6C37AF16F}"
+      DTS:ObjectName="Sales">
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[$Package::FileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\lukas\source\repos\LOGSENSE-JIP\JIP\Import\2 -Material movements_Sales\PRODEJNÍ OPERACE_Zlín.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{BA6B1F25-79C0-46B6-B672-B32F69D85CF5}"
+      DTS:ObjectName="ETLLogId">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">-1</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{5093F20D-F418-471A-9610-B08E78F8CB35}"
+      DTS:ObjectName="FileName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">C:\Users\lukas\source\repos\LOGSENSE-JIP\JIP\Import\2 -Material movements_Sales\PRODEJNÍ OPERACE_Zlín.xlsx</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{85FAC8B3-F2EC-4F03-9367-F3D865954204}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="LEFT(&#xA;  @[User::FileNameWithExtension],&#xA;  FINDSTRING(@[User::FileNameWithExtension], &quot;.&quot;, 1) - 1&#xA;)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileName">
+      <DTS:VariableValue
+        DTS:DataType="8">PRODEJNÍ OPERACE_Zlín</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B02F0F35-56D0-435F-BF91-D9C1260A3287}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="RIGHT(&#xA; @[$Package::FileName],&#xA;  FINDSTRING(REVERSE( @[$Package::FileName]) , &quot;\\&quot;, 1) - 1&#xA;)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileNameWithExtension">
+      <DTS:VariableValue
+        DTS:DataType="8">PRODEJNÍ OPERACE_Zlín.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B8DF55F2-88A9-4C12-B0B9-4BED2FD5D576}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Month">
+      <DTS:VariableValue
+        DTS:DataType="3">1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0648EFE0-268A-4151-8749-D9CB463ED2A8}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="SheetExists">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6DFC4265-C9DB-42F2-923C-2DF26EE20C5C}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="RIGHT(&quot;0&quot; + (DT_WSTR,2)@[User::Month], 2) + &quot;$&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SheetName">
+      <DTS:VariableValue
+        DTS:DataType="8">01$</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:PropertyExpression
+    DTS:Name="Name">"ImportExcel_MaterialMovememntSales" + " (" + @[User::FileName]  + ")"</DTS:PropertyExpression>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Log ETL Package Start"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5FE3776E-4AC3-49F1-8A0B-E05BFDED3406}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log ETL Package Start"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9DCA2CB3-5746-4ECF-903D-63EB7A4FDE7F}"
+          SQLTask:SqlStatementSource="EXEC [adm].[p_LogETLPackageLogStart]&#xA;  @ETLLogId = ?&#xA;  ,@MachineName = ?&#xA;  ,@PackageName = ?&#xA;  ,@UserName = ?&#xA;  ,@ExecutionInstanceGUID = ?&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::ETLLogId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::MachineName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="System::UserName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log ETL Package Succeess"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0BFEA2C2-0972-4F46-913D-CF4CE6234F81}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log ETL Package Succeess"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9DCA2CB3-5746-4ECF-903D-63EB7A4FDE7F}"
+          SQLTask:SqlStatementSource="EXEC [adm].[p_LogETLPackageLogSuccess]&#xA;  @ETLLogId = ?&#xA;  ,@MachineName = ?&#xA;  ,@PackageName = ?&#xA;  ,@UserName = ?&#xA;  ,@ExecutionInstanceGUID = ?&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::ETLLogId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::MachineName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="System::UserName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Package Content"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{F8F9033F-4952-4984-8640-9F45F1D26A9C}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Package Content">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Package Content\For each month"
+          DTS:AssignExpression="@Month = @Month +1"
+          DTS:CreationName="STOCK:FORLOOP"
+          DTS:Description="For Loop Container"
+          DTS:DTSID="{ED4E974C-EA9B-4B19-878C-3743A35F5F52}"
+          DTS:EvalExpression="@Month &lt;= 12"
+          DTS:ExecutableType="STOCK:FORLOOP"
+          DTS:InitExpression="@Month = 1"
+          DTS:LocaleID="-1"
+          DTS:MaxConcurrent="1"
+          DTS:ObjectName="For each month">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Package Content\For each month\Check if the sheet exists"
+              DTS:CreationName="Microsoft.ScriptTask"
+              DTS:Description="Script Task"
+              DTS:DTSID="{04FDC28A-DE5D-46E2-94A1-E94755A96EB2}"
+              DTS:ExecutableType="Microsoft.ScriptTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Check if the sheet exists"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ScriptProject
+                  Name="ST_49714f334b99458cae0c638ab4f6607a"
+                  VSTAMajorVersion="16"
+                  VSTAMinorVersion="0"
+                  Language="CSharp"
+                  ReadOnlyVariables="User::SheetName,$Package::FileName"
+                  ReadWriteVariables="User::SheetExists">
+                  <ProjectItem
+                    Name="Properties\Settings.settings"
+                    Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+                  <ProjectItem
+                    Name="Properties\Resources.resx"
+                    Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+                  <ProjectItem
+                    Name="ScriptMain.cs"
+                    Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
+/* The Script Task allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services control flow. 
+ * 
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script task. */
+#endregion
+
+
+#region Namespaces
+using Microsoft.SqlServer.Dts.Runtime;
+using System;
+using System.Data;
+using System.Data.OleDb;
+using System.Windows.Forms;
+#endregion
+
+namespace ST_49714f334b99458cae0c638ab4f6607a
+{
+    /// <summary>
+    /// ScriptMain is the entry point class of the script.  Do not change the name, attributes,
+    /// or parent of this class.
+    /// </summary>
+	[Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute]
+	public partial class ScriptMain : Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+	{
+        #region Help:  Using Integration Services variables and parameters in a script
+        /* To use a variable in this script, first ensure that the variable has been added to 
+         * either the list contained in the ReadOnlyVariables property or the list contained in 
+         * the ReadWriteVariables property of this script task, according to whether or not your
+         * code needs to write to the variable.  To add the variable, save this script, close this instance of
+         * Visual Studio, and update the ReadOnlyVariables and 
+         * ReadWriteVariables properties in the Script Transformation Editor window.
+         * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+         * 
+         * Example of reading from a variable:
+         *  DateTime startTime = (DateTime) Dts.Variables["System::StartTime"].Value;
+         * 
+         * Example of writing to a variable:
+         *  Dts.Variables["User::myStringVariable"].Value = "new value";
+         * 
+         * Example of reading from a package parameter:
+         *  int batchId = (int) Dts.Variables["$Package::batchId"].Value;
+         *  
+         * Example of reading from a project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].Value;
+         * 
+         * Example of reading from a sensitive project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].GetSensitiveValue();
+         * */
+
+        #endregion
+
+        #region Help:  Firing Integration Services events from a script
+        /* This script task can fire events for logging purposes.
+         * 
+         * Example of firing an error event:
+         *  Dts.Events.FireError(18, "Process Values", "Bad value", "", 0);
+         * 
+         * Example of firing an information event:
+         *  Dts.Events.FireInformation(3, "Process Values", "Processing has started", "", 0, ref fireAgain)
+         * 
+         * Example of firing a warning event:
+         *  Dts.Events.FireWarning(14, "Process Values", "No values received for input", "", 0);
+         * */
+        #endregion
+
+        #region Help:  Using Integration Services connection managers in a script
+        /* Some types of connection managers can be used in this script task.  See the topic 
+         * "Working with Connection Managers Programatically" for details.
+         * 
+         * Example of using an ADO.Net connection manager:
+         *  object rawConnection = Dts.Connections["Sales DB"].AcquireConnection(Dts.Transaction);
+         *  SqlConnection myADONETConnection = (SqlConnection)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Sales DB"].ReleaseConnection(rawConnection);
+         *
+         * Example of using a File connection manager
+         *  object rawConnection = Dts.Connections["Prices.zip"].AcquireConnection(Dts.Transaction);
+         *  string filePath = (string)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Prices.zip"].ReleaseConnection(rawConnection);
+         * */
+        #endregion
+
+
+        /// <summary>
+        /// This method is called when this script task executes in the control flow.
+        /// Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+        /// To open Help, press F1.
+        /// </summary>
+        public void Main()
+        {
+            string excelFile = Dts.Variables["$Package::FileName"].Value.ToString();
+            string sheetName = String.Format("'{0}'", Dts.Variables["User::SheetName"].Value.ToString());
+
+            bool exists = false;
+
+            string connStr =
+                "Provider=Microsoft.ACE.OLEDB.12.0;" +
+                "Data Source=" + excelFile + ";" +
+                "Extended Properties=\"Excel 12.0;HDR=YES;\";";
+
+            using (OleDbConnection conn = new OleDbConnection(connStr))
+            {
+                conn.Open();
+                DataTable sheets = conn.GetOleDbSchemaTable(
+                    OleDbSchemaGuid.Tables,
+                    null);
+
+                foreach (DataRow row in sheets.Rows)
+                {
+                    if (row["TABLE_NAME"].ToString().Equals(sheetName))
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+            }
+
+            Dts.Variables["User::SheetExists"].Value = exists;
+            Dts.TaskResult = (int)ScriptResults.Success;
+        }
+        #region ScriptResults declaration
+        /// <summary>
+        /// This enum provides a convenient shorthand within the scope of this class for setting the
+        /// result of the script.
+        /// 
+        /// This code was generated automatically.
+        /// </summary>
+        enum ScriptResults
+        {
+            Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success,
+            Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+        };
+        #endregion
+
+	}
+}]]></ProjectItem>
+                  <ProjectItem
+                    Name="Project"
+                    Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+  <msb:PropertyGroup>
+    <msb:CodeName>ST_49714f334b99458cae0c638ab4f6607a</msb:CodeName>
+    <msb:Language>msBuild</msb:Language>
+    <msb:DisplayName>ST_49714f334b99458cae0c638ab4f6607a</msb:DisplayName>
+    <msb:ProjectId>{44851CF7-AE90-452D-8E7B-9CA9E63A8FE6}</msb:ProjectId>
+  </msb:PropertyGroup>
+  <msb:ItemGroup>
+    <msb:Project Include="ST_49714f334b99458cae0c638ab4f6607a.csproj" />
+    <msb:File Include="Properties\Resources.resx" />
+    <msb:File Include="Properties\Settings.settings" />
+    <msb:File Include="Properties\AssemblyInfo.cs" />
+    <msb:File Include="Properties\Resources.Designer.cs" />
+    <msb:File Include="Properties\Settings.Designer.cs" />
+    <msb:File Include="ScriptMain.cs" />
+  </msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+                  <ProjectItem
+                    Name="Properties\Settings.Designer.cs"
+                    Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_49714f334b99458cae0c638ab4f6607a.Properties.Settings.get_Default():ST_49714f334b99458cae0c638ab4f6607a.Properties.Sett" +
+    "ings")]
+
+namespace ST_49714f334b99458cae0c638ab4f6607a.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+                  <ProjectItem
+                    Name="ST_49714f334b99458cae0c638ab4f6607a.csproj"
+                    Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EF1DAB03-5413-4377-833A-7DE17A9FFABC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ST_49714f334b99458cae0c638ab4f6607a</RootNamespace>
+    <AssemblyName>ST_49714f334b99458cae0c638ab4f6607a</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ScriptMain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
+        <Host Name="ScriptTask" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST160</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></ProjectItem>
+                  <ProjectItem
+                    Name="Properties\AssemblyInfo.cs"
+                    Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_49714f334b99458cae0c638ab4f6607a")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_49714f334b99458cae0c638ab4f6607a")]
+[assembly: AssemblyCopyright("Copyright @  2026")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+                  <ProjectItem
+                    Name="Properties\Resources.Designer.cs"
+                    Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_49714f334b99458cae0c638ab4f6607a.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_49714f334b99458cae0c638ab4f6607a.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_49714f334b99458cae0c638ab4f6607a.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace ST_49714f334b99458cae0c638ab4f6607a.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ST_49714f334b99458cae0c638ab4f6607a.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}]]></ProjectItem>
+                  <BinaryItem
+                    Name="ST_49714f334b99458cae0c638ab4f6607a.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAJ+mfGkAAAAAAAAAAOAAIiALATAAABIAAAAIAAAAAAAAyjEA
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAACAAAAAAgAAAAAAAAMAYIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAHgxAABPAAAAAEAAAHgEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAA0BEAAAAgAAAAEgAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAHgEAAAAQAAAAAYAAAAUAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAGgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAACs
+MQAAAAAAAEgAAAACAAUA4CEAAOAOAAABAAAAAAAAAMAwAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAABswAwAAAQAAAQAAEQIoEAAACm8RAAAKcgEAAHBvEgAACm8T
+AAAKbxQAAAoKcicAAHACKBAAAApvEQAACnIzAABwbxIAAApvEwAACm8UAAAKKBUAAAoLFgxyUwAA
+cAZysQAAcCgWAAAKcxcAAAoNCW8YAAAKCX4ZAAAKFG8aAAAKbxsAAApvHAAAChMEKycRBG8dAAAK
+dCUAAAFyCQEAcG8eAAAKbxQAAAoHbx8AAAosBBcM3ioRBG8gAAAKLdDeHxEEdREAAAETBREFLAcR
+BW8hAAAK3AksBglvIQAACtwCKBAAAApvEQAACnIfAQBwbxIAAAoIjCYAAAFvIgAACgIoEAAAChZv
+IwAACioBHAAAAgCAADS0ABUAAAAAAgBiAGfJAAoAAAAAHgIoJAAACioeAiglAAAKKq5+AQAABC0e
+ckMBAHDQAwAAAigmAAAKbycAAApzKAAACoABAAAEfgEAAAQqGn4CAAAEKh4CgAIAAAQqGn4DAAAE
+Kh4CKCkAAAoqLnMIAAAGgAMAAAQqAABCU0pCAQABAAAAAAAMAAAAdjQuMC4zMDMxOQAAAAAFAGwA
+AABsBAAAI34AANgEAACUBgAAI1N0cmluZ3MAAAAAbAsAALgBAAAjVVMAJA0AABAAAAAjR1VJRAAA
+ADQNAACsAQAAI0Jsb2IAAAAAAAAAAgAAAVcdogEJAwAAAPoBMwAWAAABAAAAKQAAAAUAAAAGAAAA
+CQAAAAEAAAApAAAAAgAAABAAAAABAAAAAgAAAAMAAAAEAAAAAQAAAAUAAAABAAAAAQAAAAAA+gMB
+AAAAAAAGAKACJgUGAC8DJgUGAOwBEwUPAJoFAAAGABkChQQGAIMChQQGAGQChQQGABYDhQQGAMAC
+hQQGANkChQQGADAChQQGAEsCZwMKAPQCqQMKAEgBqQMOAKkEYQAGAOwE/QUGAMMAKwQGADIEKwQG
+AM8BEwUGAEUGKwQGANwERgUGAMwEcAQSAJ8B5AMSAAAC5AMSAH8BWwQGALQBJgUKANIDqQMWAOMF
+8wAWALoA8wAGAIMDKwQOAKwEuQQOAHwAYQAGAIcAKwQOALAAVQAOAJcEVQAOAGQBVQAOAHwGVQAG
+AEMEKwQGABMBKwQGAM8AKwQGAIgGhQQAAAAAAQAAAAAAAQABAAEAEABQBDEAOQABAAEAAAAQAE0F
+qQVRAAEAAwAAARAA7QWpBWUAAwAHAAMBAAAgBgAASQAEAAoAEQA3BK0AEQA4AbEAEQCMALUABgYp
+ALkAVoAQBrwAVoAYAbwAUCAAAAAAhgBWBAYAAQB4IQAAAACGGAYFBgABAIAhAAAAAIMYBgUGAAEA
+iCEAAAAAkwjYBMAAAQC0IQAAAACTCCABxQABALshAAAAAJMILAHKAAEAwyEAAAAAlghMBtAAAgDK
+IQAAAACGGAYFBgACANIhAAAAAJEYDAXVAAIAAAABAGEDCQAGBQEAEQAGBQYAGQAGBQoAKQAGBRAA
+MQAGBRAAOQAGBRAAQQAGBRAASQAGBRAAUQAGBRAAWQAGBRAAYQAGBRAAaQAGBQYAmQAGBQYAwQAG
+BRUA0QAGBQYAcQAYBicA2QDfBSwA4QAiBDEA6QBNAzcAoQCBAzsA8QA+Bj8A8QA3BkUAeQAGBRAA
++QBLBAYAAQHYBUwAeQCcAFEAEQEuBlwAIQH4BGIAgQBnBjcAKQEiBGcA8QD2BWwAgQBzBnEAiQCX
+AQYA6QBXA3UA2QBYBgEAcQAGBQYAoQAGBQYAOQHhAHoAOQGEBoMAqQAGBYkAyQAGBQYACAAUAKMA
+CAAYAKgAKQBzABABLgALAOgALgATAPEALgAbABABLgAjABkBLgArAEIBLgAzAEIBLgA7AEIBLgBD
+ABkBLgBLAEgBLgBTAEIBLgBbAF8BQwBjAKgASQBzABABYQB7AKgAYwBrAKgAGwADAAEABAADAAAA
+3ATZAAAAQAHeAAAAUAbjAAIABAADAAIABQAFAAEABgAFAAIABwAHAASAAAABAAAANiUTYAAAAAAA
+ADEAAAAEAAAAAAAAAAAAAACRAHMAAAAAABAAAAAAAAAAAAAAAJoAigMAAAAABAAAAAAAAAAAAAAA
+kQBVAAAAAAAEAAAAAAAAAAAAAACRACsEAAAAABAAAAAAAAAAAAAAAJoACgAAAAAAAAAAAAEAAABX
+BQAABQACAAAAADxNb2R1bGU+AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuTWFuYWdlZERUUwB2YWx1ZV9f
+AFNUXzQ5NzE0ZjMzNGI5OTQ1OGNhZTBjNjM4YWI0ZjY2MDdhAFN5c3RlbS5EYXRhAFN5c3RlbS5E
+YXRhLk9sZURiAG1zY29ybGliAE9sZURiU2NoZW1hR3VpZABkZWZhdWx0SW5zdGFuY2UAR2V0T2xl
+RGJTY2hlbWFUYWJsZQBEYXRhVGFibGUAVmFyaWFibGUASURpc3Bvc2FibGUAUnVudGltZVR5cGVI
+YW5kbGUAR2V0VHlwZUZyb21IYW5kbGUATWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuUnVudGltZQBU
+eXBlAEZhaWx1cmUAZ2V0X0N1bHR1cmUAc2V0X0N1bHR1cmUAcmVzb3VyY2VDdWx0dXJlAFZTVEFS
+VFNjcmlwdE9iamVjdE1vZGVsQmFzZQBJbnRlcm5hbERhdGFDb2xsZWN0aW9uQmFzZQBBcHBsaWNh
+dGlvblNldHRpbmdzQmFzZQBEaXNwb3NlAEVkaXRvckJyb3dzYWJsZVN0YXRlAENvbXBpbGVyR2Vu
+ZXJhdGVkQXR0cmlidXRlAERlYnVnZ2VyTm9uVXNlckNvZGVBdHRyaWJ1dGUARGVidWdnYWJsZUF0
+dHJpYnV0ZQBFZGl0b3JCcm93c2FibGVBdHRyaWJ1dGUAQXNzZW1ibHlUaXRsZUF0dHJpYnV0ZQBB
+c3NlbWJseVRyYWRlbWFya0F0dHJpYnV0ZQBUYXJnZXRGcmFtZXdvcmtBdHRyaWJ1dGUAQXNzZW1i
+bHlDb25maWd1cmF0aW9uQXR0cmlidXRlAEFzc2VtYmx5RGVzY3JpcHRpb25BdHRyaWJ1dGUAQ29t
+cGlsYXRpb25SZWxheGF0aW9uc0F0dHJpYnV0ZQBBc3NlbWJseVByb2R1Y3RBdHRyaWJ1dGUAQXNz
+ZW1ibHlDb3B5cmlnaHRBdHRyaWJ1dGUAU1NJU1NjcmlwdFRhc2tFbnRyeVBvaW50QXR0cmlidXRl
+AEFzc2VtYmx5Q29tcGFueUF0dHJpYnV0ZQBSdW50aW1lQ29tcGF0aWJpbGl0eUF0dHJpYnV0ZQBn
+ZXRfVmFsdWUAc2V0X1ZhbHVlAHZhbHVlAFN5c3RlbS5SdW50aW1lLlZlcnNpb25pbmcAVG9TdHJp
+bmcATWljcm9zb2Z0LlNxbFNlcnZlci5TY3JpcHRUYXNrAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRz
+LlRhc2tzLlNjcmlwdFRhc2sAU2NyaXB0T2JqZWN0TW9kZWwAU3lzdGVtLkNvbXBvbmVudE1vZGVs
+AFNUXzQ5NzE0ZjMzNGI5OTQ1OGNhZTBjNjM4YWI0ZjY2MDdhLmRsbABnZXRfSXRlbQBTeXN0ZW0A
+RW51bQByZXNvdXJjZU1hbgBCb29sZWFuAE9wZW4AU2NyaXB0TWFpbgBTeXN0ZW0uQ29uZmlndXJh
+dGlvbgBTeXN0ZW0uR2xvYmFsaXphdGlvbgBTeXN0ZW0uUmVmbGVjdGlvbgBEYXRhUm93Q29sbGVj
+dGlvbgBPbGVEYkNvbm5lY3Rpb24AU3lzdGVtLkRhdGEuQ29tbW9uAEN1bHR1cmVJbmZvAGdldF9S
+ZXNvdXJjZU1hbmFnZXIASUVudW1lcmF0b3IAR2V0RW51bWVyYXRvcgAuY3RvcgAuY2N0b3IAU3lz
+dGVtLkRpYWdub3N0aWNzAFN5c3RlbS5SdW50aW1lLkNvbXBpbGVyU2VydmljZXMAU3lzdGVtLlJl
+c291cmNlcwBTVF80OTcxNGYzMzRiOTk0NThjYWUwYzYzOGFiNGY2NjA3YS5Qcm9wZXJ0aWVzLlJl
+c291cmNlcy5yZXNvdXJjZXMARGVidWdnaW5nTW9kZXMAU1RfNDk3MTRmMzM0Yjk5NDU4Y2FlMGM2
+MzhhYjRmNjYwN2EuUHJvcGVydGllcwBUYWJsZXMAZ2V0X1ZhcmlhYmxlcwBTZXR0aW5ncwBFcXVh
+bHMAU3lzdGVtLkNvbGxlY3Rpb25zAFN1Y2Nlc3MAZ2V0X0R0cwBTY3JpcHRSZXN1bHRzAGdldF9S
+b3dzAENvbmNhdABGb3JtYXQAT2JqZWN0AGdldF9EZWZhdWx0AHNldF9UYXNrUmVzdWx0AGdldF9D
+dXJyZW50AE1vdmVOZXh0AERhdGFSb3cAZ2V0X0Fzc2VtYmx5AAAAAAAlJABQAGEAYwBrAGEAZwBl
+ADoAOgBGAGkAbABlAE4AYQBtAGUAAAsnAHsAMAB9ACcAAR9VAHMAZQByADoAOgBTAGgAZQBlAHQA
+TgBhAG0AZQAAXVAAcgBvAHYAaQBkAGUAcgA9AE0AaQBjAHIAbwBzAG8AZgB0AC4AQQBDAEUALgBP
+AEwARQBEAEIALgAxADIALgAwADsARABhAHQAYQAgAFMAbwB1AHIAYwBlAD0AAFc7AEUAeAB0AGUA
+bgBkAGUAZAAgAFAAcgBvAHAAZQByAHQAaQBlAHMAPQAiAEUAeABjAGUAbAAgADEAMgAuADAAOwBI
+AEQAUgA9AFkARQBTADsAIgA7AAAVVABBAEIATABFAF8ATgBBAE0ARQAAI1UAcwBlAHIAOgA6AFMA
+aABlAGUAdABFAHgAaQBzAHQAcwAAcVMAVABfADQAOQA3ADEANABmADMAMwA0AGIAOQA5ADQANQA4
+AGMAYQBlADAAYwA2ADMAOABhAGIANABmADYANgAwADcAYQAuAFAAcgBvAHAAZQByAHQAaQBlAHMA
+LgBSAGUAcwBvAHUAcgBjAGUAcwAAAAAAC7j/qcGomEOdYtDMEpaD5wAEIAEBCAMgAAEFIAEBEREE
+IAEBDgUgAQERXQsHBg4OAhI9EkESRQQgABJtBCAAEnEFIAESdRwDIAAcAyAADgUAAg4OHAYAAw4O
+Dg4EBhGAhQogAhKAiRGAhR0cBSAAEoCNBCAAEkEEIAEcDgQgAQIOAyAAAgQgAQEcCAABEoCdEYCh
+BSAAEoClByACAQ4SgKUIt3pcVhk04IkIiYRdzYCAzJEEAAAAAAQBAAAAAwYSVQMGElkDBhIQAgYI
+AwYRFAQAABJVBAAAElkFAAEBElkEAAASEAMAAAEECAASVQQIABJZBAgAEhAIAQAIAAAAAAAeAQAB
+AFQCFldyYXBOb25FeGNlcHRpb25UaHJvd3MBCAEAAgAAAAAAKAEAI1NUXzQ5NzE0ZjMzNGI5OTQ1
+OGNhZTBjNjM4YWI0ZjY2MDdhAAAFAQAAAAAWAQARQ29weXJpZ2h0IEAgIDIwMjYAAEkBABouTkVU
+RnJhbWV3b3JrLFZlcnNpb249djQuNwEAVA4URnJhbWV3b3JrRGlzcGxheU5hbWUSLk5FVCBGcmFt
+ZXdvcmsgNC43AAAAtAAAAM7K774BAAAAkQAAAGxTeXN0ZW0uUmVzb3VyY2VzLlJlc291cmNlUmVh
+ZGVyLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tl
+eVRva2VuPWI3N2E1YzU2MTkzNGUwODkjU3lzdGVtLlJlc291cmNlcy5SdW50aW1lUmVzb3VyY2VT
+ZXQCAAAAAAAAAAAAAABQQURQQURQtAAAAKAxAAAAAAAAAAAAALoxAAAAIAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAACsMQAAAAAAAAAAAAAAAF9Db3JEbGxNYWluAG1zY29yZWUuZGxsAAAAAAD/JQAgABAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAEAEAAAABgAAIAAAAAAAAAAAAAAAAAAAAEAAQAAADAAAIAAAAAAAAAAAAAAAAAAAAEAAAAA
+AEgAAABYQAAAGgQAAAAAAAAAAAAAGgQ0AAAAVgBTAF8AVgBFAFIAUwBJAE8ATgBfAEkATgBGAE8A
+AAAAAL0E7/4AAAEAAAABABNgNiUAAAEAE2A2JT8AAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAABE
+AAAAAQBWAGEAcgBGAGkAbABlAEkAbgBmAG8AAAAAACQABAAAAFQAcgBhAG4AcwBsAGEAdABpAG8A
+bgAAAAAAAACwBHoDAAABAFMAdAByAGkAbgBnAEYAaQBsAGUASQBuAGYAbwAAAFYDAAABADAAMAAw
+ADAAMAA0AGIAMAAAABoAAQABAEMAbwBtAG0AZQBuAHQAcwAAAAAAAAAiAAEAAQBDAG8AbQBwAGEA
+bgB5AE4AYQBtAGUAAAAAAAAAAABwACQAAQBGAGkAbABlAEQAZQBzAGMAcgBpAHAAdABpAG8AbgAA
+AAAAUwBUAF8ANAA5ADcAMQA0AGYAMwAzADQAYgA5ADkANAA1ADgAYwBhAGUAMABjADYAMwA4AGEA
+YgA0AGYANgA2ADAANwBhAAAAPgAPAAEARgBpAGwAZQBWAGUAcgBzAGkAbwBuAAAAAAAxAC4AMAAu
+ADkANQAyADYALgAyADQANQA5ADUAAAAAAHAAKAABAEkAbgB0AGUAcgBuAGEAbABOAGEAbQBlAAAA
+UwBUAF8ANAA5ADcAMQA0AGYAMwAzADQAYgA5ADkANAA1ADgAYwBhAGUAMABjADYAMwA4AGEAYgA0
+AGYANgA2ADAANwBhAC4AZABsAGwAAABIABIAAQBMAGUAZwBhAGwAQwBvAHAAeQByAGkAZwBoAHQA
+AABDAG8AcAB5AHIAaQBnAGgAdAAgAEAAIAAgADIAMAAyADYAAAAqAAEAAQBMAGUAZwBhAGwAVABy
+AGEAZABlAG0AYQByAGsAcwAAAAAAAAAAAHgAKAABAE8AcgBpAGcAaQBuAGEAbABGAGkAbABlAG4A
+YQBtAGUAAABTAFQAXwA0ADkANwAxADQAZgAzADMANABiADkAOQA0ADUAOABjAGEAZQAwAGMANgAz
+ADgAYQBiADQAZgA2ADYAMAA3AGEALgBkAGwAbAAAAGgAJAABAFAAcgBvAGQAdQBjAHQATgBhAG0A
+ZQAAAAAAUwBUAF8ANAA5ADcAMQA0AGYAMwAzADQAYgA5ADkANAA1ADgAYwBhAGUAMABjADYAMwA4
+AGEAYgA0AGYANgA2ADAANwBhAAAAQgAPAAEAUAByAG8AZAB1AGMAdABWAGUAcgBzAGkAbwBuAAAA
+MQAuADAALgA5ADUAMgA2AC4AMgA0ADUAOQA1AAAAAABGAA8AAQBBAHMAcwBlAG0AYgBsAHkAIABW
+AGUAcgBzAGkAbwBuAAAAMQAuADAALgA5ADUAMgA2AC4AMgA0ADUAOQA1AAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAADAAAAMwxAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
+                </ScriptProject>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Package Content\For each month\Material Movememnt Sales Data"
+              DTS:CreationName="Microsoft.Pipeline"
+              DTS:DTSID="{0471D2EA-DB6F-4BBD-A505-9B1BB2083919}"
+              DTS:ExecutableType="Microsoft.Pipeline"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Material Movememnt Sales Data"
+              DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <pipeline
+                  version="1">
+                  <components>
+                    <component
+                      refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data"
+                      componentClassID="Microsoft.OLEDBDestination"
+                      contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                      description="OLE DB Destination"
+                      name="dsa Sales - Data"
+                      usesDispositions="true"
+                      version="4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of the database object used to open a rowset."
+                          name="OpenRowset">[dsa].[MaterialMovementSalesData]</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the variable that contains the name of the database object used to open a rowset."
+                          name="OpenRowsetVariable"></property>
+                        <property
+                          dataType="System.String"
+                          description="The SQL command to be executed."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the column code page to use when code page information is unavailable from the data source."
+                          name="DefaultCodePage">1250</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Forces the use of the DefaultCodePage property value when describing character data."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the mode used to access the database."
+                          name="AccessMode"
+                          typeConverter="AccessMode">3</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepIdentity">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                          name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                          name="FastLoadMaxInsertCommitSize">2147483647</property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Connections[OleDbConnection]"
+                          connectionManagerID="Package.ConnectionManagers[DWH]"
+                          connectionManagerRefId="Package.ConnectionManagers[DWH]"
+                          description="The OLE DB runtime connection used to access the database."
+                          name="OleDbConnection" />
+                      </connections>
+                      <inputs>
+                        <input
+                          refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input]"
+                          errorOrTruncationOperation="Insert"
+                          errorRowDisposition="FailComponent"
+                          hasSideEffects="true"
+                          name="OLE DB Destination Input">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].Columns[Divize]"
+                              cachedDataType="wstr"
+                              cachedLength="255"
+                              cachedName="Divize"
+                              externalMetadataColumnId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].ExternalColumns[Divize]"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Divize]" />
+                            <inputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].Columns[Pobočka]"
+                              cachedDataType="wstr"
+                              cachedLength="255"
+                              cachedName="Pobočka"
+                              externalMetadataColumnId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].ExternalColumns[Pobočka]"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Pobočka]" />
+                            <inputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].Columns[IČO]"
+                              cachedDataType="wstr"
+                              cachedLength="255"
+                              cachedName="IČO"
+                              externalMetadataColumnId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].ExternalColumns[IČO]"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[IČO]" />
+                            <inputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].Columns[Obrat v MJ]"
+                              cachedDataType="r8"
+                              cachedName="Obrat v MJ"
+                              externalMetadataColumnId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].ExternalColumns[Obrat v MJ]"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Obrat v MJ]" />
+                            <inputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].Columns[Obrat v paletách]"
+                              cachedDataType="r8"
+                              cachedName="Obrat v paletách"
+                              externalMetadataColumnId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].ExternalColumns[Obrat v paletách]"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Obrat v paletách]" />
+                            <inputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].Columns[Den]"
+                              cachedDataType="wstr"
+                              cachedLength="255"
+                              cachedName="Den"
+                              externalMetadataColumnId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].ExternalColumns[Den]"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Den]" />
+                            <inputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].Columns[Produkt - Kód]"
+                              cachedDataType="wstr"
+                              cachedLength="255"
+                              cachedName="Produkt - Kód"
+                              externalMetadataColumnId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].ExternalColumns[Produkt - Kód]"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Produkt - Kód]" />
+                            <inputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].Columns[Číslo dokladu]"
+                              cachedDataType="wstr"
+                              cachedLength="255"
+                              cachedName="Číslo dokladu"
+                              externalMetadataColumnId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].ExternalColumns[Číslo dokladu]"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Číslo dokladu]" />
+                          </inputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].ExternalColumns[Divize]"
+                              dataType="wstr"
+                              length="255"
+                              name="Divize" />
+                            <externalMetadataColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].ExternalColumns[Pobočka]"
+                              dataType="wstr"
+                              length="255"
+                              name="Pobočka" />
+                            <externalMetadataColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].ExternalColumns[IČO]"
+                              dataType="wstr"
+                              length="255"
+                              name="IČO" />
+                            <externalMetadataColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].ExternalColumns[Obrat v MJ]"
+                              dataType="r8"
+                              name="Obrat v MJ" />
+                            <externalMetadataColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].ExternalColumns[Obrat v paletách]"
+                              dataType="r8"
+                              name="Obrat v paletách" />
+                            <externalMetadataColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].ExternalColumns[Den]"
+                              dataType="wstr"
+                              length="255"
+                              name="Den" />
+                            <externalMetadataColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].ExternalColumns[Číslo dokladu]"
+                              dataType="wstr"
+                              length="255"
+                              name="Číslo dokladu" />
+                            <externalMetadataColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input].ExternalColumns[Produkt - Kód]"
+                              dataType="wstr"
+                              length="255"
+                              name="Produkt - Kód" />
+                          </externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Outputs[OLE DB Destination Error Output]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="OLE DB Destination Error Output"
+                          synchronousInputId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data"
+                      componentClassID="Microsoft.ExcelSource"
+                      contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                      description="Excel Source"
+                      name="Excel Source Data"
+                      usesDispositions="true"
+                      version="1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of the database object used to open a rowset."
+                          name="OpenRowset">'01$'</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the variable that contains the name of the database object used to open a rowset."
+                          name="OpenRowsetVariable">User::SheetName</property>
+                        <property
+                          dataType="System.String"
+                          description="The SQL command to be executed."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                        <property
+                          dataType="System.String"
+                          description="The variable that contains the SQL command to be executed."
+                          name="SqlCommandVariable"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the mode used to access the database."
+                          name="AccessMode"
+                          typeConverter="AccessMode">1</property>
+                        <property
+                          dataType="System.String"
+                          description="The mapping from parameters in the SQL command to variables."
+                          name="ParameterMapping"></property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Connections[OleDbConnection]"
+                          connectionManagerID="Package.ConnectionManagers[Sales]"
+                          connectionManagerRefId="Package.ConnectionManagers[Sales]"
+                          description="The OLE DB runtime connection used to access the database."
+                          name="OleDbConnection" />
+                      </connections>
+                      <outputs>
+                        <output
+                          refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output]"
+                          name="Excel Source Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Divize]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].ExternalColumns[Divize]"
+                              length="255"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Divize]"
+                              name="Divize"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Pobočka]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].ExternalColumns[Pobočka]"
+                              length="255"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Pobočka]"
+                              name="Pobočka"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[IČO]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].ExternalColumns[IČO]"
+                              length="255"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[IČO]"
+                              name="IČO"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Obrat v MJ]"
+                              dataType="r8"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].ExternalColumns[Obrat v MJ]"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Obrat v MJ]"
+                              name="Obrat v MJ"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Obrat v paletách]"
+                              dataType="r8"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].ExternalColumns[Obrat v paletách]"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Obrat v paletách]"
+                              name="Obrat v paletách"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Den]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].ExternalColumns[Den]"
+                              length="255"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Den]"
+                              name="Den"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Číslo dokladu]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].ExternalColumns[Číslo dokladu]"
+                              length="255"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Číslo dokladu]"
+                              name="Číslo dokladu"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Produkt - Kód]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].ExternalColumns[Produkt - Kód]"
+                              length="255"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].Columns[Produkt - Kód]"
+                              name="Produkt - Kód"
+                              truncationRowDisposition="FailComponent" />
+                          </outputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].ExternalColumns[Divize]"
+                              dataType="wstr"
+                              length="255"
+                              name="Divize" />
+                            <externalMetadataColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].ExternalColumns[Pobočka]"
+                              dataType="wstr"
+                              length="255"
+                              name="Pobočka" />
+                            <externalMetadataColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].ExternalColumns[IČO]"
+                              dataType="wstr"
+                              length="255"
+                              name="IČO" />
+                            <externalMetadataColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].ExternalColumns[Obrat v MJ]"
+                              dataType="r8"
+                              name="Obrat v MJ" />
+                            <externalMetadataColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].ExternalColumns[Obrat v paletách]"
+                              dataType="r8"
+                              name="Obrat v paletách" />
+                            <externalMetadataColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].ExternalColumns[Den]"
+                              dataType="wstr"
+                              length="255"
+                              name="Den" />
+                            <externalMetadataColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].ExternalColumns[Číslo dokladu]"
+                              dataType="wstr"
+                              length="255"
+                              name="Číslo dokladu" />
+                            <externalMetadataColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output].ExternalColumns[Produkt - Kód]"
+                              dataType="wstr"
+                              length="255"
+                              name="Produkt - Kód" />
+                          </externalMetadataColumns>
+                        </output>
+                        <output
+                          refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output]"
+                          isErrorOut="true"
+                          name="Excel Source Error Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[Divize]"
+                              dataType="wstr"
+                              length="255"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[Divize]"
+                              name="Divize" />
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[Pobočka]"
+                              dataType="wstr"
+                              length="255"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[Pobočka]"
+                              name="Pobočka" />
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[Den]"
+                              dataType="wstr"
+                              length="255"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[Den]"
+                              name="Den" />
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[IČO]"
+                              dataType="wstr"
+                              length="255"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[IČO]"
+                              name="IČO" />
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[Číslo dokladu]"
+                              dataType="wstr"
+                              length="255"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[Číslo dokladu]"
+                              name="Číslo dokladu" />
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[Produkt - Kód]"
+                              dataType="wstr"
+                              length="255"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[Produkt - Kód]"
+                              name="Produkt - Kód" />
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[Obrat v MJ]"
+                              dataType="r8"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[Obrat v MJ]"
+                              name="Obrat v MJ" />
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[Obrat v paletách]"
+                              dataType="r8"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[Obrat v paletách]"
+                              name="Obrat v paletách" />
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                  </components>
+                  <paths>
+                    <path
+                      refId="Package\Package Content\For each month\Material Movememnt Sales Data.Paths[Excel Source Output]"
+                      endId="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data.Inputs[OLE DB Destination Input]"
+                      name="Excel Source Output"
+                      startId="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data.Outputs[Excel Source Output]" />
+                  </paths>
+                </pipeline>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Package Content\For each month.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{93196CE2-40AE-4F37-9733-37A99FB70AF2}"
+              DTS:EvalOp="3"
+              DTS:Expression="@[User::SheetExists]"
+              DTS:From="Package\Package Content\For each month\Check if the sheet exists"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Package Content\For each month\Material Movememnt Sales Data" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{E790267C-11AD-451C-8C19-0CFB667761ED}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Check if the master data sheet exists"
+          DTS:CreationName="Microsoft.ScriptTask"
+          DTS:Description="Script Task"
+          DTS:DTSID="{0C03EA71-F816-4B35-94C3-5C985D4EC4EE}"
+          DTS:ExecutableType="Microsoft.ScriptTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Check if the master data sheet exists"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ST_29227734bd344a8fb210adea57849895"
+              VSTAMajorVersion="16"
+              VSTAMinorVersion="0"
+              Language="CSharp"
+              ReadOnlyVariables="$Package::FileName"
+              ReadWriteVariables="User::SheetExists">
+              <ProjectItem
+                Name="Properties\Resources.resx"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_49714f334b99458cae0c638ab4f6607a.Properties.Settings.get_Default():ST_49714f334b99458cae0c638ab4f6607a.Properties.Sett" +
+    "ings")]
+
+namespace ST_49714f334b99458cae0c638ab4f6607a.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <ProjectItem
+                Name="ScriptMain.cs"
+                Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
+/* The Script Task allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services control flow. 
+ * 
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script task. */
+#endregion
+
+
+#region Namespaces
+using Microsoft.SqlServer.Dts.Runtime;
+using System;
+using System.Data;
+using System.Data.OleDb;
+using System.Windows.Forms;
+#endregion
+
+namespace ST_49714f334b99458cae0c638ab4f6607a
+{
+    /// <summary>
+    /// ScriptMain is the entry point class of the script.  Do not change the name, attributes,
+    /// or parent of this class.
+    /// </summary>
+	[Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute]
+	public partial class ScriptMain : Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+	{
+        #region Help:  Using Integration Services variables and parameters in a script
+        /* To use a variable in this script, first ensure that the variable has been added to 
+         * either the list contained in the ReadOnlyVariables property or the list contained in 
+         * the ReadWriteVariables property of this script task, according to whether or not your
+         * code needs to write to the variable.  To add the variable, save this script, close this instance of
+         * Visual Studio, and update the ReadOnlyVariables and 
+         * ReadWriteVariables properties in the Script Transformation Editor window.
+         * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+         * 
+         * Example of reading from a variable:
+         *  DateTime startTime = (DateTime) Dts.Variables["System::StartTime"].Value;
+         * 
+         * Example of writing to a variable:
+         *  Dts.Variables["User::myStringVariable"].Value = "new value";
+         * 
+         * Example of reading from a package parameter:
+         *  int batchId = (int) Dts.Variables["$Package::batchId"].Value;
+         *  
+         * Example of reading from a project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].Value;
+         * 
+         * Example of reading from a sensitive project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].GetSensitiveValue();
+         * */
+
+        #endregion
+
+        #region Help:  Firing Integration Services events from a script
+        /* This script task can fire events for logging purposes.
+         * 
+         * Example of firing an error event:
+         *  Dts.Events.FireError(18, "Process Values", "Bad value", "", 0);
+         * 
+         * Example of firing an information event:
+         *  Dts.Events.FireInformation(3, "Process Values", "Processing has started", "", 0, ref fireAgain)
+         * 
+         * Example of firing a warning event:
+         *  Dts.Events.FireWarning(14, "Process Values", "No values received for input", "", 0);
+         * */
+        #endregion
+
+        #region Help:  Using Integration Services connection managers in a script
+        /* Some types of connection managers can be used in this script task.  See the topic 
+         * "Working with Connection Managers Programatically" for details.
+         * 
+         * Example of using an ADO.Net connection manager:
+         *  object rawConnection = Dts.Connections["Sales DB"].AcquireConnection(Dts.Transaction);
+         *  SqlConnection myADONETConnection = (SqlConnection)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Sales DB"].ReleaseConnection(rawConnection);
+         *
+         * Example of using a File connection manager
+         *  object rawConnection = Dts.Connections["Prices.zip"].AcquireConnection(Dts.Transaction);
+         *  string filePath = (string)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Prices.zip"].ReleaseConnection(rawConnection);
+         * */
+        #endregion
+
+
+        /// <summary>
+        /// This method is called when this script task executes in the control flow.
+        /// Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+        /// To open Help, press F1.
+        /// </summary>
+        public void Main()
+        {
+            string excelFile = Dts.Variables["$Package::FileName"].Value.ToString();
+            string sheetName = "číselník$";
+
+            bool exists = false;
+
+            string connStr =
+                "Provider=Microsoft.ACE.OLEDB.12.0;" +
+                "Data Source=" + excelFile + ";" +
+                "Extended Properties=\"Excel 12.0;HDR=YES;\";";
+
+            using (OleDbConnection conn = new OleDbConnection(connStr))
+            {
+                conn.Open();
+                DataTable sheets = conn.GetOleDbSchemaTable(
+                    OleDbSchemaGuid.Tables,
+                    null);
+
+                foreach (DataRow row in sheets.Rows)
+                {
+                    if (row["TABLE_NAME"].ToString().Equals(sheetName))
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+            }
+
+            Dts.Variables["User::SheetExists"].Value = exists;
+            Dts.TaskResult = (int)ScriptResults.Success;
+        }
+        #region ScriptResults declaration
+        /// <summary>
+        /// This enum provides a convenient shorthand within the scope of this class for setting the
+        /// result of the script.
+        /// 
+        /// This code was generated automatically.
+        /// </summary>
+        enum ScriptResults
+        {
+            Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success,
+            Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+        };
+        #endregion
+
+	}
+}]]></ProjectItem>
+              <ProjectItem
+                Name="ST_29227734bd344a8fb210adea57849895.csproj"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EF1DAB03-5413-4377-833A-7DE17A9FFABC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ST_49714f334b99458cae0c638ab4f6607a</RootNamespace>
+    <AssemblyName>ST_29227734bd344a8fb210adea57849895</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ScriptMain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
+        <Host Name="ScriptTask" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST160</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Project"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+  <msb:PropertyGroup>
+    <msb:CodeName>ST_29227734bd344a8fb210adea57849895</msb:CodeName>
+    <msb:Language>msBuild</msb:Language>
+    <msb:DisplayName>ST_29227734bd344a8fb210adea57849895</msb:DisplayName>
+    <msb:ProjectId>{2FFE4F35-A5A7-434F-8BD6-64990B57E752}</msb:ProjectId>
+  </msb:PropertyGroup>
+  <msb:ItemGroup>
+    <msb:Project Include="ST_29227734bd344a8fb210adea57849895.csproj" />
+    <msb:File Include="Properties\Settings.settings" />
+    <msb:File Include="Properties\AssemblyInfo.cs" />
+    <msb:File Include="Properties\Resources.resx" />
+    <msb:File Include="Properties\Resources.Designer.cs" />
+    <msb:File Include="Properties\Settings.Designer.cs" />
+    <msb:File Include="ScriptMain.cs" />
+  </msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_49714f334b99458cae0c638ab4f6607a")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_49714f334b99458cae0c638ab4f6607a")]
+[assembly: AssemblyCopyright("Copyright @  2026")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_49714f334b99458cae0c638ab4f6607a.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_49714f334b99458cae0c638ab4f6607a.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_49714f334b99458cae0c638ab4f6607a.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace ST_49714f334b99458cae0c638ab4f6607a.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ST_49714f334b99458cae0c638ab4f6607a.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <BinaryItem
+                Name="ST_29227734bd344a8fb210adea57849895.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAG3BfGkAAAAAAAAAAOAAIiALATAAABIAAAAIAAAAAAAAnjEA
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAACAAAAAAgAAAAAAAAMAYIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAEwxAABPAAAAAEAAAHgEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAApBEAAAAgAAAAEgAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAHgEAAAAQAAAAAYAAAAUAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAGgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAACA
+MQAAAAAAAEgAAAACAAUAvCEAANgOAAABAAAAAAAAAJQwAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAABswAwDcAAAAAQAAEQIoEAAACm8RAAAKcgEAAHBvEgAACm8T
+AAAKbxQAAAoKcicAAHALFgxyOwAAcAZymQAAcCgVAAAKcxYAAAoNCW8XAAAKCX4YAAAKFG8ZAAAK
+bxoAAApvGwAAChMEKycRBG8cAAAKdCUAAAFy8QAAcG8dAAAKbxQAAAoHbx4AAAosBBcM3ioRBG8f
+AAAKLdDeHxEEdREAAAETBREFLAcRBW8gAAAK3AksBglvIAAACtwCKBAAAApvEQAACnIHAQBwbxIA
+AAoIjCYAAAFvIQAACgIoEAAAChZvIgAACioBHAAAAgBcADSQABUAAAAAAgA+AGelAAoAAAAAHgIo
+IwAACioeAigkAAAKKq5+AQAABC0ecisBAHDQAwAAAiglAAAKbyYAAApzJwAACoABAAAEfgEAAAQq
+Gn4CAAAEKh4CgAIAAAQqGn4DAAAEKh4CKCgAAAoqLnMIAAAGgAMAAAQqAABCU0pCAQABAAAAAAAM
+AAAAdjQuMC4zMDMxOQAAAAAFAGwAAABoBAAAI34AANQEAACwBgAAI1N0cmluZ3MAAAAAhAsAAKAB
+AAAjVVMAJA0AABAAAAAjR1VJRAAAADQNAACkAQAAI0Jsb2IAAAAAAAAAAgAAAVcdogEJAwAAAPoB
+MwAWAAABAAAAKQAAAAUAAAAGAAAACQAAAAEAAAAoAAAAAgAAABAAAAABAAAAAgAAAAMAAAAEAAAA
+AQAAAAUAAAABAAAAAQAAAAAAHgQBAAAAAAAGAMQCSgUGAFMDSgUGABACNwUPAL4FAAAGAD0CqQQG
+AKcCqQQGAIgCqQQGADoDqQQGAOQCqQQGAP0CqQQGAFQCqQQGAG8CiwMKABgDzQMKAGwBzQMOAM0E
+hQAGABAFIQYGAOcATwQGAFYETwQGAPMBNwUGAGIGTwQGAAAFagUGAPAElAQSAMMBCAQSACQCCAQS
+AKMBfwQGANgBSgUKAPYDzQMWAAcGFwEWAN4AFwEGAKcDTwQOANAE3QQOAKAAhQAGAKsATwQOANQA
+eQAOALsEeQAOAIgBeQAOAJkGeQAGAGcETwQGADcBTwQGAPMATwQGAKUGqQQAAAAAJQAAAAAAAQAB
+AAEAEAB0BFUAOQABAAEAAAAQAHEFzQVRAAEAAwAAARAAEQbNBWUAAwAHAAMBAABEBgAASQAEAAoA
+EQBbBKcAEQBcAasAEQCwAK8ABgZNALMAVoA0BrYAVoA8AbYAUCAAAAAAhgB6BAYAAQBUIQAAAACG
+GCoFBgABAFwhAAAAAIMYKgUGAAEAZCEAAAAAkwj8BLoAAQCQIQAAAACTCEQBvwABAJchAAAAAJMI
+UAHEAAEAnyEAAAAAlghpBsoAAgCmIQAAAACGGCoFBgACAK4hAAAAAJEYMAXPAAIAAAABAIUDCQAq
+BQEAEQAqBQYAGQAqBQoAKQAqBRAAMQAqBRAAOQAqBRAAQQAqBRAASQAqBRAAUQAqBRAAWQAqBRAA
+YQAqBRAAaQAqBQYAmQAqBQYAwQAqBRUA0QAqBQYAcQA8BicA2QADBiwA4QBGBDEA6QBxAzcAoQCl
+AzsA8QBbBj8AeQAqBRAA+QBvBAYAAQH8BUYAeQDAAEsAEQFSBlYAIQEcBVwAgQCEBjcAKQFGBGEA
+8QAaBmYAgQCQBmsAiQC7AQYA6QB7A28A2QB1BgEAcQAqBQYAoQAqBQYAOQEFAXQAOQGhBn0AqQAq
+BYMAyQAqBQYACAAUAJ0ACAAYAKIAKQBzAAoBLgALAOIALgATAOsALgAbAAoBLgAjABMBLgArADwB
+LgAzADwBLgA7ADwBLgBDABMBLgBLAEIBLgBTADwBLgBbAFkBQwBjAKIASQBzAAoBYQB7AKIAYwBr
+AKIAGwADAAEABAADAAAAAAXTAAAAZAHYAAAAbQbdAAIABAADAAIABQAFAAEABgAFAAIABwAHAASA
+AAABAAAANiV+bQAAAAAAAAEAAAAEAAAAAAAAAAAAAACLAJcAAAAAABAAAAAAAAAAAAAAAJQArgMA
+AAAABAAAAAAAAAAAAAAAiwB5AAAAAAAEAAAAAAAAAAAAAACLAE8EAAAAABAAAAAAAAAAAAAAAJQA
+LgAAAAAAAAAAAAEAAAB7BQAABQACAAAAAAAAU1RfMjkyMjc3MzRiZDM0NGE4ZmIyMTBhZGVhNTc4
+NDk4OTUAPE1vZHVsZT4ATWljcm9zb2Z0LlNxbFNlcnZlci5NYW5hZ2VkRFRTAHZhbHVlX18AU1Rf
+NDk3MTRmMzM0Yjk5NDU4Y2FlMGM2MzhhYjRmNjYwN2EAU3lzdGVtLkRhdGEAU3lzdGVtLkRhdGEu
+T2xlRGIAbXNjb3JsaWIAT2xlRGJTY2hlbWFHdWlkAGRlZmF1bHRJbnN0YW5jZQBHZXRPbGVEYlNj
+aGVtYVRhYmxlAERhdGFUYWJsZQBWYXJpYWJsZQBJRGlzcG9zYWJsZQBSdW50aW1lVHlwZUhhbmRs
+ZQBHZXRUeXBlRnJvbUhhbmRsZQBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5SdW50aW1lAFR5cGUA
+RmFpbHVyZQBnZXRfQ3VsdHVyZQBzZXRfQ3VsdHVyZQByZXNvdXJjZUN1bHR1cmUAVlNUQVJUU2Ny
+aXB0T2JqZWN0TW9kZWxCYXNlAEludGVybmFsRGF0YUNvbGxlY3Rpb25CYXNlAEFwcGxpY2F0aW9u
+U2V0dGluZ3NCYXNlAERpc3Bvc2UARWRpdG9yQnJvd3NhYmxlU3RhdGUAQ29tcGlsZXJHZW5lcmF0
+ZWRBdHRyaWJ1dGUARGVidWdnZXJOb25Vc2VyQ29kZUF0dHJpYnV0ZQBEZWJ1Z2dhYmxlQXR0cmli
+dXRlAEVkaXRvckJyb3dzYWJsZUF0dHJpYnV0ZQBBc3NlbWJseVRpdGxlQXR0cmlidXRlAEFzc2Vt
+Ymx5VHJhZGVtYXJrQXR0cmlidXRlAFRhcmdldEZyYW1ld29ya0F0dHJpYnV0ZQBBc3NlbWJseUNv
+bmZpZ3VyYXRpb25BdHRyaWJ1dGUAQXNzZW1ibHlEZXNjcmlwdGlvbkF0dHJpYnV0ZQBDb21waWxh
+dGlvblJlbGF4YXRpb25zQXR0cmlidXRlAEFzc2VtYmx5UHJvZHVjdEF0dHJpYnV0ZQBBc3NlbWJs
+eUNvcHlyaWdodEF0dHJpYnV0ZQBTU0lTU2NyaXB0VGFza0VudHJ5UG9pbnRBdHRyaWJ1dGUAQXNz
+ZW1ibHlDb21wYW55QXR0cmlidXRlAFJ1bnRpbWVDb21wYXRpYmlsaXR5QXR0cmlidXRlAGdldF9W
+YWx1ZQBzZXRfVmFsdWUAdmFsdWUAU3lzdGVtLlJ1bnRpbWUuVmVyc2lvbmluZwBUb1N0cmluZwBN
+aWNyb3NvZnQuU3FsU2VydmVyLlNjcmlwdFRhc2sATWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuVGFz
+a3MuU2NyaXB0VGFzawBTY3JpcHRPYmplY3RNb2RlbABTeXN0ZW0uQ29tcG9uZW50TW9kZWwAU1Rf
+MjkyMjc3MzRiZDM0NGE4ZmIyMTBhZGVhNTc4NDk4OTUuZGxsAGdldF9JdGVtAFN5c3RlbQBFbnVt
+AHJlc291cmNlTWFuAEJvb2xlYW4AT3BlbgBTY3JpcHRNYWluAFN5c3RlbS5Db25maWd1cmF0aW9u
+AFN5c3RlbS5HbG9iYWxpemF0aW9uAFN5c3RlbS5SZWZsZWN0aW9uAERhdGFSb3dDb2xsZWN0aW9u
+AE9sZURiQ29ubmVjdGlvbgBTeXN0ZW0uRGF0YS5Db21tb24AQ3VsdHVyZUluZm8AZ2V0X1Jlc291
+cmNlTWFuYWdlcgBJRW51bWVyYXRvcgBHZXRFbnVtZXJhdG9yAC5jdG9yAC5jY3RvcgBTeXN0ZW0u
+RGlhZ25vc3RpY3MAU3lzdGVtLlJ1bnRpbWUuQ29tcGlsZXJTZXJ2aWNlcwBTeXN0ZW0uUmVzb3Vy
+Y2VzAFNUXzQ5NzE0ZjMzNGI5OTQ1OGNhZTBjNjM4YWI0ZjY2MDdhLlByb3BlcnRpZXMuUmVzb3Vy
+Y2VzLnJlc291cmNlcwBEZWJ1Z2dpbmdNb2RlcwBTVF80OTcxNGYzMzRiOTk0NThjYWUwYzYzOGFi
+NGY2NjA3YS5Qcm9wZXJ0aWVzAFRhYmxlcwBnZXRfVmFyaWFibGVzAFNldHRpbmdzAEVxdWFscwBT
+eXN0ZW0uQ29sbGVjdGlvbnMAU3VjY2VzcwBnZXRfRHRzAFNjcmlwdFJlc3VsdHMAZ2V0X1Jvd3MA
+Q29uY2F0AE9iamVjdABnZXRfRGVmYXVsdABzZXRfVGFza1Jlc3VsdABnZXRfQ3VycmVudABNb3Zl
+TmV4dABEYXRhUm93AGdldF9Bc3NlbWJseQAAAAAlJABQAGEAYwBrAGEAZwBlADoAOgBGAGkAbABl
+AE4AYQBtAGUAABMNAe0AcwBlAGwAbgDtAGsAJAABXVAAcgBvAHYAaQBkAGUAcgA9AE0AaQBjAHIA
+bwBzAG8AZgB0AC4AQQBDAEUALgBPAEwARQBEAEIALgAxADIALgAwADsARABhAHQAYQAgAFMAbwB1
+AHIAYwBlAD0AAFc7AEUAeAB0AGUAbgBkAGUAZAAgAFAAcgBvAHAAZQByAHQAaQBlAHMAPQAiAEUA
+eABjAGUAbAAgADEAMgAuADAAOwBIAEQAUgA9AFkARQBTADsAIgA7AAAVVABBAEIATABFAF8ATgBB
+AE0ARQAAI1UAcwBlAHIAOgA6AFMAaABlAGUAdABFAHgAaQBzAHQAcwAAcVMAVABfADQAOQA3ADEA
+NABmADMAMwA0AGIAOQA5ADQANQA4AGMAYQBlADAAYwA2ADMAOABhAGIANABmADYANgAwADcAYQAu
+AFAAcgBvAHAAZQByAHQAaQBlAHMALgBSAGUAcwBvAHUAcgBjAGUAcwAAAAAAsE8yk2Udt0a+p6iB
+/SjXNAAEIAEBCAMgAAEFIAEBEREEIAEBDgUgAQERXQsHBg4OAhI9EkESRQQgABJtBCAAEnEFIAES
+dRwDIAAcAyAADgYAAw4ODg4EBhGAhQogAhKAiRGAhR0cBSAAEoCNBCAAEkEEIAEcDgQgAQIOAyAA
+AgQgAQEcCAABEoCdEYChBSAAEoClByACAQ4SgKUIt3pcVhk04IkIiYRdzYCAzJEEAAAAAAQBAAAA
+AwYSVQMGElkDBhIQAgYIAwYRFAQAABJVBAAAElkFAAEBElkEAAASEAMAAAEECAASVQQIABJZBAgA
+EhAIAQAIAAAAAAAeAQABAFQCFldyYXBOb25FeGNlcHRpb25UaHJvd3MBCAEAAgAAAAAAKAEAI1NU
+XzQ5NzE0ZjMzNGI5OTQ1OGNhZTBjNjM4YWI0ZjY2MDdhAAAFAQAAAAAWAQARQ29weXJpZ2h0IEAg
+IDIwMjYAAEkBABouTkVURnJhbWV3b3JrLFZlcnNpb249djQuNwEAVA4URnJhbWV3b3JrRGlzcGxh
+eU5hbWUSLk5FVCBGcmFtZXdvcmsgNC43ALQAAADOyu++AQAAAJEAAABsU3lzdGVtLlJlc291cmNl
+cy5SZXNvdXJjZVJlYWRlciwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0
+cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5I1N5c3RlbS5SZXNvdXJjZXMuUnVu
+dGltZVJlc291cmNlU2V0AgAAAAAAAAAAAAAAUEFEUEFEULQAAAB0MQAAAAAAAAAAAACOMQAAACAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAgDEAAAAAAAAAAAAAAABfQ29yRGxsTWFpbgBtc2NvcmVlLmRs
+bAAAAAAA/yUAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAEAEAAAABgAAIAAAAAAAAAAAAAAAAAAAAEAAQAAADAAAIAAAAAAAAAAAAAAAAAAAAEAAAAA
+AEgAAABYQAAAGgQAAAAAAAAAAAAAGgQ0AAAAVgBTAF8AVgBFAFIAUwBJAE8ATgBfAEkATgBGAE8A
+AAAAAL0E7/4AAAEAAAABAH5tNiUAAAEAfm02JT8AAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAABE
+AAAAAQBWAGEAcgBGAGkAbABlAEkAbgBmAG8AAAAAACQABAAAAFQAcgBhAG4AcwBsAGEAdABpAG8A
+bgAAAAAAAACwBHoDAAABAFMAdAByAGkAbgBnAEYAaQBsAGUASQBuAGYAbwAAAFYDAAABADAAMAAw
+ADAAMAA0AGIAMAAAABoAAQABAEMAbwBtAG0AZQBuAHQAcwAAAAAAAAAiAAEAAQBDAG8AbQBwAGEA
+bgB5AE4AYQBtAGUAAAAAAAAAAABwACQAAQBGAGkAbABlAEQAZQBzAGMAcgBpAHAAdABpAG8AbgAA
+AAAAUwBUAF8ANAA5ADcAMQA0AGYAMwAzADQAYgA5ADkANAA1ADgAYwBhAGUAMABjADYAMwA4AGEA
+YgA0AGYANgA2ADAANwBhAAAAPgAPAAEARgBpAGwAZQBWAGUAcgBzAGkAbwBuAAAAAAAxAC4AMAAu
+ADkANQAyADYALgAyADgAMAAzADAAAAAAAHAAKAABAEkAbgB0AGUAcgBuAGEAbABOAGEAbQBlAAAA
+UwBUAF8AMgA5ADIAMgA3ADcAMwA0AGIAZAAzADQANABhADgAZgBiADIAMQAwAGEAZABlAGEANQA3
+ADgANAA5ADgAOQA1AC4AZABsAGwAAABIABIAAQBMAGUAZwBhAGwAQwBvAHAAeQByAGkAZwBoAHQA
+AABDAG8AcAB5AHIAaQBnAGgAdAAgAEAAIAAgADIAMAAyADYAAAAqAAEAAQBMAGUAZwBhAGwAVABy
+AGEAZABlAG0AYQByAGsAcwAAAAAAAAAAAHgAKAABAE8AcgBpAGcAaQBuAGEAbABGAGkAbABlAG4A
+YQBtAGUAAABTAFQAXwAyADkAMgAyADcANwAzADQAYgBkADMANAA0AGEAOABmAGIAMgAxADAAYQBk
+AGUAYQA1ADcAOAA0ADkAOAA5ADUALgBkAGwAbAAAAGgAJAABAFAAcgBvAGQAdQBjAHQATgBhAG0A
+ZQAAAAAAUwBUAF8ANAA5ADcAMQA0AGYAMwAzADQAYgA5ADkANAA1ADgAYwBhAGUAMABjADYAMwA4
+AGEAYgA0AGYANgA2ADAANwBhAAAAQgAPAAEAUAByAG8AZAB1AGMAdABWAGUAcgBzAGkAbwBuAAAA
+MQAuADAALgA5ADUAMgA2AC4AMgA4ADAAMwAwAAAAAABGAA8AAQBBAHMAcwBlAG0AYgBsAHkAIABW
+AGUAcgBzAGkAbwBuAAAAMQAuADAALgA5ADUAMgA2AC4AMgA4ADAAMwAwAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAADAAAAKAxAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
+            </ScriptProject>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Material Movement Sales Master Data"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DTSID="{CAFAA6E6-B6FE-4151-844C-1FFED0F59F21}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Material Movement Sales Master Data"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="dsa Sales - Mater Data"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dsa].[MaterialMovementMasterData]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1250</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DWH]"
+                      connectionManagerRefId="Package.ConnectionManagers[DWH]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].Columns[Divize]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Divize"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[Divize]"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Divize]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].Columns[Pobočka]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Pobočka"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[Pobočka]"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Pobočka]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].Columns[IČO]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="IČO"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[IČO]"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[IČO]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].Columns[Obrat v MJ]"
+                          cachedDataType="r8"
+                          cachedName="Obrat v MJ"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[Obrat v MJ]"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Obrat v MJ]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].Columns[Obrat v paletách]"
+                          cachedDataType="r8"
+                          cachedName="Obrat v paletách"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[Obrat v paletách]"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Obrat v paletách]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].Columns[K jméno]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="K jméno"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[K jméno]"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[K jméno]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].Columns[K město]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="K město"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[K město]"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[K město]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].Columns[Zakázka]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Zakázka"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[Zakázka]"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Zakázka]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].Columns[Spekulace]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Spekulace"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[Spekulace]"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Spekulace]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[Divize]"
+                          dataType="wstr"
+                          length="255"
+                          name="Divize" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[Pobočka]"
+                          dataType="wstr"
+                          length="255"
+                          name="Pobočka" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[IČO]"
+                          dataType="wstr"
+                          length="255"
+                          name="IČO" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[Obrat v MJ]"
+                          dataType="r8"
+                          name="Obrat v MJ" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[Obrat v paletách]"
+                          dataType="r8"
+                          name="Obrat v paletách" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[K jméno]"
+                          dataType="wstr"
+                          length="255"
+                          name="K jméno" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[K město]"
+                          dataType="wstr"
+                          length="255"
+                          name="K město" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[Zakázka]"
+                          dataType="wstr"
+                          length="255"
+                          name="Zakázka" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input].ExternalColumns[Spekulace]"
+                          dataType="wstr"
+                          length="255"
+                          name="Spekulace" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data"
+                  componentClassID="Microsoft.ExcelSource"
+                  contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Excel Source"
+                  name="Excel Source Master Data"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">číselník$</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mapping from parameters in the SQL command to variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Sales]"
+                      connectionManagerRefId="Package.ConnectionManagers[Sales]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output]"
+                      name="Excel Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Divize]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[Divize]"
+                          length="255"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Divize]"
+                          name="Divize"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Pobočka]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[Pobočka]"
+                          length="255"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Pobočka]"
+                          name="Pobočka"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[IČO]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[IČO]"
+                          length="255"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[IČO]"
+                          name="IČO"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[K jméno]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[K jméno]"
+                          length="255"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[K jméno]"
+                          name="K jméno"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[K město]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[K město]"
+                          length="255"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[K město]"
+                          name="K město"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Zakázka]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[Zakázka]"
+                          length="255"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Zakázka]"
+                          name="Zakázka"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Spekulace]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[Spekulace]"
+                          length="255"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Spekulace]"
+                          name="Spekulace"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Obrat v MJ]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[Obrat v MJ]"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Obrat v MJ]"
+                          name="Obrat v MJ"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Obrat v paletách]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[Obrat v paletách]"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].Columns[Obrat v paletách]"
+                          name="Obrat v paletách"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[Divize]"
+                          dataType="wstr"
+                          length="255"
+                          name="Divize" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[Pobočka]"
+                          dataType="wstr"
+                          length="255"
+                          name="Pobočka" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[IČO]"
+                          dataType="wstr"
+                          length="255"
+                          name="IČO" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[K jméno]"
+                          dataType="wstr"
+                          length="255"
+                          name="K jméno" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[K město]"
+                          dataType="wstr"
+                          length="255"
+                          name="K město" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[Zakázka]"
+                          dataType="wstr"
+                          length="255"
+                          name="Zakázka" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[Spekulace]"
+                          dataType="wstr"
+                          length="255"
+                          name="Spekulace" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[Obrat v MJ]"
+                          dataType="r8"
+                          name="Obrat v MJ" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output].ExternalColumns[Obrat v paletách]"
+                          dataType="r8"
+                          name="Obrat v paletách" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output]"
+                      isErrorOut="true"
+                      name="Excel Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[Divize]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[Divize]"
+                          name="Divize" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[Pobočka]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[Pobočka]"
+                          name="Pobočka" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[IČO]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[IČO]"
+                          name="IČO" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[K jméno]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[K jméno]"
+                          name="K jméno" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[K město]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[K město]"
+                          name="K město" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[Zakázka]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[Zakázka]"
+                          name="Zakázka" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[Spekulace]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[Spekulace]"
+                          name="Spekulace" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[Obrat v MJ]"
+                          dataType="r8"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[Obrat v MJ]"
+                          name="Obrat v MJ" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[Obrat v paletách]"
+                          dataType="r8"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[Obrat v paletách]"
+                          name="Obrat v paletách" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\Material Movement Sales Master Data.Paths[Excel Source Output]"
+                  endId="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data.Inputs[OLE DB Destination Input]"
+                  name="Excel Source Output"
+                  startId="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data.Outputs[Excel Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{8B0FF3A7-9B72-4E9C-9004-0A2A14F766C2}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::SheetExists]"
+          DTS:From="Package\Sequence Container\Check if the master data sheet exists"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\Material Movement Sales Master Data" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{AEE6D16B-46EA-4D97-AFD0-0E6A71E30642}"
+      DTS:From="Package\Log ETL Package Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Sequence Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{92CE2151-FF1D-46EE-A05A-EB43CF2FE955}"
+      DTS:From="Package\Package Content"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Log ETL Package Succeess" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{0B294199-7449-4D35-A04C-244B3CB081CD}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Package Content" />
+  </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{9640FF1F-9955-41BF-8584-448B51B45AA7}"
+      DTS:EventID="313412132"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{8ACDB9D6-71A7-4F89-8138-78BE59C830A6}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Log ETL Package Failure"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{FEF3BAF9-C8F7-4A75-A17C-652EBF3CE288}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Log ETL Package Failure"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9DCA2CB3-5746-4ECF-903D-63EB7A4FDE7F}"
+              SQLTask:SqlStatementSource="EXEC [adm].[p_LogETLPackageLogFailure]&#xA;  @ETLLogId = ?&#xA;  ,@MachineName = ?&#xA;  ,@PackageName = ?&#xA;  ,@UserName = ?&#xA;  ,@ExecutionInstanceGUID = ?&#xA;  ,@SourceName = ?&#xA;  ,@TaskName = ?&#xA;  ,@ErrorCode = ?&#xA;  ,@ErrorMessage = ?&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="$Package::ETLLogId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::MachineName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="System::UserName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="4"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="5"
+                SQLTask:DtsVariableName="System::SourceName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="6"
+                SQLTask:DtsVariableName="System::TaskName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="7"
+                SQLTask:DtsVariableName="System::ErrorCode"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="8"
+                SQLTask:DtsVariableName="System::ErrorDescription"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="185.333333333334,42.6666666666667"
+          Id="Package\Log ETL Package Start"
+          TopLeft="126.718733075541,0.866666728655499" />
+        <NodeLayout
+          Size="205.333333333334,42.6666666666667"
+          Id="Package\Log ETL Package Succeess"
+          TopLeft="116.718733075541,652.516672276655" />
+        <NodeLayout
+          Size="194.666666666667,42.6666666666667"
+          Id="Package\Package Content\For each month\Check if the sheet exists"
+          TopLeft="41.4895744974107,7.81665392796242" />
+        <NodeLayout
+          Size="230.666666666667,42.6666666666667"
+          Id="Package\Package Content\For each month\Material Movememnt Sales Data"
+          TopLeft="20.822907830744,78.8333150466289" />
+        <EdgeLayout
+          Id="Package\Package Content\For each month.PrecedenceConstraints[Constraint]"
+          TopLeft="136.156241164077,50.4833205946291">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.3499944519998"
+              Start="0,0"
+              End="0,20.8499944519998">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.8499944519998" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,2.4249972259999,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="256.666666666667,176.666666666667"
+          Size="256.666666666667,219.333333333334"
+          Id="Package\Package Content\For each month"
+          TopLeft="38.6145854218242,24.7333334573109" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="340.666666666667,262.666666666667"
+          Size="340.666666666667,305.333333333334"
+          Id="Package\Package Content"
+          TopLeft="49.0520664088745,319.866658670108" />
+        <NodeLayout
+          Size="253.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\Check if the master data sheet exists"
+          TopLeft="22.166656980912,7.91668727795209" />
+        <NodeLayout
+          Size="257.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\Material Movement Sales Master Data"
+          TopLeft="15.4999903142453,74.2166695491472" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="146.499990314245,50.5833539446188">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.6333156045284"
+              Start="0,0"
+              End="0,16.1333156045284">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.1333156045284" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,0.0666578022642241,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="287.333333333334,172"
+          Size="287.333333333334,214.666666666667"
+          Id="Package\Sequence Container"
+          TopLeft="75.7187330755412,71.616663474242" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="219.385399742208,43.5333333953222">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.0833300789198"
+              Start="0,0"
+              End="0,20.5833300789198">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5833300789198" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="219.385399742208,625.199992003441">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27.3166802732143"
+              Start="0,0"
+              End="0,19.8166802732143">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.8166802732143" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="219.385399742208,286.283330140909">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.583328529199"
+              Start="0,0"
+              End="0,26.083328529199">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.083328529199" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package.EventHandlers[OnError]\Log ETL Package Failure"
+          TopLeft="NaN,NaN" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <TaskHost
+    design-time-name="Package\Package Content\For each month\Material Movememnt Sales Data">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data"
+          TopLeft="153.64582588741,101.149992220402" />
+        <NodeLayout
+          Size="164,42.6666666666667"
+          Id="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data"
+          TopLeft="146.979159220743,25.1949152542373" />
+        <EdgeLayout
+          Id="Package\Package Content\For each month\Material Movememnt Sales Data.Paths[Excel Source Output]"
+          TopLeft="230.312492554077,67.861581920904">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.288410299498"
+              Start="0,0"
+              End="0,25.788410299498">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.788410299498" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Package Content\For each month\Material Movememnt Sales Data\dsa Sales - Data">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Package Content\For each month\Material Movememnt Sales Data\Excel Source Data">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Sequence Container\Material Movement Sales Master Data">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="200,42.6666666666667"
+          Id="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data"
+          TopLeft="146.979159220743,25.1949152542373" />
+        <NodeLayout
+          Size="186.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data"
+          TopLeft="153.64582588741,101.149992220402" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Material Movement Sales Master Data.Paths[Excel Source Output]"
+          TopLeft="246.979159220743,67.861581920904">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.288410299498"
+              Start="0,0"
+              End="0,25.788410299498">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.788410299498" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Material Movement Sales Master Data\dsa Sales - Mater Data">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Material Movement Sales Master Data\Excel Source Master Data">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

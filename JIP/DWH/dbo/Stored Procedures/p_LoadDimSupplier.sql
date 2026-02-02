@@ -5,6 +5,8 @@ DROP TABLE IF EXISTS #DimSupplier
 
 SELECT TOP 0
 	[SupplierICO]
+	,[SupplierName]
+	,[SupplierCity]
 	,[SupplierIsJIP]
 INTO #DimSupplier
 FROM [DimSupplier]
@@ -12,12 +14,16 @@ FROM [DimSupplier]
 INSERT INTO #DimSupplier
 (
 	[SupplierICO]
+	,[SupplierName]
+	,[SupplierCity]
 	,[SupplierIsJIP]
 )
 SELECT DISTINCT
 	[IČO] AS [SupplierICO]
-	,IIF([IČO] LIKE '27464822%', 1, 0) AS [SupplierIsJIP]
-FROM [dsa].[v_MaterialMovementReceipt]
+	,[K jméno]
+	,[K město]
+	,[SupplierIsJIP]
+FROM [dsa].[v_Supplier]
 
 ;
 MERGE [DimSupplier] AS t
@@ -26,12 +32,16 @@ WHEN NOT MATCHED BY TARGET THEN
 	INSERT
 	(
 		[SupplierICO]
+		,[SupplierName]
+		,[SupplierCity]
 		,[SupplierIsJIP]
 		,[SupplierDeleted]
 	)
 	VALUES
 	(
 		s.[SupplierICO]
+		,s.[SupplierName]
+		,s.[SupplierCity]
 		,s.[SupplierIsJIP]
 		,0
 	)
@@ -39,6 +49,8 @@ WHEN NOT MATCHED BY TARGET THEN
 WHEN MATCHED THEN
 	UPDATE SET
 		t.[SupplierICO] = s.[SupplierICO]
+		,t.[SupplierName] = s.[SupplierName]
+		,t.[SupplierCity] = s.[SupplierCity]
 		,t.[SupplierIsJIP] = s.[SupplierIsJIP]
 		,t.[SupplierDeleted] = 0
 
