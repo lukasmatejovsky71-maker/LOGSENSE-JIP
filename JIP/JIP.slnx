@@ -3,9 +3,12 @@
     <BuildType Name="Debug" />
     <BuildType Name="Development" />
     <BuildType Name="Release" />
+    <Platform Name="Any CPU" />
+    <Platform Name="x86" />
   </Configurations>
   <Project Path="DWH/DWH.sqlproj" Id="2c41f46f-5a67-43d9-a26c-44e7eb555ca9">
     <BuildType Solution="Development|*" Project="Release" />
+    <Platform Project="AnyCPU" />
     <Build />
     <Deploy />
   </Project>
@@ -14,4 +17,9 @@
     <Platform Project="?" />
   </Project>
   <Project Path="PBI/PBI.shproj" Id="76bee320-c469-433b-a9c9-4e4aaa98be28" />
+  <Project Path="TAB/TAB.smproj" Type="6870e480-7721-4708-bfb8-9ae898aa21b3" Id="8ce414bb-95b2-4c99-9e03-51ba72086e22">
+    <BuildType Project="Development" />
+    <Platform Project="x86" />
+    <Deploy />
+  </Project>
 </Solution>

@@ -21,15 +21,27 @@ table Product
 
 		annotation SummarizationSetBy = Automatic
 
-	column ProductDeleted
-		dataType: boolean
-		isHidden
-		formatString: """TRUE"";""TRUE"";""FALSE"""
-		lineageTag: 717eaba0-25a3-4585-a78a-d01191d86653
+	column ProductName
+		dataType: string
+		lineageTag: de2411e8-7d55-4bb7-ba3f-45dcda8448b1
 		summarizeBy: none
-		sourceColumn: ProductDeleted
+		sourceColumn: ProductName
 
-		changedProperty = IsHidden
+		annotation SummarizationSetBy = Automatic
+
+	column ProductFullName
+		dataType: string
+		lineageTag: b71d0ed0-5dc8-4a08-b27d-4ab59abd0d81
+		summarizeBy: none
+		sourceColumn: ProductFullName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductCardType
+		dataType: string
+		lineageTag: 5f987e9c-617c-4cd8-88f7-9f1e15971186
+		summarizeBy: none
+		sourceColumn: ProductCardType
 
 		annotation SummarizationSetBy = Automatic
 
@@ -38,9 +50,11 @@ table Product
 		source =
 				let
 				    Source = Sql.Database("BORGERS.LOCAL", "JIP_DWH"),
-				    dbo_DimProduct = Source{[Schema="dbo",Item="DimProduct"]}[Data]
+				    dbo_DimProduct = Source{[Schema="dbo",Item="v_DimProduct"]}[Data]
 				in
 				    dbo_DimProduct
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

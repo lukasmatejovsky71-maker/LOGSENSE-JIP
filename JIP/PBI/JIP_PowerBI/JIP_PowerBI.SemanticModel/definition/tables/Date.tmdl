@@ -52,15 +52,6 @@ table Date
 
 		annotation SummarizationSetBy = Automatic
 
-	column DateCalendarYearMonthSortOrder
-		dataType: int64
-		formatString: 0
-		lineageTag: fb31de7c-92fc-4a89-811e-b44fbd16788f
-		summarizeBy: sum
-		sourceColumn: DateCalendarYearMonthSortOrder
-
-		annotation SummarizationSetBy = Automatic
-
 	column DateMonthNumberOfYear
 		dataType: int64
 		formatString: 0
@@ -70,22 +61,61 @@ table Date
 
 		annotation SummarizationSetBy = Automatic
 
-	column DateWithToday
+	column 'Date Czech Day Name Of Week'
 		dataType: string
-		lineageTag: c5d271ac-72bf-44ff-b749-96e47296709e
+		lineageTag: f690fd1a-8883-4b21-a7ce-f74c338b8506
 		summarizeBy: none
-		sourceColumn: DateWithToday
+		sourceColumn: Date Czech Day Name Of Week
+		sortByColumn: DateDayNumberOfWeek
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
+
+	column DateDayNumberOfWeek
+		dataType: int64
+		formatString: 0
+		lineageTag: 16e29f37-a514-41e2-ba77-f6b92113a9dd
+		summarizeBy: sum
+		sourceColumn: DateDayNumberOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateCzechMonthName
+		dataType: string
+		lineageTag: 30f1825b-064f-4e4b-80c8-a72334fae110
+		summarizeBy: none
+		sourceColumn: DateCzechMonthName
+		sortByColumn: DateMonthNumberOfYear
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Date Hierarchy'
+		lineageTag: deec4388-e9f9-4b8d-a428-c670797dac82
+
+		level DateDate
+			lineageTag: 969c89d3-1dc8-4f15-99cc-e3ee8e4bd0d6
+			column: DateDate
+
+		level DateCalendarYear
+			lineageTag: 8b537b0a-0c9e-4cd0-b937-93a7bcc4ada5
+			column: DateCalendarYear
+
+		level DateCzechMonthName
+			lineageTag: 08d1eb2c-efd7-4fdb-a2e7-af1b39f3a8fa
+			column: DateCzechMonthName
 
 	partition Date = m
 		mode: import
 		source =
 				let
 				    Source = Sql.Database("BORGERS.LOCAL", "JIP_DWH"),
-				    dbo_v_DimDate = Source{[Schema="dbo",Item="v_DimDate"]}[Data]
+				    dbo_v_DimDate = Source{[Schema="dbo",Item="v_DimDate"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_v_DimDate,{{"DateCzechDayNameOfWeek", "Date Czech Day Name Of Week"}})
 				in
-				    dbo_v_DimDate
+				    #"Renamed Columns"
 
 	annotation PBI_ResultType = Table
 

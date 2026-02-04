@@ -3,7 +3,7 @@ AS
 SELECT [SupplierId]
 	,[SupplierICO]
 	,[SupplierName]
+	,[SupplierICO] +  IIF([SupplierName] <> N'', ' - ' + [SupplierName], '' ) AS [SupplierFullName]
 	,[SupplierCity]
 	,[SupplierIsJIP]
-	,[SupplierDeleted]
 FROM [DimSupplier]

@@ -40,9 +40,11 @@ table Branch
 		source =
 				let
 				    Source = Sql.Database("BORGERS.LOCAL", "JIP_DWH"),
-				    dbo_DimBranch = Source{[Schema="dbo",Item="DimBranch"]}[Data]
+				    dbo_DimBranch = Source{[Schema="dbo",Item="v_DimBranch"]}[Data]
 				in
 				    dbo_DimBranch
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

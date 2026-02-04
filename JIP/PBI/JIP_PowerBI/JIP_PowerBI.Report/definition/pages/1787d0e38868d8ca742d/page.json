@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "1787d0e38868d8ca742d",
+  "displayName": "Denní průtok ",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}

@@ -2,5 +2,7 @@
 AS
 SELECT [ProductId]
 	,[ProductCode]
-	,[ProductDeleted]
+	,[ProductName]
+	,[ProductCode] + IIF([ProductName] <> N'', N' - ' + [ProductName], N'') AS [ProductFullName]
+	,[ProductCardType]
 FROM [DimProduct]

@@ -1,0 +1,226 @@
+table ABC
+	lineageTag: 6a84c040-84ee-4de6-9104-38455827ad12
+
+	measure Orderline =
+			
+			VAR SalesByProduct =
+			    CALCULATETABLE (
+			        ADDCOLUMNS (
+			            SUMMARIZE ( 'Fact Material Movement', 'Fact Material Movement'[MaterialMovement_ProductId] ),
+			            "@ProdSales", [Material Movement Turnover Count]
+			        ),
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			VAR AllSales =
+			    CALCULATE (
+			        [Material Movement Turnover Count],
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			VAR CumulatedPctByProduct =
+			    ADDCOLUMNS (
+			        SalesByProduct,
+			        "@CumulatedPct",
+			        VAR CurrentSalesAmt = [@ProdSales]
+			        VAR CumulatedSales =
+			            FILTER (
+			                SalesByProduct,
+			                [@ProdSales] >= CurrentSalesAmt
+			            )
+			        VAR CumulatedSalesAmount =
+			            SUMX (
+			                CumulatedSales,
+			                [@ProdSales]
+			            )
+			        VAR Perc =
+			            DIVIDE (
+			                CumulatedSalesAmount,
+			                AllSales
+			            )
+			        RETURN
+			            Perc
+			    )
+			VAR ProductsInClass =
+			    FILTER (
+			        CROSSJOIN (
+			            CumulatedPctByProduct,
+			            'ABC'
+			        ),
+			        AND (
+			            [@CumulatedPct] > 'ABC'[ABCFrom],
+			            [@CumulatedPct] <= 'ABC'[ABCTo]
+			        )
+			    )
+			VAR Result =
+			    CALCULATE (             -- The pattern is the same for every measure, just
+			        [Material Movement Turnover Count],     -- change this measure reference for other measures
+			        KEEPFILTERS ( ProductsInClass )
+			    )
+			RETURN
+			    Result
+		formatString: #,0
+		lineageTag: 4db7f335-8cad-4590-b8fe-fba6c6542be1
+
+	measure Products =
+			
+			VAR SalesByProduct =
+			    CALCULATETABLE (
+			        ADDCOLUMNS (
+			            SUMMARIZE ( 'Fact Material Movement', 'Fact Material Movement'[MaterialMovement_ProductId] ),
+			            "@ProdSales", [Material Movement Turnover Count]
+			        ),
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			VAR AllSales =
+			    CALCULATE (
+			        [Material Movement Turnover Count],
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			VAR CumulatedPctByProduct =
+			    ADDCOLUMNS (
+			        SalesByProduct,
+			        "@CumulatedPct",
+			        VAR CurrentSalesAmt = [@ProdSales]
+			        VAR CumulatedSales =
+			            FILTER (
+			                SalesByProduct,
+			                [@ProdSales] >= CurrentSalesAmt
+			            )
+			        VAR CumulatedSalesAmount =
+			            SUMX (
+			                CumulatedSales,
+			                [@ProdSales]
+			            )
+			        VAR Perc =
+			            DIVIDE (
+			                CumulatedSalesAmount,
+			                AllSales
+			            )
+			        RETURN
+			            Perc
+			    )
+			VAR ProductsInClass =
+			    FILTER (
+			        CROSSJOIN (
+			            CumulatedPctByProduct,
+			            'ABC'
+			        ),
+			        AND (
+			            [@CumulatedPct] > 'ABC'[ABCFrom],
+			            [@CumulatedPct] <= 'ABC'[ABCTo]
+			        )
+			    )
+			VAR Result =
+			    CALCULATE (             -- The pattern is the same for every measure, just
+			        [Material Movement Product Count],     -- change this measure reference for other measures
+			        KEEPFILTERS ( ProductsInClass )
+			    )
+			RETURN
+			    Result
+		formatString: #,0
+		lineageTag: 0fe777db-64bf-4bf4-a690-ccd363bc5fd5
+
+	measure Units =
+			
+			VAR SalesByProduct =
+			    CALCULATETABLE (
+			        ADDCOLUMNS (
+			            SUMMARIZE ( 'Fact Material Movement', 'Fact Material Movement'[MaterialMovement_ProductId] ),
+			            "@ProdSales", [Material Movement Turnover Count]
+			        ),
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			VAR AllSales =
+			    CALCULATE (
+			        [Material Movement Turnover Count],
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			VAR CumulatedPctByProduct =
+			    ADDCOLUMNS (
+			        SalesByProduct,
+			        "@CumulatedPct",
+			        VAR CurrentSalesAmt = [@ProdSales]
+			        VAR CumulatedSales =
+			            FILTER (
+			                SalesByProduct,
+			                [@ProdSales] >= CurrentSalesAmt
+			            )
+			        VAR CumulatedSalesAmount =
+			            SUMX (
+			                CumulatedSales,
+			                [@ProdSales]
+			            )
+			        VAR Perc =
+			            DIVIDE (
+			                CumulatedSalesAmount,
+			                AllSales
+			            )
+			        RETURN
+			            Perc
+			    )
+			VAR ProductsInClass =
+			    FILTER (
+			        CROSSJOIN (
+			            CumulatedPctByProduct,
+			            'ABC'
+			        ),
+			        AND (
+			            [@CumulatedPct] > 'ABC'[ABCFrom],
+			            [@CumulatedPct] <= 'ABC'[ABCTo]
+			        )
+			    )
+			VAR Result =
+			    CALCULATE (             -- The pattern is the same for every measure, just
+			        [Material Movement Turnover Units],     -- change this measure reference for other measures
+			        KEEPFILTERS ( ProductsInClass )
+			    )
+			RETURN
+			    Result
+		formatString: #,0
+		lineageTag: b1c3abfa-c4ee-44c5-83c5-daf9098d0b18
+
+	column ABCId
+		dataType: int64
+		formatString: 0
+		lineageTag: c07b97ab-c19b-4eb7-baeb-9dc0612f33a4
+		summarizeBy: count
+		sourceColumn: ABCId
+
+		annotation SummarizationSetBy = Automatic
+
+	column ABCName
+		dataType: string
+		lineageTag: d4f3b3fc-3826-4d26-ac10-dc3ca372a200
+		summarizeBy: none
+		sourceColumn: ABCName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ABCFrom
+		dataType: double
+		lineageTag: 52c8a020-1e2c-416a-987b-923e8e79f0a5
+		summarizeBy: sum
+		sourceColumn: ABCFrom
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ABCTo
+		dataType: double
+		lineageTag: 99bb5ce1-b5a1-4dcd-a289-c50237321ca0
+		summarizeBy: sum
+		sourceColumn: ABCTo
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition ABC = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("BORGERS.LOCAL", "JIP_DWH"),
+				    adm_ABC = Source{[Schema="adm",Item="ABC"]}[Data]
+				in
+				    adm_ABC
+

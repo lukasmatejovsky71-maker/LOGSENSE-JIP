@@ -1,0 +1,118 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "71bbccc8430c70cdbab8",
+  "position": {
+    "x": 762.65654648956354,
+    "y": 121.44212523719166,
+    "z": 7000,
+    "height": 276.88804554079695,
+    "width": 516.53383934218846,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date"
+                    }
+                  },
+                  "Property": "Date Czech Day Name Of Week"
+                }
+              },
+              "queryRef": "Date.Date Czech Day Name Of Week",
+              "nativeQueryRef": "Den",
+              "active": true,
+              "displayName": "Den"
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measure Selection"
+                    }
+                  },
+                  "Property": "Selekce"
+                }
+              },
+              "queryRef": "Measure Selection.Selekce",
+              "nativeQueryRef": "Selekce"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Material Movement"
+                    }
+                  },
+                  "Property": "Material Movement Day Count"
+                }
+              },
+              "queryRef": "Fact Material Movement.Material Movement Day Count",
+              "nativeQueryRef": "# dní",
+              "displayName": "# dní"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measure Selection"
+                    }
+                  },
+                  "Property": "Ø za den"
+                }
+              },
+              "queryRef": "Measure Selection.Ø za den",
+              "nativeQueryRef": "Ø za den"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measure Selection"
+                    }
+                  },
+                  "Property": "90 % perc"
+                }
+              },
+              "queryRef": "Measure Selection.90 % perc",
+              "nativeQueryRef": "90 % perc"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Date"
+                  }
+                },
+                "Property": "Date Czech Day Name Of Week"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

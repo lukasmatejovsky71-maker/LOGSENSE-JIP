@@ -1,6 +1,10 @@
 table Document
 	lineageTag: bfe0cede-d0f7-46e1-9ab3-33939fe58cc9
 
+	measure 'Document Count' = COUNTROWS()
+		formatString: 0
+		lineageTag: cbe5c9a5-dc04-40f1-9788-bb0d777e2d71
+
 	column DocumentId
 		dataType: int64
 		isHidden
@@ -21,23 +25,16 @@ table Document
 
 		annotation SummarizationSetBy = Automatic
 
-	column DocumentDeleted
-		dataType: boolean
-		formatString: """TRUE"";""TRUE"";""FALSE"""
-		lineageTag: 789e1d00-45ef-40e5-a301-fdd54447e12a
-		summarizeBy: none
-		sourceColumn: DocumentDeleted
-
-		annotation SummarizationSetBy = Automatic
-
 	partition Document = m
 		mode: import
 		source =
 				let
 				    Source = Sql.Database("BORGERS.LOCAL", "JIP_DWH"),
-				    dbo_DimDocument = Source{[Schema="dbo",Item="DimDocument"]}[Data]
+				    dbo_DimDocument = Source{[Schema="dbo",Item="v_DimDocument"]}[Data]
 				in
 				    dbo_DimDocument
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

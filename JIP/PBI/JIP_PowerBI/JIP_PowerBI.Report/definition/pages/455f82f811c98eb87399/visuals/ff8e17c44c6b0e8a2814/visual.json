@@ -1,0 +1,206 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "ff8e17c44c6b0e8a2814",
+  "position": {
+    "x": 0,
+    "y": 139.25363693864642,
+    "z": 0,
+    "height": 284.98418722327642,
+    "width": 519.77229601518025,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ABC"
+                    }
+                  },
+                  "Property": "ABCName"
+                }
+              },
+              "queryRef": "ABC.ABCName",
+              "nativeQueryRef": "ABC",
+              "active": true,
+              "displayName": "ABC"
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ABC"
+                    }
+                  },
+                  "Property": "Products"
+                }
+              },
+              "queryRef": "ABC.products",
+              "nativeQueryRef": "# SKU",
+              "displayName": "# SKU"
+            },
+            {
+              "field": {
+                "Arithmetic": {
+                  "Left": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "ABC"
+                        }
+                      },
+                      "Property": "Products"
+                    }
+                  },
+                  "Right": {
+                    "ScopedEval": {
+                      "Expression": {
+                        "Measure": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "ABC"
+                            }
+                          },
+                          "Property": "Products"
+                        }
+                      },
+                      "Scope": [
+                        {
+                          "RoleRef": {
+                            "Role": "Columns"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "Operator": 3
+                }
+              },
+              "queryRef": "Divide(ABC.Products, ScopedEval(ABC.Products, [Role.Columns]))",
+              "nativeQueryRef": "% SKU",
+              "displayName": "% SKU"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ABC"
+                    }
+                  },
+                  "Property": "Orderline"
+                }
+              },
+              "queryRef": "ABC.Orderline",
+              "nativeQueryRef": "# Orderline",
+              "displayName": "# Orderline"
+            },
+            {
+              "field": {
+                "Arithmetic": {
+                  "Left": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "ABC"
+                        }
+                      },
+                      "Property": "Orderline"
+                    }
+                  },
+                  "Right": {
+                    "ScopedEval": {
+                      "Expression": {
+                        "Measure": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "ABC"
+                            }
+                          },
+                          "Property": "Orderline"
+                        }
+                      },
+                      "Scope": []
+                    }
+                  },
+                  "Operator": 3
+                }
+              },
+              "queryRef": "Divide(ABC.Orderline, ScopedEval(ABC.Orderline, []))",
+              "nativeQueryRef": "% Orderline",
+              "displayName": "% Orderline"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ABC"
+                    }
+                  },
+                  "Property": "Units"
+                }
+              },
+              "queryRef": "ABC.Units",
+              "nativeQueryRef": "# MJ",
+              "displayName": "# MJ"
+            },
+            {
+              "field": {
+                "Arithmetic": {
+                  "Left": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "ABC"
+                        }
+                      },
+                      "Property": "Units"
+                    }
+                  },
+                  "Right": {
+                    "ScopedEval": {
+                      "Expression": {
+                        "Measure": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "ABC"
+                            }
+                          },
+                          "Property": "Units"
+                        }
+                      },
+                      "Scope": [
+                        {
+                          "RoleRef": {
+                            "Role": "Columns"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "Operator": 3
+                }
+              },
+              "queryRef": "Divide(ABC.Units, ScopedEval(ABC.Units, [Role.Columns]))",
+              "nativeQueryRef": "% MJ",
+              "displayName": "% MJ"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

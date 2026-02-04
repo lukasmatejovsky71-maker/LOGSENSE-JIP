@@ -73,6 +73,7 @@
     <Folder Include="adm\Views" />
     <Folder Include="dsa\Views" />
     <Folder Include="dbo\Views" />
+    <Folder Include="scripts\dbo" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="security\dsa.sql" />
@@ -143,6 +144,22 @@
     <Build Include="dbo\Views\v_DimDocument.sql" />
     <Build Include="dbo\Views\v_DimOrder.sql" />
     <Build Include="dbo\Views\v_DimProduct.sql" />
+    <Build Include="dbo\Views\v_FactDocument.sql" />
+    <Build Include="dbo\Views\v_BrancFilter.sql" />
+    <Build Include="adm\Tables\MeasureSelection.sql" />
+    <None Include="scripts\adm\Fill.adm.MeasureSelection.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Build Include="adm\Tables\ABC.sql" />
+    <None Include="scripts\adm\Fill.adm.ABC.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Build Include="dbo\Tables\DimMovementType.sql" />
+    <None Include="scripts\dbo\Fill.dbo.MovementType.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Build Include="dbo\Views\v_DimMovementType.sql" />
+    <Build Include="dsa\Tables\Product.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DWH.publish.xml" />

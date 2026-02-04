@@ -21,15 +21,6 @@ table Supplier
 
 		annotation SummarizationSetBy = Automatic
 
-	column SupplierDeleted
-		dataType: boolean
-		formatString: """TRUE"";""TRUE"";""FALSE"""
-		lineageTag: 02844de4-1f73-48ad-ab87-933521bd6670
-		summarizeBy: none
-		sourceColumn: SupplierDeleted
-
-		annotation SummarizationSetBy = Automatic
-
 	column 'Supplier Is JIP'
 		dataType: boolean
 		formatString: """TRUE"";""TRUE"";""FALSE"""
@@ -45,15 +36,41 @@ table Supplier
 
 		annotation SummarizationSetBy = Automatic
 
+	column SupplierName
+		dataType: string
+		lineageTag: 4aa73f18-af4f-4537-a0c6-70928520cb4d
+		summarizeBy: none
+		sourceColumn: SupplierName
+
+		annotation SummarizationSetBy = Automatic
+
+	column SupplierCity
+		dataType: string
+		lineageTag: acca645c-bb8f-4c55-a430-92519897fc86
+		summarizeBy: none
+		sourceColumn: SupplierCity
+
+		annotation SummarizationSetBy = Automatic
+
+	column SupplierFullName
+		dataType: string
+		lineageTag: 3119b480-6cb4-45bd-8875-7e657958fcce
+		summarizeBy: none
+		sourceColumn: SupplierFullName
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Supplier = m
 		mode: import
 		source =
 				let
 				    Source = Sql.Database("BORGERS.LOCAL", "JIP_DWH"),
-				    dbo_DimSupplier = Source{[Schema="dbo",Item="DimSupplier"]}[Data],
+				    dbo_DimSupplier = Source{[Schema="dbo",Item="v_DimSupplier"]}[Data],
 				    #"Renamed Columns" = Table.RenameColumns(dbo_DimSupplier,{{"SupplierIsJIP", "Supplier Is JIP"}})
 				in
 				    #"Renamed Columns"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

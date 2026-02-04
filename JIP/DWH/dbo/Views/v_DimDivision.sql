@@ -2,5 +2,4 @@
 AS
 SELECT [DivisionId]
 	,[DivisionName]
-	,[DivisionDeleted]
 FROM [DimDivision]

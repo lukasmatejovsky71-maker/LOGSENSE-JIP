@@ -23,7 +23,7 @@ table 'Fact Material Movement'
 
 	measure 'Material Movement External Palletes' =
 			CALCULATE(
-			    SUM('Fact Material Movement'[Material Movement Turnover Palletes]),
+			    SUM('Fact Material Movement'[MaterialMovementTurnoverPalletes]),
 			    NOT( Supplier[Supplier Is JIP])
 			)
 		formatString: #,0.00
@@ -31,7 +31,7 @@ table 'Fact Material Movement'
 
 	measure 'Material Movement Internall Palletes' = ```
 			CALCULATE(
-			    SUM('Fact Material Movement'[Material Movement Turnover Palletes]),
+			    SUM('Fact Material Movement'[MaterialMovementTurnoverPalletes]),
 			     Supplier[Supplier Is JIP]
 			)
 			
@@ -39,21 +39,35 @@ table 'Fact Material Movement'
 		formatString: #,0.00
 		lineageTag: 2ebe5ba5-2f0e-4a8b-b992-b2d320fd516b
 
-	measure 'Material Movement External Palletes %' = [Material Movement External Palletes] / SUM([Material Movement Turnover Palletes])
+	measure 'Material Movement External Palletes %' = [Material Movement External Palletes] / SUM([MaterialMovementTurnoverPalletes])
 		formatString: 0.00\ %;-0.00\ %;0.00\ %
 		lineageTag: 785bd327-0429-4f92-b68c-0d2d6fc9f529
 
-	column MaterialMovementId
-		dataType: int64
-		isHidden
+	measure 'Material Movement Document Count' = DISTINCTCOUNT('Fact Material Movement'[MaterialMovement_DocumentId])
 		formatString: 0
-		lineageTag: 374363f1-a5ff-42f1-940a-b1312deac65d
-		summarizeBy: count
-		sourceColumn: MaterialMovementId
+		lineageTag: 53c2819a-14d2-44cd-b4e2-c29b29b8b013
 
-		changedProperty = IsHidden
+	measure 'Material Movement Turnover Palletes' = SUM('Fact Material Movement'[MaterialMovementTurnoverPalletes])
+		lineageTag: 4b2bd784-4438-4fec-8682-2b643fa746d0
 
-		annotation SummarizationSetBy = Automatic
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Material Movement Turnover Units' = SUM('Fact Material Movement'[MaterialMovementTurnoverUnits])
+		lineageTag: 051d5dea-4370-4a5f-bccb-c8a578d7887d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Material Movement Day Count' = DISTINCTCOUNT('Fact Material Movement'[MaterialMovement_DateId])
+		formatString: 0
+		lineageTag: 453fc21c-50da-4553-9665-736da836451c
+
+	measure 'Material Movement Product Count' = DISTINCTCOUNT('Fact Material Movement'[MaterialMovement_ProductId])
+		formatString: 0
+		lineageTag: 29896474-33dd-4319-a225-bba382704edc
+
+	measure 'Material Movement Turnover Full Palletes' = SUM('Fact Material Movement'[MaterialMovementTurnoverFullPalletes])
+		formatString: #,0
+		lineageTag: 398ee66c-5e8e-4ef6-ac65-099b64d82fb2
 
 	column MaterialMovement_DateId
 		dataType: int64
@@ -62,18 +76,6 @@ table 'Fact Material Movement'
 		lineageTag: ca0cca8c-bd76-4722-aa48-9851004a5a61
 		summarizeBy: none
 		sourceColumn: MaterialMovement_DateId
-
-		changedProperty = IsHidden
-
-		annotation SummarizationSetBy = Automatic
-
-	column MaterialMovement_DivisionId
-		dataType: int64
-		isHidden
-		formatString: 0
-		lineageTag: 942f63a5-afa7-49fd-8e14-22f1aaf3e225
-		summarizeBy: none
-		sourceColumn: MaterialMovement_DivisionId
 
 		changedProperty = IsHidden
 
@@ -127,11 +129,12 @@ table 'Fact Material Movement'
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Material Movement Turnover Units'
+	column MaterialMovementTurnoverUnits
 		dataType: double
+		isHidden
 		lineageTag: 939747b7-7e67-417d-b657-6c6feedf055b
 		summarizeBy: sum
-		sourceColumn: Material Movement Turnover Units
+		sourceColumn: MaterialMovementTurnoverUnits
 
 		changedProperty = IsHidden
 
@@ -139,31 +142,56 @@ table 'Fact Material Movement'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'Material Movement Turnover Palletes'
+	column MaterialMovementTurnoverPalletes
 		dataType: double
+		isHidden
 		lineageTag: 8618dd3e-7b1a-43d4-a54d-4d59b177ecff
 		summarizeBy: sum
-		sourceColumn: Material Movement Turnover Palletes
+		sourceColumn: MaterialMovementTurnoverPalletes
 
 		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MaterialMovement_MovementTypeId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6f64d5a7-2adb-4ccb-9bd5-dfd0fca2cddc
+		summarizeBy: none
+		sourceColumn: MaterialMovement_MovementTypeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaterialMovementTurnoverFullPalletes
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 54b8a22d-a7ae-4dc5-af78-fe4fef6ea05e
+		summarizeBy: sum
+		sourceColumn: MaterialMovementTurnoverFullPalletes
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
 
 	partition 'Fact Material Movement' = m
 		mode: import
 		source =
 				let
 				    Source = Sql.Database("BORGERS.LOCAL", "JIP_DWH"),
-				    dbo_FactMaterialMovement = Source{[Schema="dbo",Item="FactMaterialMovement"]}[Data],
-				    #"Renamed Columns" = Table.RenameColumns(dbo_FactMaterialMovement,{{"MaterialMovementTurnoverPalletes", "Material Movement Turnover Palletes"}, {"MaterialMovementTurnoverUoM", "Material Movement Turnover Units"}})
+				    dbo_FactMaterialMovement = Source{[Schema="dbo",Item="v_FactMaterialMovement"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_FactMaterialMovement,{{"MaterialMovementTurnoverPalletes", "MaterialMovementTurnoverPalletes"}, {"MaterialMovementTurnoverUoM", "MaterialMovementTurnoverUnits"}})
 				in
 				    #"Renamed Columns"
 
 	changedProperty = IsHidden
 
-	changedProperty = Name
-
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

@@ -1,0 +1,1351 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/24/2025 7:23:58 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MATEJOVSKY"
+  DTS:CreatorName="MATEJOVSKY\lukas"
+  DTS:DTSID="{0777FDD5-9D28-4713-92C9-BD5B9B8AF245}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
+  DTS:LocaleID="1029"
+  DTS:ObjectName="ImportExcel_Product"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="34"
+  DTS:VersionGUID="{139F2384-B0F2-494D-92A7-BE79B4A91F55}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DWH]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{12E3A9FD-FED2-41A9-AE28-6EB644527753}"
+      DTS:ObjectName="DWH">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::DWHConnectionString]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=BORGERS.LOCAL;User ID=lukas;Initial Catalog=JIP_DWH;Provider=SQLOLEDB.1;Application Name=SSIS-ETL_AllETLPackages-{C89952DD-8CB2-4B4C-A496-94C82D42FA05}BORGERS.LOCAL.Actum_digital_DWH.lukas;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"></DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{BE47E84E-FD6F-43B7-8DEF-EF213732DC22}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[$Package::FileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\lukas\source\repos\LOGSENSE-JIP\JIP\Import\MasterData\13 - Logistické informace ke kartám zboží_aktualizace.xlsb;Extended Properties=&quot;Excel 12.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{6E157F59-D613-482E-8A4F-0C472DE46697}"
+      DTS:ObjectName="ETLLogId">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">-1</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{FBFCB94C-9610-4A8B-879F-3482133DF30C}"
+      DTS:ObjectName="FileName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">C:\Users\lukas\source\repos\LOGSENSE-JIP\JIP\Import\MasterData\13 - Logistické informace ke kartám zboží_aktualizace.xlsb</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{97CE69F6-3DC5-4172-96B5-8C7D44947D9F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ImportFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Users\lukas\source\repos\LOGSENSE-JIP\JIP\Import\9 - Other material movements_Receipts\NÁKUPNÍ OPERACE_ČBudějovice.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Log ETL Package Start"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C7857FD0-5C83-4508-A4E9-9D79C3681BDD}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log ETL Package Start"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{12E3A9FD-FED2-41A9-AE28-6EB644527753}"
+          SQLTask:SqlStatementSource="EXEC [adm].[p_LogETLPackageLogStart]&#xA;  @ETLLogId = ?&#xA;  ,@MachineName = ?&#xA;  ,@PackageName = ?&#xA;  ,@UserName = ?&#xA;  ,@ExecutionInstanceGUID = ?&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::ETLLogId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::MachineName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="System::UserName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log ETL Package Succeess"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A0AFD6E1-1688-452E-A94D-3AAEEEE7C5A2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log ETL Package Succeess"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{12E3A9FD-FED2-41A9-AE28-6EB644527753}"
+          SQLTask:SqlStatementSource="EXEC [adm].[p_LogETLPackageLogSuccess]&#xA;  @ETLLogId = ?&#xA;  ,@MachineName = ?&#xA;  ,@PackageName = ?&#xA;  ,@UserName = ?&#xA;  ,@ExecutionInstanceGUID = ?&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::ETLLogId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::MachineName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="System::UserName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Package Content"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{165C8AA8-20AB-42BC-BF9F-6EB6AC549090}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Package Content">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Package Content\Product"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DTSID="{707865CC-DB61-4B28-9406-F7D9C4A71191}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Product"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Package Content\Product\Excel Source"
+                  componentClassID="Microsoft.ExcelSource"
+                  contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Excel Source"
+                  name="Excel Source"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">'log#data ke zboží$'</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mapping from parameters in the SQL command to variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Package Content\Product\Excel Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                      connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output]"
+                      name="Excel Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Kód]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Kód]"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Kód]"
+                          name="Kód"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[druh karty]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[druh karty]"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[druh karty]"
+                          name="druh karty"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Název]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Název]"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Název]"
+                          name="Název"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Dodavatel]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Dodavatel]"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Dodavatel]"
+                          name="Dodavatel"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Dodavatel-popis]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Dodavatel-popis]"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Dodavatel-popis]"
+                          name="Dodavatel-popis"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[MJ v balení]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[MJ v balení]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[MJ v balení]"
+                          name="MJ v balení"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[MJ na paletě]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[MJ na paletě]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[MJ na paletě]"
+                          name="MJ na paletě"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Hmotnost v kg]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Hmotnost v kg]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Hmotnost v kg]"
+                          name="Hmotnost v kg"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Rozměry ks (mm)]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Rozměry ks (mm)]"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Rozměry ks (mm)]"
+                          name="Rozměry ks (mm)"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Rozměry karton (mm)]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Rozměry karton (mm)]"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Rozměry karton (mm)]"
+                          name="Rozměry karton (mm)"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Rozměry display (mm)]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Rozměry display (mm)]"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Rozměry display (mm)]"
+                          name="Rozměry display (mm)"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Teplotní režim]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Teplotní režim]"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Teplotní režim]"
+                          name="Teplotní režim"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Skupina2]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Skupina2]"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Skupina2]"
+                          name="Skupina2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Skupina2-popis]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Skupina2-popis]"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Skupina2-popis]"
+                          name="Skupina2-popis"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Nadř#skup#2]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Nadř#skup#2]"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Nadř#skup#2]"
+                          name="Nadř#skup#2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Nadř#skup#2 pop#]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Nadř#skup#2 pop#]"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Nadř#skup#2 pop#]"
+                          name="Nadř#skup#2 pop#"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Záruka]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Záruka]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Záruka]"
+                          name="Záruka"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Skladová cena]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Skladová cena]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Skladová cena]"
+                          name="Skladová cena"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Min# obj# bal#]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Min# obj# bal#]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Min# obj# bal#]"
+                          name="Min# obj# bal#"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Jednotka MJ]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Jednotka MJ]"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Jednotka MJ]"
+                          name="Jednotka MJ"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Kód]"
+                          dataType="wstr"
+                          length="255"
+                          name="Kód" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[druh karty]"
+                          dataType="wstr"
+                          length="255"
+                          name="druh karty" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Název]"
+                          dataType="wstr"
+                          length="255"
+                          name="Název" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Dodavatel]"
+                          dataType="wstr"
+                          length="255"
+                          name="Dodavatel" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Dodavatel-popis]"
+                          dataType="wstr"
+                          length="255"
+                          name="Dodavatel-popis" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[MJ v balení]"
+                          dataType="r8"
+                          name="MJ v balení" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[MJ na paletě]"
+                          dataType="r8"
+                          name="MJ na paletě" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Hmotnost v kg]"
+                          dataType="r8"
+                          name="Hmotnost v kg" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Rozměry ks (mm)]"
+                          dataType="wstr"
+                          length="255"
+                          name="Rozměry ks (mm)" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Rozměry karton (mm)]"
+                          dataType="wstr"
+                          length="255"
+                          name="Rozměry karton (mm)" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Rozměry display (mm)]"
+                          dataType="wstr"
+                          length="255"
+                          name="Rozměry display (mm)" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Teplotní režim]"
+                          dataType="wstr"
+                          length="255"
+                          name="Teplotní režim" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Skupina2]"
+                          dataType="wstr"
+                          length="255"
+                          name="Skupina2" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Skupina2-popis]"
+                          dataType="wstr"
+                          length="255"
+                          name="Skupina2-popis" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Nadř#skup#2]"
+                          dataType="wstr"
+                          length="255"
+                          name="Nadř#skup#2" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Nadř#skup#2 pop#]"
+                          dataType="wstr"
+                          length="255"
+                          name="Nadř#skup#2 pop#" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Záruka]"
+                          dataType="r8"
+                          name="Záruka" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Skladová cena]"
+                          dataType="r8"
+                          name="Skladová cena" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Min# obj# bal#]"
+                          dataType="r8"
+                          name="Min# obj# bal#" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].ExternalColumns[Jednotka MJ]"
+                          dataType="wstr"
+                          length="255"
+                          name="Jednotka MJ" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output]"
+                      isErrorOut="true"
+                      name="Excel Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Kód]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Kód]"
+                          name="Kód" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[druh karty]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[druh karty]"
+                          name="druh karty" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Název]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Název]"
+                          name="Název" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Dodavatel]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Dodavatel]"
+                          name="Dodavatel" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Dodavatel-popis]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Dodavatel-popis]"
+                          name="Dodavatel-popis" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[MJ v balení]"
+                          dataType="r8"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[MJ v balení]"
+                          name="MJ v balení" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[MJ na paletě]"
+                          dataType="r8"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[MJ na paletě]"
+                          name="MJ na paletě" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Hmotnost v kg]"
+                          dataType="r8"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Hmotnost v kg]"
+                          name="Hmotnost v kg" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Rozměry ks (mm)]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Rozměry ks (mm)]"
+                          name="Rozměry ks (mm)" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Rozměry karton (mm)]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Rozměry karton (mm)]"
+                          name="Rozměry karton (mm)" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Rozměry display (mm)]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Rozměry display (mm)]"
+                          name="Rozměry display (mm)" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Teplotní režim]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Teplotní režim]"
+                          name="Teplotní režim" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Skupina2]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Skupina2]"
+                          name="Skupina2" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Skupina2-popis]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Skupina2-popis]"
+                          name="Skupina2-popis" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Nadř#skup#2]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Nadř#skup#2]"
+                          name="Nadř#skup#2" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Nadř#skup#2 pop#]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Nadř#skup#2 pop#]"
+                          name="Nadř#skup#2 pop#" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Záruka]"
+                          dataType="r8"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Záruka]"
+                          name="Záruka" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Skladová cena]"
+                          dataType="r8"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Skladová cena]"
+                          name="Skladová cena" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Min# obj# bal#]"
+                          dataType="r8"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Min# obj# bal#]"
+                          name="Min# obj# bal#" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Jednotka MJ]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[Jednotka MJ]"
+                          name="Jednotka MJ" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Package Content\Product\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dsa].[Product]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1250</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Package Content\Product\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DWH]"
+                      connectionManagerRefId="Package.ConnectionManagers[DWH]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Kód]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Kód"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Kód]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Kód]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[druh karty]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="druh karty"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[druh karty]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[druh karty]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Název]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Název"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Název]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Název]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Dodavatel]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Dodavatel"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Dodavatel]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Dodavatel]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Dodavatel-popis]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Dodavatel-popis"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Dodavatel-popis]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Dodavatel-popis]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MJ v balení]"
+                          cachedDataType="r8"
+                          cachedName="MJ v balení"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MJ v balení]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[MJ v balení]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MJ na paletě]"
+                          cachedDataType="r8"
+                          cachedName="MJ na paletě"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MJ na paletě]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[MJ na paletě]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Hmotnost v kg]"
+                          cachedDataType="r8"
+                          cachedName="Hmotnost v kg"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Hmotnost v kg]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Hmotnost v kg]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Rozměry ks (mm)]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Rozměry ks (mm)"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rozměry ks (mm)]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Rozměry ks (mm)]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Rozměry karton (mm)]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Rozměry karton (mm)"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rozměry karton (mm)]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Rozměry karton (mm)]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Rozměry display (mm)]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Rozměry display (mm)"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rozměry display (mm)]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Rozměry display (mm)]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Teplotní režim]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Teplotní režim"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Teplotní režim]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Teplotní režim]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Skupina2]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Skupina2"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Skupina2]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Skupina2]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Skupina2-popis]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Skupina2-popis"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Skupina2-popis]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Skupina2-popis]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Nadř#skup#2]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Nadř#skup#2"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Nadř#skup#2]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Nadř#skup#2]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Nadř#skup#2 pop#]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Nadř#skup#2 pop#"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Nadř#skup#2 pop#]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Nadř#skup#2 pop#]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Záruka]"
+                          cachedDataType="r8"
+                          cachedName="Záruka"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Záruka]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Záruka]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Skladová cena]"
+                          cachedDataType="r8"
+                          cachedName="Skladová cena"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Skladová cena]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Skladová cena]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Min# obj# bal#]"
+                          cachedDataType="r8"
+                          cachedName="Min# obj# bal#"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Min# obj# bal#]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Min# obj# bal#]" />
+                        <inputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Jednotka MJ]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Jednotka MJ"
+                          externalMetadataColumnId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Jednotka MJ]"
+                          lineageId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output].Columns[Jednotka MJ]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Kód]"
+                          dataType="wstr"
+                          length="255"
+                          name="Kód" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[druh karty]"
+                          dataType="wstr"
+                          length="255"
+                          name="druh karty" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Název]"
+                          dataType="wstr"
+                          length="255"
+                          name="Název" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Dodavatel]"
+                          dataType="wstr"
+                          length="255"
+                          name="Dodavatel" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Dodavatel-popis]"
+                          dataType="wstr"
+                          length="255"
+                          name="Dodavatel-popis" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MJ v balení]"
+                          dataType="r8"
+                          name="MJ v balení" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MJ na paletě]"
+                          dataType="r8"
+                          name="MJ na paletě" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Hmotnost v kg]"
+                          dataType="r8"
+                          name="Hmotnost v kg" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rozměry ks (mm)]"
+                          dataType="wstr"
+                          length="255"
+                          name="Rozměry ks (mm)" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rozměry karton (mm)]"
+                          dataType="wstr"
+                          length="255"
+                          name="Rozměry karton (mm)" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rozměry display (mm)]"
+                          dataType="wstr"
+                          length="255"
+                          name="Rozměry display (mm)" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Teplotní režim]"
+                          dataType="wstr"
+                          length="255"
+                          name="Teplotní režim" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Skupina2]"
+                          dataType="wstr"
+                          length="255"
+                          name="Skupina2" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Skupina2-popis]"
+                          dataType="wstr"
+                          length="255"
+                          name="Skupina2-popis" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Nadř#skup#2]"
+                          dataType="wstr"
+                          length="255"
+                          name="Nadř#skup#2" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Nadř#skup#2 pop#]"
+                          dataType="wstr"
+                          length="255"
+                          name="Nadř#skup#2 pop#" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Záruka]"
+                          dataType="r8"
+                          name="Záruka" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Skladová cena]"
+                          dataType="r8"
+                          name="Skladová cena" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Min# obj# bal#]"
+                          dataType="r8"
+                          name="Min# obj# bal#" />
+                        <externalMetadataColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Jednotka MJ]"
+                          dataType="wstr"
+                          length="255"
+                          name="Jednotka MJ" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Package Content\Product\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Package Content\Product\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Package Content\Product\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Package Content\Product\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Package Content\Product.Paths[Excel Source Output]"
+                  endId="Package\Package Content\Product\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Excel Source Output"
+                  startId="Package\Package Content\Product\Excel Source.Outputs[Excel Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Package Content\Truncate target table"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{2BD4F8BC-40F5-470D-A4B2-C68113512212}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate target table"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{12E3A9FD-FED2-41A9-AE28-6EB644527753}"
+              SQLTask:SqlStatementSource="IF OBJECT_ID('[dsa].[MaterialMovementReceipt]', 'U') IS NOT NULL TRUNCATE TABLE [dsa].[MaterialMovementReceipt]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Package Content.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{47BE603F-7745-46AF-86B9-F2E4F8825CDA}"
+          DTS:From="Package\Package Content\Truncate target table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Package Content\Product" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C4C6AC6E-3920-4ADE-95A5-4EC06CD714BF}"
+      DTS:From="Package\Log ETL Package Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Package Content" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{179A67EA-1D19-46BE-8EC4-E772BDBF8975}"
+      DTS:From="Package\Package Content"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Log ETL Package Succeess" />
+  </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{77D39922-E2D9-4145-BEB8-303CA6B58F2B}"
+      DTS:EventID="313412132"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{5B5FCEC6-055E-4E6D-865D-EAAC9C35ED22}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Log ETL Package Failure"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{A01C8A2A-FC60-48C8-AD5C-BD6FEC26FB68}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Log ETL Package Failure"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{12E3A9FD-FED2-41A9-AE28-6EB644527753}"
+              SQLTask:SqlStatementSource="EXEC [adm].[p_LogETLPackageLogFailure]&#xA;  @ETLLogId = ?&#xA;  ,@MachineName = ?&#xA;  ,@PackageName = ?&#xA;  ,@UserName = ?&#xA;  ,@ExecutionInstanceGUID = ?&#xA;  ,@SourceName = ?&#xA;  ,@TaskName = ?&#xA;  ,@ErrorCode = ?&#xA;  ,@ErrorMessage = ?&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="$Package::ETLLogId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::MachineName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="System::UserName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="4"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="5"
+                SQLTask:DtsVariableName="System::SourceName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="6"
+                SQLTask:DtsVariableName="System::TaskName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="7"
+                SQLTask:DtsVariableName="System::ErrorCode"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="8"
+                SQLTask:DtsVariableName="System::ErrorDescription"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="185.333333333334,42.6666666666667"
+          Id="Package\Log ETL Package Start"
+          TopLeft="147.833333333333,1.50000000000001" />
+        <NodeLayout
+          Size="205.333333333334,42.6666666666667"
+          Id="Package\Log ETL Package Succeess"
+          TopLeft="137.833333333333,337.5" />
+        <NodeLayout
+          Size="178.666666666667,42.6666666666667"
+          Id="Package\Package Content\Truncate target table"
+          TopLeft="31.9374905703592,12.6666666666667" />
+        <NodeLayout
+          Size="116,42.6666666666667"
+          Id="Package\Package Content\Product"
+          TopLeft="63.2708239036925,88.4166686813035" />
+        <EdgeLayout
+          Id="Package\Package Content.PrecedenceConstraints[Constraint]"
+          TopLeft="121.270823903693,55.3333333333334">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.0833353479702"
+              Start="0,0"
+              End="0,25.5833353479702">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.5833353479702" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="244.666666666667,180.666666666667"
+          Size="244.666666666667,224"
+          Id="Package\Package Content"
+          TopLeft="118.166666666666,76.833333333333" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="240.5,44.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.6666666666664"
+              Start="0,0"
+              End="0,25.1666666666664">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.1666666666664" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="240.5,300.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.666666666667"
+              Start="0,0"
+              End="0,29.166666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.166666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="194.666666666667,42.6666666666667"
+          Id="Package.EventHandlers[OnError]\Log ETL Package Failure"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <TaskHost
+    design-time-name="Package\Package Content\Product">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\Package Content\Product\OLE DB Destination"
+          TopLeft="161.14582588741,101.149992220402" />
+        <NodeLayout
+          Size="139.333333333334,42.6666666666667"
+          Id="Package\Package Content\Product\Excel Source"
+          TopLeft="177.479159220743,25.1949152542373" />
+        <EdgeLayout
+          Id="Package\Package Content\Product.Paths[Excel Source Output]"
+          TopLeft="247.14582588741,67.861581920904">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.288410299498"
+              Start="0,0"
+              End="0,25.788410299498">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.788410299498" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Package Content\Product\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Package Content\Product\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

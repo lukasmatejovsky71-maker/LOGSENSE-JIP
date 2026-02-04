@@ -10,3 +10,5 @@
 	[MaterialSaleTurnoverUoM] DECIMAL(18, 4)  NULL,
 	[MaterialSaleTurnoverPalletes] DECIMAL(18, 4) NULL,
 )
+GO;
+CREATE INDEX [IX_MaterialSale_MaterialSale_DateId] ON [FactMaterialSale]([MaterialSale_DateId])

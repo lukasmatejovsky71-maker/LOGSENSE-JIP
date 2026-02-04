@@ -19,11 +19,11 @@ relationship 7173972e-8bb7-214a-c6d2-08896b912b29
 	fromColumn: 'Fact Material Movement'.MaterialMovement_DocumentId
 	toColumn: Document.DocumentId
 
-relationship 7b79361c-7b19-d54e-6c56-da8f1de61399
-	fromColumn: 'Fact Material Movement'.MaterialMovement_DivisionId
-	toColumn: Division.DivisionId
-
 relationship d64d1f94-7163-15c1-dca4-f2feff9822fe
 	fromColumn: 'Fact Material Movement'.MaterialMovement_SupplierId
 	toColumn: Supplier.SupplierId
+
+relationship 0d94c27f-639a-3886-0848-4cf3dc6148b1
+	fromColumn: 'Fact Material Movement'.MaterialMovement_MovementTypeId
+	toColumn: 'Movement Type'.MovementTypeId
 

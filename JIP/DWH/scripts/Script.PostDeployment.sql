@@ -32,3 +32,13 @@ Administrative tables
 :r .\adm\Fill.adm.ETLConfiguration.sql
 :r .\adm\Fill.adm.ETLEvent.sql
 :r .\adm\Fill.adm.ETLLog.sql
+
+:r .\adm\Fill.adm.MeasureSelection.sql
+:r .\adm\Fill.adm.ABC.sql
+
+/*
+--------------------------------------------------------------------------------------
+Datawarehouse tables
+--------------------------------------------------------------------------------------
+*/
+:r .\dbo\Fill.dbo.MovementType.sql

@@ -14,8 +14,8 @@
   DTS:ObjectName="ImportExcel_JIP"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="35"
-  DTS:VersionGUID="{69701187-087D-4C1F-91C5-384ECB050621}">
+  DTS:VersionBuild="36"
+  DTS:VersionGUID="{DA020C70-29B5-4884-A782-AFA3BA2248FE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -217,6 +217,27 @@
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Package Content\Exec Product"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{49b5b4f6-472a-4329-b780-1db3edfc21eb}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Exec Product"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>ImportExcel_Product.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ETLLogId</ParameterName>
+                <BindedVariableOrParameterName>$Package::ETLLogId</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
       </DTS:Executables>
       <DTS:PrecedenceConstraints>
         <DTS:PrecedenceConstraint
@@ -354,7 +375,7 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="185.333333333334,42.6666666666667"
           Id="Package\Log ETL Package Start"
@@ -362,7 +383,7 @@
         <NodeLayout
           Size="205.333333333334,42.6666666666667"
           Id="Package\Log ETL Package Succeess"
-          TopLeft="61.083329030623,372.749998663366" />
+          TopLeft="61.083329030623,434.749998663366" />
         <NodeLayout
           Size="234.666666666667,42.6666666666667"
           Id="Package\Package Content\Exec MaterialMovementReceipt"
@@ -393,11 +414,15 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="140,42.6666666666667"
+          Id="Package\Package Content\Exec Product"
+          TopLeft="61.1249985191972,155.289218875696" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="267.333333333334,222"
-          Size="267.333333333334,264.666666666667"
+          PanelSize="267.333333333334,286"
+          Size="267.333333333334,329.333333333334"
           Id="Package\Package Content"
           TopLeft="30.083329030623,79.1833318339785" />
         <EdgeLayout
@@ -424,18 +449,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="163.74999569729,343.849998500645">
+          TopLeft="163.74999569729,408.516665167312">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,28.9000001627209"
+              EndConnector="0,26.2333334960542"
               Start="0,0"
-              End="0,21.4000001627209">
+              End="0,18.7333334960542">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,21.4000001627209" />
+                    End="0,18.7333334960542" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

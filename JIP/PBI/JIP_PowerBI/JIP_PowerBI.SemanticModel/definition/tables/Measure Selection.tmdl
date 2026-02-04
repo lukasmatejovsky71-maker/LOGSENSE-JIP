@@ -1,0 +1,88 @@
+table 'Measure Selection'
+	lineageTag: 33932f60-2e03-4887-98bd-b5d74de633ab
+
+	measure Selekce =
+			
+			SWITCH( TRUE(),
+				SELECTEDVALUE( 'Measure Selection'[MeasureSelectionName] ) = "# Orderlines", [Material Movement Turnover Count],
+				SELECTEDVALUE( 'Measure Selection'[MeasureSelectionName] ) = "# MJ", [Material Movement Turnover Units] ,
+			    SELECTEDVALUE( 'Measure Selection'[MeasureSelectionName] ) = "# Objednávky", [Material Movement Document Count],
+			    SELECTEDVALUE( 'Measure Selection'[MeasureSelectionName] ) = "# Palety", [Material Movement Turnover Palletes],
+			[Material Movement Turnover Count])
+		formatString: #,0
+		lineageTag: ffb40f9b-837b-42cb-8cf6-3fa0e1ec8fd6
+
+	measure 'Ø za den' = [Selekce] / 'Fact Material Movement'[Material Movement Day Count]
+		lineageTag: c38853e4-9084-4e7d-a92c-9d4c770d9346
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '90 % perc' = ```
+			
+			CALCULATE (
+			    PERCENTILEX.INC (
+			        VALUES ( 'Fact Material Movement'[MaterialMovement_DateId] ),
+			        [Selekce],
+			        0.9
+			    ),
+			    ALLSELECTED ( 'Date'[DateDate] )
+			)
+			
+			```
+		lineageTag: a54aca8b-66e4-4fc9-ac76-ae4a48f27b0a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'peak factor' = divide ( [90 % perc] , [Ø za den], 0 )
+		lineageTag: 12603aff-f171-438a-b75e-ff38260fab0e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ø za den vše' =
+			
+			CALCULATE (
+			    AVERAGEX ( VALUES ( 'Fact Material Movement'[MaterialMovement_DateId] ), [Selekce] ),
+			    ALLSELECTED( ( 'Date'[DateDate] )
+			))
+		lineageTag: 9353bc7f-d804-4242-bb06-97f992d55687
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MeasureSelectionId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 93e38c07-0f0e-42e6-aff2-833f0007e7e0
+		summarizeBy: count
+		sourceColumn: MeasureSelectionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MeasureSelectionName
+		dataType: string
+		lineageTag: 791aaaeb-290f-4cea-ad8c-4f413738b9b2
+		summarizeBy: none
+		sourceColumn: MeasureSelectionName
+
+		annotation SummarizationSetBy = Automatic
+
+	column MeasureSelectionIndex
+		dataType: int64
+		formatString: 0
+		lineageTag: cf5ccae0-b457-4791-8556-737748b840df
+		summarizeBy: sum
+		sourceColumn: MeasureSelectionIndex
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Measure Selection' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("BORGERS.LOCAL", "JIP_DWH"),
+				    adm_MeasureSelection = Source{[Schema="adm",Item="MeasureSelection"]}[Data]
+				in
+				    adm_MeasureSelection
+

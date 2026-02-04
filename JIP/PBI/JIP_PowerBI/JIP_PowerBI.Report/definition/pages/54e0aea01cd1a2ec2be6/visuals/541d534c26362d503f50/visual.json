@@ -4,10 +4,10 @@
   "position": {
     "x": 779.16666666666674,
     "y": 0,
-    "z": 6000,
+    "z": 3000,
     "height": 66.666666666666671,
     "width": 163.33333333333334,
-    "tabOrder": 6000
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -25,7 +25,7 @@
                           "Entity": "Fact Material Movement"
                         }
                       },
-                      "Property": "Material Movement Turnover Units"
+                      "Property": "MaterialMovementTurnoverUnits"
                     }
                   },
                   "Function": 0
@@ -50,7 +50,7 @@
                         "Entity": "Fact Material Movement"
                       }
                     },
-                    "Property": "Material Movement Turnover Units"
+                    "Property": "MaterialMovementTurnoverUnits"
                   }
                 },
                 "Function": 0

@@ -3,5 +3,4 @@ AS
 SELECT [OrderId]
 	,[OrderNumber]
 	,[OrderSpeculation]
-	,[OrderDeleted]
 FROM [DimOrder]

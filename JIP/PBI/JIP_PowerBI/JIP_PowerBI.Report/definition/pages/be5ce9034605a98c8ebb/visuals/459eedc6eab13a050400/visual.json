@@ -64,7 +64,7 @@
                           "Entity": "Fact Material Movement"
                         }
                       },
-                      "Property": "Material Movement Turnover Palletes"
+                      "Property": "MaterialMovementTurnoverPalletes"
                     }
                   },
                   "Function": 0

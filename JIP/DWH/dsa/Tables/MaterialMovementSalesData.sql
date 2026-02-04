@@ -12,3 +12,6 @@
 GO;
 CREATE NONCLUSTERED INDEX [IX_dsa_MaterialMovementSalesData_Číslo dokladu]
 ON [dsa].[MaterialMovementSalesData] ([Číslo dokladu])
+
+GO
+CREATE INDEX IX_dsa_MaterialMovementSalesData_Produkt_kod ON [dsa].[MaterialMovementSalesData]([Produkt - Kód])

@@ -2,5 +2,4 @@
 AS
 SELECT [DocumentId]
 	,[DocumentNumber]
-	,[DocumentDeleted]
 FROM [DimDocument]

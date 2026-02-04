@@ -8,9 +8,11 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["Date","Branch","Document","Supplier","Product","Division","Fact Material Movement"]
+annotation PBI_QueryOrder = ["Date","Branch","Document","Supplier","Product","Fact Material Movement","ABC","Measure Selection","Movement Type"]
 
 annotation PBI_ProTooling = ["DevMode"]
+
+annotation __TEdtr = 1
 
 ref table Date
 ref table DateTableTemplate_6d33a379-3767-46fc-a494-f05ce9fe588a
@@ -19,8 +21,10 @@ ref table Branch
 ref table Document
 ref table Supplier
 ref table Product
-ref table Division
 ref table 'Fact Material Movement'
+ref table ABC
+ref table 'Measure Selection'
+ref table 'Movement Type'
 
 ref cultureInfo en-US
 

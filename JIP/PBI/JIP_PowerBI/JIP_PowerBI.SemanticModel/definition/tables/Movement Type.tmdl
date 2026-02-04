@@ -1,0 +1,29 @@
+table 'Movement Type'
+	lineageTag: cc0d9caf-80e6-44ba-923b-d58e76849b42
+
+	column MovementTypeId
+		dataType: int64
+		formatString: 0
+		lineageTag: 794ffc21-76bc-40e2-91ee-3a360170e446
+		summarizeBy: none
+		sourceColumn: MovementTypeId
+
+		annotation SummarizationSetBy = Automatic
+
+	column MovementTypeName
+		dataType: string
+		lineageTag: f4220650-c0a9-4a1a-a823-65724eb9136f
+		summarizeBy: none
+		sourceColumn: MovementTypeName
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Movement Type' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("BORGERS.LOCAL", "JIP_DWH"),
+				    dbo_v_DimMovementType = Source{[Schema="dbo",Item="v_DimMovementType"]}[Data]
+				in
+				    dbo_v_DimMovementType
+

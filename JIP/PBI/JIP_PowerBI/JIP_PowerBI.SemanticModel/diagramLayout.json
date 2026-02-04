@@ -4,8 +4,8 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 351.64080183473357,
-        "y": 190.75494154838668
+        "x": 767.09282555427728,
+        "y": 225.37594611459673
       },
       "nodes": [
         {
@@ -19,7 +19,7 @@
             "height": 167,
             "width": 234
           },
-          "zIndex": 6
+          "zIndex": 8
         },
         {
           "location": {
@@ -32,20 +32,7 @@
             "height": 176,
             "width": 234
           },
-          "zIndex": 1
-        },
-        {
-          "location": {
-            "x": 790,
-            "y": 0
-          },
-          "nodeIndex": "Division",
-          "nodeLineageTag": "3de3e802-b628-4145-8ba5-11a6e22547c5",
-          "size": {
-            "height": 152,
-            "width": 234
-          },
-          "zIndex": 2
+          "zIndex": 5
         },
         {
           "location": {
@@ -57,12 +44,12 @@
             "height": 152,
             "width": 234
           },
-          "zIndex": 3
+          "zIndex": 6
         },
         {
           "location": {
-            "x": 1143,
-            "y": 288.5
+            "x": 1430.1506849315069,
+            "y": 119.46803652968035
           },
           "nodeIndex": "Product",
           "nodeLineageTag": "282f76cb-9194-485e-b4c2-ea58c0a18158",
@@ -70,7 +57,7 @@
             "height": 152,
             "width": 234
           },
-          "zIndex": 4
+          "zIndex": 7
         },
         {
           "location": {
@@ -82,7 +69,7 @@
             "height": 152,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 1
         },
         {
           "location": {
@@ -90,8 +77,48 @@
             "y": 225.5
           },
           "nodeIndex": "Fact Material Movement",
+          "nodeLineageTag": "eb949167-dcbd-47a6-bebd-6aa2de690348",
           "size": {
             "height": 296,
+            "width": 301.20547945205476
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 1325.2054794520548,
+            "y": 659.469945567928
+          },
+          "nodeIndex": "ABC",
+          "nodeLineageTag": "6a84c040-84ee-4de6-9104-38455827ad12",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1406.5068493150684,
+            "y": 309.08790081494476
+          },
+          "nodeIndex": "Movement Type",
+          "nodeLineageTag": "cc0d9caf-80e6-44ba-923b-d58e76849b42",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1271.1415525114155,
+            "y": 485.46689624873471
+          },
+          "nodeIndex": "Measure Selection",
+          "nodeLineageTag": "33932f60-2e03-4887-98bd-b5d74de633ab",
+          "size": {
+            "height": 152,
             "width": 234
           },
           "zIndex": 0
@@ -99,6 +126,99 @@
       ],
       "name": "All tables",
       "zoomValue": 98.206278026905821,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 234.1447420483866,
+            "y": 604.05756245780924
+          },
+          "nodeIndex": "Branch",
+          "nodeLineageTag": "f0c6129d-6143-40bf-b729-693491295216",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 279.1007993657588
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "71fb670f-0951-4cfe-8244-194600b96e51",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 744.55448822248559,
+            "y": 295.97037319724535
+          },
+          "nodeIndex": "Document",
+          "nodeLineageTag": "bfe0cede-d0f7-46e1-9ab3-33939fe58cc9",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 457.46379257486853,
+            "y": 251.45527966441841
+          },
+          "nodeIndex": "Fact Material Movement",
+          "nodeLineageTag": "eb949167-dcbd-47a6-bebd-6aa2de690348",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 582.71521428969731,
+            "y": 46.453224990607282
+          },
+          "nodeIndex": "Product",
+          "nodeLineageTag": "282f76cb-9194-485e-b4c2-ea58c0a18158",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 224.66930609248487,
+            "y": -50
+          },
+          "nodeIndex": "Supplier",
+          "nodeLineageTag": "c4ac5f4e-ac57-40d0-abb6-a83a2bee7a94",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 6
+        }
+      ],
+      "name": "Fact Material Movement",
+      "zoomValue": 130,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,

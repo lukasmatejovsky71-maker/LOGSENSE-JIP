@@ -11,7 +11,10 @@
 );
 
 GO
-CREATE INDEX IX_dsa_MaterialMovementReceipt_Diviz ON [dsa].[MaterialMovementReceipt]([Divize])
+CREATE INDEX IX_dsa_MaterialMovementReceipt_Produkt_kod ON [dsa].[MaterialMovementReceipt]([Produkt - kód])
+
+GO
+CREATE INDEX IX_dsa_MaterialMovementReceipt_Divize ON [dsa].[MaterialMovementReceipt]([Divize])
 
 GO;
 CREATE NONCLUSTERED INDEX [IX_dsa_MaterialMovementrReceipt_Číslo dokladu]

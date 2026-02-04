@@ -1,0 +1,257 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "ea49fc4c3fae112bc4ce",
+  "position": {
+    "x": 10.909090909090908,
+    "y": 64.545454545454547,
+    "z": 0,
+    "height": 655.45454545454538,
+    "width": 1270,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Movement Type"
+                    }
+                  },
+                  "Property": "MovementTypeName"
+                }
+              },
+              "queryRef": "Movement Type.MovementTypeName",
+              "nativeQueryRef": "Typ pohybu",
+              "active": true,
+              "displayName": "Typ pohybu"
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Product"
+                    }
+                  },
+                  "Property": "ProductFullName"
+                }
+              },
+              "queryRef": "Product.ProductFullName",
+              "nativeQueryRef": "SKU",
+              "active": true,
+              "displayName": "SKU"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Supplier"
+                    }
+                  },
+                  "Property": "SupplierFullName"
+                }
+              },
+              "queryRef": "Supplier.SupplierFullName",
+              "nativeQueryRef": "IČO",
+              "active": false,
+              "displayName": "IČO"
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Material Movement"
+                    }
+                  },
+                  "Property": "Material Movement Turnover Count"
+                }
+              },
+              "queryRef": "Fact Material Movement.Material Movement Turnover Count",
+              "nativeQueryRef": "# Orderlines",
+              "displayName": "# Orderlines"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Material Movement"
+                    }
+                  },
+                  "Property": "Material Movement Turnover Units"
+                }
+              },
+              "queryRef": "Fact Material Movement.Material Movement Turnover Units",
+              "nativeQueryRef": "# MJ",
+              "displayName": "# MJ"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Material Movement"
+                    }
+                  },
+                  "Property": "Material Movement Turnover Palletes"
+                }
+              },
+              "queryRef": "Fact Material Movement.Material Movement Turnover Palletes",
+              "nativeQueryRef": "# Palet",
+              "displayName": "# Palet"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Material Movement"
+                    }
+                  },
+                  "Property": "Material Movement Turnover Full Palletes"
+                }
+              },
+              "queryRef": "Fact Material Movement.Material Movement Turnover Full Palletes",
+              "nativeQueryRef": "# Celopalet",
+              "displayName": "# Celopalet"
+            }
+          ]
+        }
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "Product.ProductFullName"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Product"
+                    }
+                  },
+                  "Property": "ProductFullName"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "Supplier.SupplierFullName"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {}
+      }
+    ],
+    "objects": {
+      "grid": [
+        {
+          "properties": {}
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "bandedRowHeaders": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "layout": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Compact'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTotals": [
+        {
+          "properties": {
+            "columnSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Auto'"
+                }
+              }
+            },
+            "titleAlignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Left'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Default'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

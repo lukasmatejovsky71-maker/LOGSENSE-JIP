@@ -4,10 +4,10 @@
   "position": {
     "x": 0,
     "y": 452.14285714285717,
-    "z": 7000,
+    "z": 4000,
     "height": 257.14285714285717,
     "width": 1280,
-    "tabOrder": 7000
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "tableEx",
@@ -39,7 +39,7 @@
                           "Entity": "Fact Material Movement"
                         }
                       },
-                      "Property": "Material Movement Turnover Palletes"
+                      "Property": "MaterialMovementTurnoverPalletes"
                     }
                   },
                   "Function": 0
@@ -89,7 +89,7 @@
                           "Entity": "Fact Material Movement"
                         }
                       },
-                      "Property": "Material Movement Turnover Units"
+                      "Property": "MaterialMovementTurnoverUnits"
                     }
                   },
                   "Function": 0
