@@ -420,6 +420,4 @@ FodyWeavers.xsd
 
 # Working folders used by JIP
 /JIP/Import/
-/JIP/PBI/SharedResports
-
 /JIP/PBI/SharedReports
