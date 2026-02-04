@@ -1,12 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
-  "name": "1529270b70650e1975cc",
+  "name": "0bb436b6b3d756088a54",
   "position": {
-    "x": 444.5454545454545,
+    "x": 352.72727272727269,
     "y": 0,
     "z": 6000,
     "height": 53.636363636363633,
-    "width": 141.81818181818181,
+    "width": 91.818181818181813,
     "tabOrder": 6000
   },
   "visual": {
@@ -20,21 +20,49 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Branch"
+                      "Entity": "Date"
                     }
                   },
-                  "Property": "BranchName"
+                  "Property": "DateCalendarYear"
                 }
               },
-              "queryRef": "Branch.BranchName",
-              "nativeQueryRef": "Pobočka",
-              "active": true,
-              "displayName": "Pobočka"
+              "queryRef": "Date.DateCalendarYear",
+              "nativeQueryRef": "DateCalendarYear",
+              "active": true
             }
           ]
         }
       }
     },
+    "expansionStates": [
+      {
+        "roles": [
+          "Values"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "Date.DateCalendarYear"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date"
+                    }
+                  },
+                  "Property": "DateCalendarYear"
+                }
+              }
+            ],
+            "isPinned": true
+          }
+        ],
+        "root": {}
+      }
+    ],
     "objects": {
       "data": [
         {
@@ -52,6 +80,13 @@
       "header": [
         {
           "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Rok'"
+                }
+              }
+            },
             "fontFamily": {
               "expr": {
                 "Literal": {
@@ -72,20 +107,13 @@
       "general": [
         {
           "properties": {
-            "selfFilterEnabled": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
             "filter": {
               "filter": {
                 "Version": 2,
                 "From": [
                   {
-                    "Name": "b",
-                    "Entity": "Branch",
+                    "Name": "d",
+                    "Entity": "Date",
                     "Type": 0
                   }
                 ],
@@ -98,10 +126,10 @@
                             "Column": {
                               "Expression": {
                                 "SourceRef": {
-                                  "Source": "b"
+                                  "Source": "d"
                                 }
                               },
-                              "Property": "BranchName"
+                              "Property": "DateCalendarYear"
                             }
                           }
                         ],
@@ -109,7 +137,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'Horšovský Týn'"
+                                "Value": "2025L"
                               }
                             }
                           ]
@@ -125,58 +153,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "4fb68a6308807167b539",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Fact Material Movement"
-              }
-            },
-            "Property": "Material Movement Turnover Count"
-          }
-        },
-        "type": "Advanced",
-        "filter": {
-          "Version": 2,
-          "From": [
-            {
-              "Name": "f",
-              "Entity": "Fact Material Movement",
-              "Type": 0
-            }
-          ],
-          "Where": [
-            {
-              "Condition": {
-                "Comparison": {
-                  "ComparisonKind": 1,
-                  "Left": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Source": "f"
-                        }
-                      },
-                      "Property": "Material Movement Turnover Count"
-                    }
-                  },
-                  "Right": {
-                    "Literal": {
-                      "Value": "0L"
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        },
-        "howCreated": "User"
-      }
-    ]
   }
 }

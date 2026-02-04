@@ -2118,22 +2118,6 @@ cultureInfo en-US
 			            "State": "Generated",
 			            "Weight": 0.99
 			          }
-			        },
-			        {
-			          "ICO": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "IČO": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -7550,9 +7534,159 @@ cultureInfo en-US
 			          }
 			        }
 			      ]
+			    },
+			    "fact_material_movement.material_movement_supplier_count": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact Material Movement",
+			          "ConceptualProperty": "Material Movement Supplier Count"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "material movement supplier count": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "supplier count": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "movement supplier count": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "material movement supplier amount": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.748
+			          }
+			        },
+			        {
+			          "movement supplier amount": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        },
+			        {
+			          "supplier amount": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "abc.ICO_palletes": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "ABC",
+			          "ConceptualProperty": "ICO Palletes"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ICO palletes": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "IČO": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
+			    "fact_material_movement_has_material_movement_supplier_count": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact Material Movement"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_material_movement": {
+			          "Target": {
+			            "Entity": "fact_material_movement"
+			          }
+			        },
+			        "fact_material_movement.material_movement_supplier_count": {
+			          "Target": {
+			            "Entity": "fact_material_movement.material_movement_supplier_count"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_material_movement"
+			            },
+			            "Object": {
+			              "Role": "fact_material_movement.material_movement_supplier_count"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_material_movements_have_material_movement_supplier_count"
+			        }
+			      ]
+			    },
+			    "fact_material_movement_has_material_movement_turnover_full_palletes": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact Material Movement"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_material_movement": {
+			          "Target": {
+			            "Entity": "fact_material_movement"
+			          }
+			        },
+			        "fact_material_movement.material_movement_turnover_full_palletes": {
+			          "Target": {
+			            "Entity": "fact_material_movement.material_movement_turnover_full_palletes"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_material_movement"
+			            },
+			            "Object": {
+			              "Role": "fact_material_movement.material_movement_turnover_full_palletes"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_material_movements_have_material_movement_turnover_full_palletes"
+			        }
+			      ]
+			    },
 			    "product_has_product_card_type": {
 			      "Binding": {
 			        "ConceptualEntity": "Product"
@@ -9878,7 +10012,7 @@ cultureInfo en-US
 			        }
 			      ]
 			    },
-			    "fact_material_movement_has_material_movement_turnover_full_palletes": {
+			    "fact_material_movement_has_abc_ICO_palletes": {
 			      "Binding": {
 			        "ConceptualEntity": "Fact Material Movement"
 			      },
@@ -9889,9 +10023,9 @@ cultureInfo en-US
 			            "Entity": "fact_material_movement"
 			          }
 			        },
-			        "fact_material_movement.material_movement_turnover_full_palletes": {
+			        "abc.ICO_palletes": {
 			          "Target": {
-			            "Entity": "fact_material_movement.material_movement_turnover_full_palletes"
+			            "Entity": "abc.ICO_palletes"
 			          }
 			        }
 			      },
@@ -9902,12 +10036,12 @@ cultureInfo en-US
 			              "Role": "fact_material_movement"
 			            },
 			            "Object": {
-			              "Role": "fact_material_movement.material_movement_turnover_full_palletes"
+			              "Role": "abc.ICO_palletes"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "fact_material_movements_have_material_movement_turnover_full_palletes"
+			          "ID": "fact_material_movements_have_ICO_palletes"
 			        }
 			      ]
 			    },

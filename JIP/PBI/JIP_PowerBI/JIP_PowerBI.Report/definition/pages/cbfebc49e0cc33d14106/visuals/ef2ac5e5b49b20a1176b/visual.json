@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
-  "name": "1529270b70650e1975cc",
+  "name": "ef2ac5e5b49b20a1176b",
   "position": {
-    "x": 444.5454545454545,
+    "x": 840.90909090909088,
     "y": 0,
-    "z": 6000,
+    "z": 7000,
     "height": 53.636363636363633,
-    "width": 141.81818181818181,
-    "tabOrder": 6000
+    "width": 150,
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "slicer",
@@ -20,16 +20,16 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Branch"
+                      "Entity": "Product"
                     }
                   },
-                  "Property": "BranchName"
+                  "Property": "ProductCardType"
                 }
               },
-              "queryRef": "Branch.BranchName",
-              "nativeQueryRef": "Pobočka",
+              "queryRef": "Product.ProductCardType",
+              "nativeQueryRef": "Typ karty",
               "active": true,
-              "displayName": "Pobočka"
+              "displayName": "Typ karty"
             }
           ]
         }
@@ -43,6 +43,19 @@
               "expr": {
                 "Literal": {
                   "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "selfFilterEnabled": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }
@@ -68,60 +81,6 @@
             }
           }
         }
-      ],
-      "general": [
-        {
-          "properties": {
-            "selfFilterEnabled": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "filter": {
-              "filter": {
-                "Version": 2,
-                "From": [
-                  {
-                    "Name": "b",
-                    "Entity": "Branch",
-                    "Type": 0
-                  }
-                ],
-                "Where": [
-                  {
-                    "Condition": {
-                      "In": {
-                        "Expressions": [
-                          {
-                            "Column": {
-                              "Expression": {
-                                "SourceRef": {
-                                  "Source": "b"
-                                }
-                              },
-                              "Property": "BranchName"
-                            }
-                          }
-                        ],
-                        "Values": [
-                          [
-                            {
-                              "Literal": {
-                                "Value": "'Horšovský Týn'"
-                              }
-                            }
-                          ]
-                        ]
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        }
       ]
     },
     "drillFilterOtherVisuals": true
@@ -129,7 +88,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "4fb68a6308807167b539",
+        "name": "da4eba2e709ab1a5640d",
         "field": {
           "Measure": {
             "Expression": {
@@ -137,7 +96,7 @@
                 "Entity": "Fact Material Movement"
               }
             },
-            "Property": "Material Movement Turnover Count"
+            "Property": "Material Movement External Count"
           }
         },
         "type": "Advanced",
@@ -162,7 +121,7 @@
                           "Source": "f"
                         }
                       },
-                      "Property": "Material Movement Turnover Count"
+                      "Property": "Material Movement External Count"
                     }
                   },
                   "Right": {

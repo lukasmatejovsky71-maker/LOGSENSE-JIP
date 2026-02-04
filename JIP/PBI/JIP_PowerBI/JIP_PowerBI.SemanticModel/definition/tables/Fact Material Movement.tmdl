@@ -69,6 +69,10 @@ table 'Fact Material Movement'
 		formatString: #,0
 		lineageTag: 398ee66c-5e8e-4ef6-ac65-099b64d82fb2
 
+	measure 'Material Movement Supplier Count' = DISTINCTCOUNT('Fact Material Movement'[MaterialMovement_SupplierId])
+		formatString: 0
+		lineageTag: 3580e7dc-0630-4b15-b0bd-d4c7b059f07e
+
 	column MaterialMovement_DateId
 		dataType: int64
 		isHidden

@@ -178,6 +178,182 @@ table ABC
 		formatString: #,0
 		lineageTag: b1c3abfa-c4ee-44c5-83c5-daf9098d0b18
 
+	measure 'ICO Palletes' =
+			
+			VAR SalesByProduct =
+			    CALCULATETABLE (
+			        ADDCOLUMNS (
+			            SUMMARIZE ( 'Fact Material Movement', 'Fact Material Movement'[MaterialMovement_SupplierId] ),
+			            "@ProdSales", [Material Movement Turnover Palletes]
+			        ),
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			VAR AllSales =
+			    CALCULATE (
+			        [Material Movement Turnover Palletes],
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			VAR CumulatedPctByProduct =
+			    ADDCOLUMNS (
+			        SalesByProduct,
+			        "@CumulatedPct",
+			        VAR CurrentSalesAmt = [@ProdSales]
+			        VAR CumulatedSales =
+			            FILTER (
+			                SalesByProduct,
+			                [@ProdSales] >= CurrentSalesAmt
+			            )
+			        VAR CumulatedSalesAmount =
+			            SUMX (
+			                CumulatedSales,
+			                [@ProdSales]
+			            )
+			        VAR Perc =
+			            DIVIDE (
+			                CumulatedSalesAmount,
+			                AllSales
+			            )
+			        RETURN
+			            Perc
+			    )
+			VAR ProductsInClass =
+			    FILTER (
+			        CROSSJOIN (
+			            CumulatedPctByProduct,
+			            'ABC'
+			        ),
+			        AND (
+			            [@CumulatedPct] > 'ABC'[ABCFrom],
+			            [@CumulatedPct] <= 'ABC'[ABCTo]
+			        )
+			    )
+			VAR Result =
+			    CALCULATE (             -- The pattern is the same for every measure, just
+			        [Material Movement Supplier Count],     -- change this measure reference for other measures
+			        KEEPFILTERS ( ProductsInClass )
+			    )
+			RETURN
+			    Result
+		lineageTag: fe540614-8d4e-4d71-97f9-6deab2c45ab9
+
+	measure 'ICO Units' =
+			
+			VAR SalesByProduct =
+			    CALCULATETABLE (
+			        ADDCOLUMNS (
+			            SUMMARIZE ( 'Fact Material Movement', 'Fact Material Movement'[MaterialMovement_SupplierId] ),
+			            "@ProdSales", [Material Movement Turnover Units]
+			        ),
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			VAR AllSales =
+			    CALCULATE (
+			        [Material Movement Turnover Units],
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			VAR CumulatedPctByProduct =
+			    ADDCOLUMNS (
+			        SalesByProduct,
+			        "@CumulatedPct",
+			        VAR CurrentSalesAmt = [@ProdSales]
+			        VAR CumulatedSales =
+			            FILTER (
+			                SalesByProduct,
+			                [@ProdSales] >= CurrentSalesAmt
+			            )
+			        VAR CumulatedSalesAmount =
+			            SUMX (
+			                CumulatedSales,
+			                [@ProdSales]
+			            )
+			        VAR Perc =
+			            DIVIDE (
+			                CumulatedSalesAmount,
+			                AllSales
+			            )
+			        RETURN
+			            Perc
+			    )
+			VAR ProductsInClass =
+			    FILTER (
+			        CROSSJOIN (
+			            CumulatedPctByProduct,
+			            'ABC'
+			        ),
+			        AND (
+			            [@CumulatedPct] > 'ABC'[ABCFrom],
+			            [@CumulatedPct] <= 'ABC'[ABCTo]
+			        )
+			    )
+			VAR Result =
+			    CALCULATE (             -- The pattern is the same for every measure, just
+			        [Material Movement Supplier Count],     -- change this measure reference for other measures
+			        KEEPFILTERS ( ProductsInClass )
+			    )
+			RETURN
+			    Result
+		formatString: 0
+		lineageTag: 808e03e4-52f7-46db-b099-34673c842787
+
+	measure 'ICO Orderline' =
+			
+			VAR SalesByProduct =
+			    CALCULATETABLE (
+			        ADDCOLUMNS (
+			            SUMMARIZE ( 'Fact Material Movement', 'Fact Material Movement'[MaterialMovement_SupplierId] ),
+			            "@ProdSales", [Material Movement Turnover Count]
+			        ),
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			VAR AllSales =
+			    CALCULATE (
+			        [Material Movement Turnover Count],
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			VAR CumulatedPctByProduct =
+			    ADDCOLUMNS (
+			        SalesByProduct,
+			        "@CumulatedPct",
+			        VAR CurrentSalesAmt = [@ProdSales]
+			        VAR CumulatedSales =
+			            FILTER (
+			                SalesByProduct,
+			                [@ProdSales] >= CurrentSalesAmt
+			            )
+			        VAR CumulatedSalesAmount =
+			            SUMX (
+			                CumulatedSales,
+			                [@ProdSales]
+			            )
+			        VAR Perc =
+			            DIVIDE (
+			                CumulatedSalesAmount,
+			                AllSales
+			            )
+			        RETURN
+			            Perc
+			    )
+			VAR ProductsInClass =
+			    FILTER (
+			        CROSSJOIN (
+			            CumulatedPctByProduct,
+			            'ABC'
+			        ),
+			        AND (
+			            [@CumulatedPct] > 'ABC'[ABCFrom],
+			            [@CumulatedPct] <= 'ABC'[ABCTo]
+			        )
+			    )
+			VAR Result =
+			    CALCULATE (             -- The pattern is the same for every measure, just
+			        [Material Movement Supplier Count],     -- change this measure reference for other measures
+			        KEEPFILTERS ( ProductsInClass )
+			    )
+			RETURN
+			    Result
+		formatString: 0
+		lineageTag: 07e975ef-1245-4690-993b-ca0f814ae44e
+
 	column ABCId
 		dataType: int64
 		formatString: 0
