@@ -43,11 +43,11 @@
                       "Entity": "ABC"
                     }
                   },
-                  "Property": "ICO Orderline"
+                  "Property": "Orderlines classified by Palletes"
                 }
               },
-              "queryRef": "ABC.ICO Orderline",
-              "nativeQueryRef": "ICO Orderline"
+              "queryRef": "ABC.Orderlines classified by Palletes",
+              "nativeQueryRef": "Orderlines classified by Palletes"
             }
           ]
         }
@@ -342,7 +342,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'IČO dle ABC (Orderline)'"
+                  "Value": "'Orderline dle ABC (palety)'"
                 }
               }
             },

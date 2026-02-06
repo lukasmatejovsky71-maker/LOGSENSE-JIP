@@ -12,6 +12,7 @@ relationship ce999be4-daba-3e79-27b9-2c9648ba8de5
 	toColumn: Date.DateId
 
 relationship 13678c1a-e37f-7640-e822-249c4d77e811
+	crossFilteringBehavior: bothDirections
 	fromColumn: 'Fact Material Movement'.MaterialMovement_ProductId
 	toColumn: Product.ProductId
 

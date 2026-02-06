@@ -43,11 +43,11 @@
                       "Entity": "ABC"
                     }
                   },
-                  "Property": "Products"
+                  "Property": "Products classified by Orderlines"
                 }
               },
-              "queryRef": "ABC.Products",
-              "nativeQueryRef": "SKU",
+              "queryRef": "ABC.Products classified by Orderlines",
+              "nativeQueryRef": "SKU1",
               "displayName": "SKU"
             }
           ]

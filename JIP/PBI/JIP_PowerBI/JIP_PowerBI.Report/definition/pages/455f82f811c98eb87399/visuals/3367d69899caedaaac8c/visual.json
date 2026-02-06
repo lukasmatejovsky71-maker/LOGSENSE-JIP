@@ -43,10 +43,10 @@
                       "Entity": "ABC"
                     }
                   },
-                  "Property": "Units"
+                  "Property": "Units classified by Orderlines"
                 }
               },
-              "queryRef": "ABC.Units",
+              "queryRef": "ABC.Units classified by Orderlines",
               "nativeQueryRef": "MJ",
               "displayName": "MJ"
             }

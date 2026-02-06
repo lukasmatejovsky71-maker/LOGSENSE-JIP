@@ -354,6 +354,446 @@ table ABC
 		formatString: 0
 		lineageTag: 07e975ef-1245-4690-993b-ca0f814ae44e
 
+	measure 'Product Suppliers classified by Palletes' = ```
+			
+			VAR SalesByProductSupplier = 
+			    CALCULATETABLE (
+			        ADDCOLUMNS (
+			            SUMMARIZE (
+			                'Fact Material Movement',
+			                'Product'[ProductSupplier]
+			            ),
+			            "@ProdSales",
+			                [Material Movement Turnover Palletes]
+			        ),
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			
+			VAR AllSales =
+			    CALCULATE (
+			        [Material Movement Turnover Palletes],
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			
+			VAR CumulatedPctByProduct =
+			    ADDCOLUMNS (
+			        SalesByProductSupplier,
+			        "@CumulatedPct",
+			        VAR CurrentSalesAmt = [@ProdSales]
+			        VAR CumulatedSales =
+			            FILTER (
+			                SalesByProductSupplier,
+			                [@ProdSales] >= CurrentSalesAmt
+			            )
+			        RETURN
+			            DIVIDE (
+			                SUMX ( CumulatedSales, [@ProdSales] ),
+			                AllSales
+			            )
+			    )
+			
+			VAR ABCFrom =
+			    SELECTEDVALUE ( 'ABC'[ABCFrom] )
+			
+			VAR ABCTo =
+			    SELECTEDVALUE ( 'ABC'[ABCTo] )
+			
+			VAR IsABCInContext =
+			    NOT ISBLANK ( ABCFrom )
+			
+			VAR ProductsInClass =
+			    FILTER (
+			        CumulatedPctByProduct,
+			        [@CumulatedPct] > ABCFrom
+			            && [@CumulatedPct] <= ABCTo
+			    )
+			
+			RETURN
+			IF (
+			    IsABCInContext,
+			    /* === ABC řádek === */
+			    CALCULATE (
+			        [Material Movement Product Supplier Count],
+			        KEEPFILTERS ( ProductsInClass )
+			    ),
+			    /* === Total (bez ABC v kontextu) === */
+			    CALCULATE (
+			        [Material Movement Product Supplier Count],
+			        ALL ( 'ABC' )
+			    )
+			)
+			
+			```
+		lineageTag: c92ed1cb-5ff6-4e55-9cc4-1153c7be8ef6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Orderlines classified by Palletes' = ```
+			
+			VAR SalesByProductSupplier = 
+			    CALCULATETABLE (
+			        ADDCOLUMNS (
+			            SUMMARIZE (
+			                'Fact Material Movement',
+			                'Product'[ProductSupplier]
+			            ),
+			            "@ProdSales",
+			                [Material Movement Turnover Palletes]
+			        ),
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			
+			VAR AllSales =
+			    CALCULATE (
+			        [Material Movement Turnover Palletes],
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			
+			VAR CumulatedPctByProduct =
+			    ADDCOLUMNS (
+			        SalesByProductSupplier,
+			        "@CumulatedPct",
+			        VAR CurrentSalesAmt = [@ProdSales]
+			        VAR CumulatedSales =
+			            FILTER (
+			                SalesByProductSupplier,
+			                [@ProdSales] >= CurrentSalesAmt
+			            )
+			        RETURN
+			            DIVIDE (
+			                SUMX ( CumulatedSales, [@ProdSales] ),
+			                AllSales
+			            )
+			    )
+			
+			VAR ABCFrom =
+			    SELECTEDVALUE ( 'ABC'[ABCFrom] )
+			
+			VAR ABCTo =
+			    SELECTEDVALUE ( 'ABC'[ABCTo] )
+			
+			VAR IsABCInContext =
+			    NOT ISBLANK ( ABCFrom )
+			
+			VAR ProductsInClass =
+			    FILTER (
+			        CumulatedPctByProduct,
+			        [@CumulatedPct] > ABCFrom
+			            && [@CumulatedPct] <= ABCTo
+			    )
+			
+			RETURN
+			IF (
+			    IsABCInContext,
+			    /* === ABC řádek === */
+			    CALCULATE (
+			        [Material Movement Turnover Count],
+			        KEEPFILTERS ( ProductsInClass )
+			    ),
+			    /* === Total (bez ABC v kontextu) === */
+			    CALCULATE (
+			        [Material Movement Turnover Count],
+			        ALL ( 'ABC' )
+			    )
+			)
+			
+			```
+		formatString: #,0
+		lineageTag: 6eede6ed-8533-48dc-8dae-aae0c225b967
+
+	measure 'Units classified by Palletes' = ```
+			
+			VAR SalesByProductSupplier = 
+			    CALCULATETABLE (
+			        ADDCOLUMNS (
+			            SUMMARIZE (
+			                'Fact Material Movement',
+			                'Product'[ProductSupplier]
+			            ),
+			            "@ProdSales",
+			                [Material Movement Turnover Palletes]
+			        ),
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			
+			VAR AllSales =
+			    CALCULATE (
+			        [Material Movement Turnover Palletes],
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			
+			VAR CumulatedPctByProduct =
+			    ADDCOLUMNS (
+			        SalesByProductSupplier,
+			        "@CumulatedPct",
+			        VAR CurrentSalesAmt = [@ProdSales]
+			        VAR CumulatedSales =
+			            FILTER (
+			                SalesByProductSupplier,
+			                [@ProdSales] >= CurrentSalesAmt
+			            )
+			        RETURN
+			            DIVIDE (
+			                SUMX ( CumulatedSales, [@ProdSales] ),
+			                AllSales
+			            )
+			    )
+			
+			VAR ABCFrom =
+			    SELECTEDVALUE ( 'ABC'[ABCFrom] )
+			
+			VAR ABCTo =
+			    SELECTEDVALUE ( 'ABC'[ABCTo] )
+			
+			VAR IsABCInContext =
+			    NOT ISBLANK ( ABCFrom )
+			
+			VAR ProductsInClass =
+			    FILTER (
+			        CumulatedPctByProduct,
+			        [@CumulatedPct] > ABCFrom
+			            && [@CumulatedPct] <= ABCTo
+			    )
+			
+			RETURN
+			IF (
+			    IsABCInContext,
+			    /* === ABC řádek === */
+			    CALCULATE (
+			        [Material Movement Turnover Units],
+			        KEEPFILTERS ( ProductsInClass )
+			    ),
+			    /* === Total (bez ABC v kontextu) === */
+			    CALCULATE (
+			        [Material Movement Turnover Units],
+			        ALL ( 'ABC' )
+			    )
+			)
+			
+			```
+		lineageTag: 0e754e9b-bb62-4761-8b67-685824cfd1bf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Products classified by Orderlines' = ```
+			
+			VAR SalesByProductSupplier = 
+			    CALCULATETABLE (
+			        ADDCOLUMNS (
+			            SUMMARIZE (
+			                'Fact Material Movement',
+			                [MaterialMovement_ProductId]
+			            ),
+			            "@ProdSales",
+			                [Material Movement Turnover Count]
+			        ),
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			
+			VAR AllSales =
+			    CALCULATE (
+			        [Material Movement Turnover Count],
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			
+			VAR CumulatedPctByProduct =
+			    ADDCOLUMNS (
+			        SalesByProductSupplier,
+			        "@CumulatedPct",
+			        VAR CurrentSalesAmt = [@ProdSales]
+			        VAR CumulatedSales =
+			            FILTER (
+			                SalesByProductSupplier,
+			                [@ProdSales] >= CurrentSalesAmt
+			            )
+			        RETURN
+			            DIVIDE (
+			                SUMX ( CumulatedSales, [@ProdSales] ),
+			                AllSales
+			            )
+			    )
+			
+			VAR ABCFrom =
+			    SELECTEDVALUE ( 'ABC'[ABCFrom] )
+			
+			VAR ABCTo =
+			    SELECTEDVALUE ( 'ABC'[ABCTo] )
+			
+			VAR IsABCInContext =
+			    NOT ISBLANK ( ABCFrom )
+			
+			VAR ProductsInClass =
+			    FILTER (
+			        CumulatedPctByProduct,
+			        [@CumulatedPct] > ABCFrom
+			            && [@CumulatedPct] <= ABCTo
+			    )
+			
+			RETURN
+			IF (
+			    IsABCInContext,
+			    /* === ABC řádek === */
+			    CALCULATE (
+			        [Material Movement Product Count],
+			        KEEPFILTERS ( ProductsInClass )
+			    ),
+			    /* === Total (bez ABC v kontextu) === */
+			    CALCULATE (
+			        [Material Movement Product Count],
+			        ALL ( 'ABC' )
+			    )
+			)
+			
+			```
+		formatString: #,0
+		lineageTag: a3047397-6c16-4c33-b4fd-7db2a25720f9
+
+	measure 'Orderlines classified by Orderlines' = ```
+			
+			VAR SalesByProductSupplier = 
+			    CALCULATETABLE (
+			        ADDCOLUMNS (
+			            SUMMARIZE (
+			                'Fact Material Movement',
+			                [MaterialMovement_ProductId]
+			            ),
+			            "@ProdSales",
+			                [Material Movement Turnover Count]
+			        ),
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			
+			VAR AllSales =
+			    CALCULATE (
+			        [Material Movement Turnover Count],
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			
+			VAR CumulatedPctByProduct =
+			    ADDCOLUMNS (
+			        SalesByProductSupplier,
+			        "@CumulatedPct",
+			        VAR CurrentSalesAmt = [@ProdSales]
+			        VAR CumulatedSales =
+			            FILTER (
+			                SalesByProductSupplier,
+			                [@ProdSales] >= CurrentSalesAmt
+			            )
+			        RETURN
+			            DIVIDE (
+			                SUMX ( CumulatedSales, [@ProdSales] ),
+			                AllSales
+			            )
+			    )
+			
+			VAR ABCFrom =
+			    SELECTEDVALUE ( 'ABC'[ABCFrom] )
+			
+			VAR ABCTo =
+			    SELECTEDVALUE ( 'ABC'[ABCTo] )
+			
+			VAR IsABCInContext =
+			    NOT ISBLANK ( ABCFrom )
+			
+			VAR ProductsInClass =
+			    FILTER (
+			        CumulatedPctByProduct,
+			        [@CumulatedPct] > ABCFrom
+			            && [@CumulatedPct] <= ABCTo
+			    )
+			
+			RETURN
+			IF (
+			    IsABCInContext,
+			    /* === ABC řádek === */
+			    CALCULATE (
+			        [Material Movement Turnover Count],
+			        KEEPFILTERS ( ProductsInClass )
+			    ),
+			    /* === Total (bez ABC v kontextu) === */
+			    CALCULATE (
+			        [Material Movement Turnover Count],
+			        ALL ( 'ABC' )
+			    )
+			)
+			
+			```
+		formatString: #,0
+		lineageTag: bc9451e9-5f01-4181-be91-b9c847bdbf9b
+
+	measure 'Units classified by Orderlines' = ```
+			
+			VAR SalesByProductSupplier = 
+			    CALCULATETABLE (
+			        ADDCOLUMNS (
+			            SUMMARIZE (
+			                'Fact Material Movement',
+			                [MaterialMovement_ProductId]
+			            ),
+			            "@ProdSales",
+			                [Material Movement Turnover Count]
+			        ),
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			
+			VAR AllSales =
+			    CALCULATE (
+			        [Material Movement Turnover Count],
+			        ALLSELECTED ( 'Fact Material Movement' )
+			    )
+			
+			VAR CumulatedPctByProduct =
+			    ADDCOLUMNS (
+			        SalesByProductSupplier,
+			        "@CumulatedPct",
+			        VAR CurrentSalesAmt = [@ProdSales]
+			        VAR CumulatedSales =
+			            FILTER (
+			                SalesByProductSupplier,
+			                [@ProdSales] >= CurrentSalesAmt
+			            )
+			        RETURN
+			            DIVIDE (
+			                SUMX ( CumulatedSales, [@ProdSales] ),
+			                AllSales
+			            )
+			    )
+			
+			VAR ABCFrom =
+			    SELECTEDVALUE ( 'ABC'[ABCFrom] )
+			
+			VAR ABCTo =
+			    SELECTEDVALUE ( 'ABC'[ABCTo] )
+			
+			VAR IsABCInContext =
+			    NOT ISBLANK ( ABCFrom )
+			
+			VAR ProductsInClass =
+			    FILTER (
+			        CumulatedPctByProduct,
+			        [@CumulatedPct] > ABCFrom
+			            && [@CumulatedPct] <= ABCTo
+			    )
+			
+			RETURN
+			IF (
+			    IsABCInContext,
+			    /* === ABC řádek === */
+			    CALCULATE (
+			        [Material Movement Turnover Units],
+			        KEEPFILTERS ( ProductsInClass )
+			    ),
+			    /* === Total (bez ABC v kontextu) === */
+			    CALCULATE (
+			        [Material Movement Turnover Units],
+			        ALL ( 'ABC' )
+			    )
+			)
+			
+			```
+		formatString: #,0
+		lineageTag: 34bca02e-02c7-46db-87b0-aed8dca73f01
+
 	column ABCId
 		dataType: int64
 		formatString: 0

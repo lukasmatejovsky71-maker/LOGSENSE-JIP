@@ -6641,16 +6641,6 @@ cultureInfo en-US
 			          "orderline": {
 			            "State": "Generated"
 			          }
-			        },
-			        {
-			          "# Orderline": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -6845,26 +6835,6 @@ cultureInfo en-US
 			            },
 			            "Weight": 0.614
 			          }
-			        },
-			        {
-			          "SKU": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        },
-			        {
-			          "# SKU": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -6880,26 +6850,6 @@ cultureInfo en-US
 			        {
 			          "units": {
 			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "MJ": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        },
-			        {
-			          "# MJ": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -7612,16 +7562,6 @@ cultureInfo en-US
 			          "ICO palletes": {
 			            "State": "Generated"
 			          }
-			        },
-			        {
-			          "IČO": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -8057,9 +7997,812 @@ cultureInfo en-US
 			          }
 			        }
 			      ]
+			    },
+			    "fact_material_movement.material_movement_product_supplier_count": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact Material Movement",
+			          "ConceptualProperty": "Material Movement Product Supplier Count"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "material movement product supplier count": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "supplier count": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "product supplier count": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "movement product supplier count": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "material movement product supplier amount": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.757
+			          }
+			        },
+			        {
+			          "movement product supplier amount": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.748
+			          }
+			        },
+			        {
+			          "product supplier amount": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        },
+			        {
+			          "supplier amount": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "material movement artifact supplier count": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.624
+			          }
+			        },
+			        {
+			          "movement artifact supplier count": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "artifact supplier count": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "material movement item supplier count": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.605
+			          }
+			        },
+			        {
+			          "material movement merchandise supplier count": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.605
+			          }
+			        },
+			        {
+			          "material movement produce supplier count": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.605
+			          }
+			        }
+			      ]
+			    },
+			    "abc.product_suppliers_classified_by_palletes": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "ABC",
+			          "ConceptualProperty": "Product Suppliers classified by Palletes"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "product suppliers classified by palletes": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "artifact supplier classified by pallete": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.624
+			          }
+			        },
+			        {
+			          "item supplier classified by pallete": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.605
+			          }
+			        },
+			        {
+			          "merchandise supplier classified by pallete": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.605
+			          }
+			        },
+			        {
+			          "produce supplier classified by pallete": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.605
+			          }
+			        },
+			        {
+			          "# Dotavatelů": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Dodavatel": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "abc.orderlines_classified_by_palletes": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "ABC",
+			          "ConceptualProperty": "Orderlines classified by Palletes"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "orderlines classified by palletes": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "# Orderline": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "abc.units_classified_by_palletes": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "ABC",
+			          "ConceptualProperty": "Units classified by Palletes"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "units classified by palletes": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "unit classified by pallete": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.686
+			          }
+			        },
+			        {
+			          "# MJ": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "abc.products_classified_by_orderlines": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "ABC",
+			          "ConceptualProperty": "Products classified by Orderlines"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "products classified by orderlines": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "artifact classified by orderline": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "item classified by orderline": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.599
+			          }
+			        },
+			        {
+			          "merchandise classified by orderline": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.599
+			          }
+			        },
+			        {
+			          "produce classified by orderline": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.599
+			          }
+			        },
+			        {
+			          "goods classified by orderline": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "SKU": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "# SKU": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "abc.orderlines_classified_by_orderlines": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "ABC",
+			          "ConceptualProperty": "Orderlines classified by Orderlines"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "orderlines classified by orderlines": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Orderline": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "# Orderline": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "abc.units_classified_by_orderlines": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "ABC",
+			          "ConceptualProperty": "Units classified by Orderlines"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "units classified by orderlines": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "unit classified by orderline": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.686
+			          }
+			        },
+			        {
+			          "MJ": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "# MJ": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
+			    "abc_has_units_classified_by_orderlines": {
+			      "Binding": {
+			        "ConceptualEntity": "ABC"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "abc": {
+			          "Target": {
+			            "Entity": "abc"
+			          }
+			        },
+			        "abc.units_classified_by_orderlines": {
+			          "Target": {
+			            "Entity": "abc.units_classified_by_orderlines"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "abc"
+			            },
+			            "Object": {
+			              "Role": "abc.units_classified_by_orderlines"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "abcs_have_units_classified_by_orderlines"
+			        }
+			      ]
+			    },
+			    "abc_has_orderlines_classified_by_orderlines": {
+			      "Binding": {
+			        "ConceptualEntity": "ABC"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "abc": {
+			          "Target": {
+			            "Entity": "abc"
+			          }
+			        },
+			        "abc.orderlines_classified_by_orderlines": {
+			          "Target": {
+			            "Entity": "abc.orderlines_classified_by_orderlines"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "abc"
+			            },
+			            "Object": {
+			              "Role": "abc.orderlines_classified_by_orderlines"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "abcs_have_orderlines_classified_by_orderlines"
+			        }
+			      ]
+			    },
+			    "fact_material_movement_has_abc_products_classified_by_orderlines": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact Material Movement"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_material_movement": {
+			          "Target": {
+			            "Entity": "fact_material_movement"
+			          }
+			        },
+			        "abc.products_classified_by_orderlines": {
+			          "Target": {
+			            "Entity": "abc.products_classified_by_orderlines"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_material_movement"
+			            },
+			            "Object": {
+			              "Role": "abc.products_classified_by_orderlines"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_material_movements_have_products_classified_by_orderlines"
+			        }
+			      ]
+			    },
+			    "abc_has_products_classified_by_orderlines": {
+			      "Binding": {
+			        "ConceptualEntity": "ABC"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "abc": {
+			          "Target": {
+			            "Entity": "abc"
+			          }
+			        },
+			        "abc.products_classified_by_orderlines": {
+			          "Target": {
+			            "Entity": "abc.products_classified_by_orderlines"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "abc"
+			            },
+			            "Object": {
+			              "Role": "abc.products_classified_by_orderlines"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "abcs_have_products_classified_by_orderlines"
+			        }
+			      ]
+			    },
+			    "fact_material_movement_has_abc_units_classified_by_palletes": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact Material Movement"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_material_movement": {
+			          "Target": {
+			            "Entity": "fact_material_movement"
+			          }
+			        },
+			        "abc.units_classified_by_palletes": {
+			          "Target": {
+			            "Entity": "abc.units_classified_by_palletes"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_material_movement"
+			            },
+			            "Object": {
+			              "Role": "abc.units_classified_by_palletes"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_material_movements_have_units_classified_by_palletes"
+			        }
+			      ]
+			    },
+			    "abc_has_units_classified_by_palletes": {
+			      "Binding": {
+			        "ConceptualEntity": "ABC"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "abc": {
+			          "Target": {
+			            "Entity": "abc"
+			          }
+			        },
+			        "abc.units_classified_by_palletes": {
+			          "Target": {
+			            "Entity": "abc.units_classified_by_palletes"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "abc"
+			            },
+			            "Object": {
+			              "Role": "abc.units_classified_by_palletes"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "abcs_have_units_classified_by_palletes"
+			        }
+			      ]
+			    },
+			    "abc_has_orderlines_classified_by_palletes": {
+			      "Binding": {
+			        "ConceptualEntity": "ABC"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "abc": {
+			          "Target": {
+			            "Entity": "abc"
+			          }
+			        },
+			        "abc.orderlines_classified_by_palletes": {
+			          "Target": {
+			            "Entity": "abc.orderlines_classified_by_palletes"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "abc"
+			            },
+			            "Object": {
+			              "Role": "abc.orderlines_classified_by_palletes"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "abcs_have_orderlines_classified_by_palletes"
+			        }
+			      ]
+			    },
+			    "product_has_abc_product_suppliers_classified_by_palletes": {
+			      "Binding": {
+			        "ConceptualEntity": "Product"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "product": {
+			          "Target": {
+			            "Entity": "product"
+			          }
+			        },
+			        "abc.product_suppliers_classified_by_palletes": {
+			          "Target": {
+			            "Entity": "abc.product_suppliers_classified_by_palletes"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "product"
+			            },
+			            "Object": {
+			              "Role": "abc.product_suppliers_classified_by_palletes"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "products_have_product_suppliers_classified_by_palletes"
+			        }
+			      ]
+			    },
+			    "abc_has_product_suppliers_classified_by_palletes": {
+			      "Binding": {
+			        "ConceptualEntity": "ABC"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "abc": {
+			          "Target": {
+			            "Entity": "abc"
+			          }
+			        },
+			        "abc.product_suppliers_classified_by_palletes": {
+			          "Target": {
+			            "Entity": "abc.product_suppliers_classified_by_palletes"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "abc"
+			            },
+			            "Object": {
+			              "Role": "abc.product_suppliers_classified_by_palletes"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "abcs_have_product_suppliers_classified_by_palletes"
+			        }
+			      ]
+			    },
+			    "product_has_fact_material_movement_material_movement_product_supplier_count": {
+			      "Binding": {
+			        "ConceptualEntity": "Product"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "product": {
+			          "Target": {
+			            "Entity": "product"
+			          }
+			        },
+			        "fact_material_movement.material_movement_product_supplier_count": {
+			          "Target": {
+			            "Entity": "fact_material_movement.material_movement_product_supplier_count"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "product"
+			            },
+			            "Object": {
+			              "Role": "fact_material_movement.material_movement_product_supplier_count"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "products_have_material_movement_product_supplier_count"
+			        }
+			      ]
+			    },
+			    "fact_material_movement_has_abc_ICO_orderline": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact Material Movement"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_material_movement": {
+			          "Target": {
+			            "Entity": "fact_material_movement"
+			          }
+			        },
+			        "abc.ICO_orderline": {
+			          "Target": {
+			            "Entity": "abc.ICO_orderline"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_material_movement"
+			            },
+			            "Object": {
+			              "Role": "abc.ICO_orderline"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_material_movements_have_ICO_orderline"
+			        }
+			      ]
+			    },
 			    "fact_material_movement_has_abc_ICO_units": {
 			      "Binding": {
 			        "ConceptualEntity": "Fact Material Movement"
@@ -10616,7 +11359,7 @@ cultureInfo en-US
 			        }
 			      ]
 			    },
-			    "fact_material_movement_has_abc_ICO_orderline": {
+			    "fact_material_movement_has_abc_units_classified_by_orderlines": {
 			      "Binding": {
 			        "ConceptualEntity": "Fact Material Movement"
 			      },
@@ -10627,9 +11370,9 @@ cultureInfo en-US
 			            "Entity": "fact_material_movement"
 			          }
 			        },
-			        "abc.ICO_orderline": {
+			        "abc.units_classified_by_orderlines": {
 			          "Target": {
-			            "Entity": "abc.ICO_orderline"
+			            "Entity": "abc.units_classified_by_orderlines"
 			          }
 			        }
 			      },
@@ -10640,12 +11383,12 @@ cultureInfo en-US
 			              "Role": "fact_material_movement"
 			            },
 			            "Object": {
-			              "Role": "abc.ICO_orderline"
+			              "Role": "abc.units_classified_by_orderlines"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "fact_material_movements_have_ICO_orderline"
+			          "ID": "fact_material_movements_have_units_classified_by_orderlines"
 			        }
 			      ]
 			    },

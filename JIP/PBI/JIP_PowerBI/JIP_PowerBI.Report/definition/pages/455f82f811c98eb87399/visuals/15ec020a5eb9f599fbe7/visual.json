@@ -43,11 +43,12 @@
                       "Entity": "ABC"
                     }
                   },
-                  "Property": "Orderline"
+                  "Property": "Orderlines classified by Orderlines"
                 }
               },
-              "queryRef": "ABC.Orderline",
-              "nativeQueryRef": "Orderline"
+              "queryRef": "ABC.Orderlines classified by Orderlines",
+              "nativeQueryRef": "Orderline",
+              "displayName": "Orderline"
             }
           ]
         }

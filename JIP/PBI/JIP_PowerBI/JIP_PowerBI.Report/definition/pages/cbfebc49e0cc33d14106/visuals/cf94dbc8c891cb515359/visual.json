@@ -43,12 +43,12 @@
                       "Entity": "ABC"
                     }
                   },
-                  "Property": "ICO Palletes"
+                  "Property": "Product Suppliers classified by Palletes"
                 }
               },
-              "queryRef": "ABC.ICO Palletes",
-              "nativeQueryRef": "IČO",
-              "displayName": "IČO"
+              "queryRef": "ABC.Product Suppliers classified by Palletes",
+              "nativeQueryRef": "Dodavatel",
+              "displayName": "Dodavatel"
             }
           ]
         }
@@ -350,7 +350,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'IČO dle ABC (palety)'"
+                  "Value": "'Dodavatelé dle ABC (palety)'"
                 }
               }
             }
@@ -359,23 +359,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "92eb7d47de48cf6fdbd0",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "ABC"
-              }
-            },
-            "Property": "ABCName"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

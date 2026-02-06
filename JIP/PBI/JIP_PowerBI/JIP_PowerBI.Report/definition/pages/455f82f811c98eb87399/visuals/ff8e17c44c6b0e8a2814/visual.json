@@ -43,10 +43,10 @@
                       "Entity": "ABC"
                     }
                   },
-                  "Property": "Products"
+                  "Property": "Products classified by Orderlines"
                 }
               },
-              "queryRef": "ABC.products",
+              "queryRef": "ABC.Products classified by Orderlines",
               "nativeQueryRef": "# SKU",
               "displayName": "# SKU"
             },
@@ -60,7 +60,7 @@
                           "Entity": "ABC"
                         }
                       },
-                      "Property": "Products"
+                      "Property": "Products classified by Orderlines"
                     }
                   },
                   "Right": {
@@ -72,7 +72,7 @@
                               "Entity": "ABC"
                             }
                           },
-                          "Property": "Products"
+                          "Property": "Products classified by Orderlines"
                         }
                       },
                       "Scope": [
@@ -87,7 +87,7 @@
                   "Operator": 3
                 }
               },
-              "queryRef": "Divide(ABC.Products, ScopedEval(ABC.Products, [Role.Columns]))",
+              "queryRef": "Divide(ABC.Products classified by Orderlines, ScopedEval(ABC.Products classified by Orderlines, [Role.Columns]))",
               "nativeQueryRef": "% SKU",
               "displayName": "% SKU"
             },
@@ -99,10 +99,10 @@
                       "Entity": "ABC"
                     }
                   },
-                  "Property": "Orderline"
+                  "Property": "Orderlines classified by Orderlines"
                 }
               },
-              "queryRef": "ABC.Orderline",
+              "queryRef": "ABC.Orderlines classified by Orderlines",
               "nativeQueryRef": "# Orderline",
               "displayName": "# Orderline"
             },
@@ -116,7 +116,7 @@
                           "Entity": "ABC"
                         }
                       },
-                      "Property": "Orderline"
+                      "Property": "Orderlines classified by Orderlines"
                     }
                   },
                   "Right": {
@@ -128,57 +128,7 @@
                               "Entity": "ABC"
                             }
                           },
-                          "Property": "Orderline"
-                        }
-                      },
-                      "Scope": []
-                    }
-                  },
-                  "Operator": 3
-                }
-              },
-              "queryRef": "Divide(ABC.Orderline, ScopedEval(ABC.Orderline, []))",
-              "nativeQueryRef": "% Orderline",
-              "displayName": "% Orderline"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "ABC"
-                    }
-                  },
-                  "Property": "Units"
-                }
-              },
-              "queryRef": "ABC.Units",
-              "nativeQueryRef": "# MJ",
-              "displayName": "# MJ"
-            },
-            {
-              "field": {
-                "Arithmetic": {
-                  "Left": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "ABC"
-                        }
-                      },
-                      "Property": "Units"
-                    }
-                  },
-                  "Right": {
-                    "ScopedEval": {
-                      "Expression": {
-                        "Measure": {
-                          "Expression": {
-                            "SourceRef": {
-                              "Entity": "ABC"
-                            }
-                          },
-                          "Property": "Units"
+                          "Property": "Orderlines classified by Orderlines"
                         }
                       },
                       "Scope": [
@@ -193,7 +143,63 @@
                   "Operator": 3
                 }
               },
-              "queryRef": "Divide(ABC.Units, ScopedEval(ABC.Units, [Role.Columns]))",
+              "queryRef": "Divide(ABC.Orderlines classified by Orderlines, ScopedEval(ABC.Orderlines classified by Orderlines, [Role.Columns]))",
+              "nativeQueryRef": "% Orderline",
+              "displayName": "% Orderline"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ABC"
+                    }
+                  },
+                  "Property": "Units classified by Orderlines"
+                }
+              },
+              "queryRef": "ABC.Units classified by Orderlines",
+              "nativeQueryRef": "# MJ",
+              "displayName": "# MJ"
+            },
+            {
+              "field": {
+                "Arithmetic": {
+                  "Left": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "ABC"
+                        }
+                      },
+                      "Property": "Units classified by Orderlines"
+                    }
+                  },
+                  "Right": {
+                    "ScopedEval": {
+                      "Expression": {
+                        "Measure": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "ABC"
+                            }
+                          },
+                          "Property": "Units classified by Orderlines"
+                        }
+                      },
+                      "Scope": [
+                        {
+                          "RoleRef": {
+                            "Role": "Columns"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "Operator": 3
+                }
+              },
+              "queryRef": "Divide(ABC.Units classified by Orderlines, ScopedEval(ABC.Units classified by Orderlines, [Role.Columns]))",
               "nativeQueryRef": "% MJ",
               "displayName": "% MJ"
             }

@@ -43,11 +43,11 @@
                       "Entity": "ABC"
                     }
                   },
-                  "Property": "ICO Units"
+                  "Property": "Units classified by Palletes"
                 }
               },
-              "queryRef": "ABC.ICO Units",
-              "nativeQueryRef": "ICO Units"
+              "queryRef": "ABC.Units classified by Palletes",
+              "nativeQueryRef": "Units classified by Palletes"
             }
           ]
         }
@@ -342,7 +342,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'IČO dle ABC (MJ)'"
+                  "Value": "'MJ dle ABC (palety)'"
                 }
               }
             },
@@ -358,23 +358,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "c387224aec2f18879f82",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "ABC"
-              }
-            },
-            "Property": "ABCName"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

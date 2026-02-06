@@ -20,16 +20,16 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Supplier"
+                      "Entity": "Product"
                     }
                   },
-                  "Property": "SupplierFullName"
+                  "Property": "ProductSupplierFullName"
                 }
               },
-              "queryRef": "Supplier.SupplierFullName",
-              "nativeQueryRef": "IČO",
+              "queryRef": "Product.ProductSupplierFullName",
+              "nativeQueryRef": "Dodavatel",
               "active": true,
-              "displayName": "IČO"
+              "displayName": "Dodavatel"
             }
           ]
         }
@@ -77,6 +77,44 @@
                 "Literal": {
                   "Value": "true"
                 }
+              }
+            },
+            "selfFilter": {
+              "filter": {
+                "Version": 2,
+                "From": [
+                  {
+                    "Name": "p",
+                    "Entity": "Product",
+                    "Type": 0
+                  }
+                ],
+                "Where": [
+                  {
+                    "Condition": {
+                      "Contains": {
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "p"
+                              }
+                            },
+                            "Property": "ProductSupplierFullName"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "'stock'"
+                          }
+                        }
+                      }
+                    },
+                    "Annotations": {
+                      "PowerBI.MParameterBehavior": 1
+                    }
+                  }
+                ]
               }
             }
           }

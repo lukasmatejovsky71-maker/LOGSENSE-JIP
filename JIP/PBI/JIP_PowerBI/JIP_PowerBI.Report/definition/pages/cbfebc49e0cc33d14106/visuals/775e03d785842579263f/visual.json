@@ -3,10 +3,10 @@
   "name": "775e03d785842579263f",
   "position": {
     "x": 0,
-    "y": 139.25363693864642,
+    "y": 139,
     "z": 0,
-    "height": 284.98418722327642,
-    "width": 519.77229601518025,
+    "height": 285,
+    "width": 637,
     "tabOrder": 0
   },
   "visual": {
@@ -43,12 +43,12 @@
                       "Entity": "ABC"
                     }
                   },
-                  "Property": "Products"
+                  "Property": "Product Suppliers classified by Palletes"
                 }
               },
-              "queryRef": "ABC.products",
-              "nativeQueryRef": "# SKU",
-              "displayName": "# SKU"
+              "queryRef": "ABC.Product Supplier Palletes classified by Palletes",
+              "nativeQueryRef": "# Dotavatelů",
+              "displayName": "# Dotavatelů"
             },
             {
               "field": {
@@ -60,7 +60,7 @@
                           "Entity": "ABC"
                         }
                       },
-                      "Property": "Products"
+                      "Property": "Product Suppliers classified by Palletes"
                     }
                   },
                   "Right": {
@@ -72,7 +72,7 @@
                               "Entity": "ABC"
                             }
                           },
-                          "Property": "Products"
+                          "Property": "Product Suppliers classified by Palletes"
                         }
                       },
                       "Scope": [
@@ -87,9 +87,9 @@
                   "Operator": 3
                 }
               },
-              "queryRef": "Divide(ABC.Products, ScopedEval(ABC.Products, [Role.Columns]))",
-              "nativeQueryRef": "% SKU",
-              "displayName": "% SKU"
+              "queryRef": "Divide(ABC.Product Suppliers classified by Palletes, ScopedEval(ABC.Product Suppliers classified by Palletes, [Role.Columns]))",
+              "nativeQueryRef": "% Dotavatelů",
+              "displayName": "% Dotavatelů"
             },
             {
               "field": {
@@ -99,10 +99,10 @@
                       "Entity": "ABC"
                     }
                   },
-                  "Property": "Orderline"
+                  "Property": "Orderlines classified by Palletes"
                 }
               },
-              "queryRef": "ABC.Orderline",
+              "queryRef": "ABC.Orderlines classified by Palletes",
               "nativeQueryRef": "# Orderline",
               "displayName": "# Orderline"
             },
@@ -116,7 +116,7 @@
                           "Entity": "ABC"
                         }
                       },
-                      "Property": "Orderline"
+                      "Property": "Orderlines classified by Palletes"
                     }
                   },
                   "Right": {
@@ -128,57 +128,7 @@
                               "Entity": "ABC"
                             }
                           },
-                          "Property": "Orderline"
-                        }
-                      },
-                      "Scope": []
-                    }
-                  },
-                  "Operator": 3
-                }
-              },
-              "queryRef": "Divide(ABC.Orderline, ScopedEval(ABC.Orderline, []))",
-              "nativeQueryRef": "% Orderline",
-              "displayName": "% Orderline"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "ABC"
-                    }
-                  },
-                  "Property": "Units"
-                }
-              },
-              "queryRef": "ABC.Units",
-              "nativeQueryRef": "# MJ",
-              "displayName": "# MJ"
-            },
-            {
-              "field": {
-                "Arithmetic": {
-                  "Left": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "ABC"
-                        }
-                      },
-                      "Property": "Units"
-                    }
-                  },
-                  "Right": {
-                    "ScopedEval": {
-                      "Expression": {
-                        "Measure": {
-                          "Expression": {
-                            "SourceRef": {
-                              "Entity": "ABC"
-                            }
-                          },
-                          "Property": "Units"
+                          "Property": "Orderlines classified by Palletes"
                         }
                       },
                       "Scope": [
@@ -193,7 +143,63 @@
                   "Operator": 3
                 }
               },
-              "queryRef": "Divide(ABC.Units, ScopedEval(ABC.Units, [Role.Columns]))",
+              "queryRef": "Divide(ABC.Orderlines classified by Palletes, ScopedEval(ABC.Orderlines classified by Palletes, [Role.Columns]))",
+              "nativeQueryRef": "% Orderline",
+              "displayName": "% Orderline"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ABC"
+                    }
+                  },
+                  "Property": "Units classified by Palletes"
+                }
+              },
+              "queryRef": "ABC.Units classified by Palletes",
+              "nativeQueryRef": "# MJ",
+              "displayName": "# MJ"
+            },
+            {
+              "field": {
+                "Arithmetic": {
+                  "Left": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "ABC"
+                        }
+                      },
+                      "Property": "Units classified by Palletes"
+                    }
+                  },
+                  "Right": {
+                    "ScopedEval": {
+                      "Expression": {
+                        "Measure": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "ABC"
+                            }
+                          },
+                          "Property": "Units classified by Palletes"
+                        }
+                      },
+                      "Scope": [
+                        {
+                          "RoleRef": {
+                            "Role": "Columns"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "Operator": 3
+                }
+              },
+              "queryRef": "Divide(ABC.Units classified by Palletes, ScopedEval(ABC.Units classified by Palletes, [Role.Columns]))",
               "nativeQueryRef": "% MJ",
               "displayName": "% MJ"
             }

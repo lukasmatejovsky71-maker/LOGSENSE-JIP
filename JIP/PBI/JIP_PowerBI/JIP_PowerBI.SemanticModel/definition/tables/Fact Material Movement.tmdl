@@ -62,7 +62,7 @@ table 'Fact Material Movement'
 		lineageTag: 453fc21c-50da-4553-9665-736da836451c
 
 	measure 'Material Movement Product Count' = DISTINCTCOUNT('Fact Material Movement'[MaterialMovement_ProductId])
-		formatString: 0
+		formatString: #,0
 		lineageTag: 29896474-33dd-4319-a225-bba382704edc
 
 	measure 'Material Movement Turnover Full Palletes' = SUM('Fact Material Movement'[MaterialMovementTurnoverFullPalletes])
@@ -72,6 +72,18 @@ table 'Fact Material Movement'
 	measure 'Material Movement Supplier Count' = DISTINCTCOUNT('Fact Material Movement'[MaterialMovement_SupplierId])
 		formatString: 0
 		lineageTag: 3580e7dc-0630-4b15-b0bd-d4c7b059f07e
+
+	measure 'Material Movement Product Supplier Count' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( 'Product'[ProductSupplier] ),
+			    TREATAS (
+			        VALUES ( 'Fact Material Movement'[MaterialMovement_ProductId]),
+			        'Product'[ProductID]
+			    )
+			)
+		formatString: #,0
+		lineageTag: f46028cb-8fdf-4bd0-8ef1-a029bf2be399
 
 	column MaterialMovement_DateId
 		dataType: int64
