@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
   "name": "a3c43f4ca3803e534315",
   "position": {
-    "x": 649.090909090909,
+    "x": 649.16666666666674,
     "y": 0,
     "z": 2000,
-    "height": 62.72727272727272,
-    "width": 168.18181818181816,
+    "height": 62.5,
+    "width": 287.5,
     "tabOrder": 2000
   },
   "visual": {
@@ -20,16 +20,16 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Supplier"
+                      "Entity": "Product"
                     }
                   },
-                  "Property": "SupplierFullName"
+                  "Property": "ProductSupplierFullName"
                 }
               },
-              "queryRef": "Supplier.SupplierFullName",
-              "nativeQueryRef": "IČO",
+              "queryRef": "Product.ProductSupplierFullName",
+              "nativeQueryRef": "Dodavatel",
               "active": true,
-              "displayName": "IČO"
+              "displayName": "Dodavatel"
             }
           ]
         }

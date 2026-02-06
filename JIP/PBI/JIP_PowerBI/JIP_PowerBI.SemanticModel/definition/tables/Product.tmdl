@@ -45,6 +45,30 @@ table Product
 
 		annotation SummarizationSetBy = Automatic
 
+	column ProductSupplier
+		dataType: string
+		lineageTag: fc578890-fe4e-439c-a6c2-9efe4835ce42
+		summarizeBy: none
+		sourceColumn: ProductSupplier
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSupplierDescription
+		dataType: string
+		lineageTag: d228a223-b610-46c6-a35e-162788555cbc
+		summarizeBy: none
+		sourceColumn: ProductSupplierDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSupplierFullName
+		dataType: string
+		lineageTag: b89f223f-5a08-4291-99e2-c558ef861c67
+		summarizeBy: none
+		sourceColumn: ProductSupplierFullName
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Product = m
 		mode: import
 		source =

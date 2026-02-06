@@ -56,16 +56,16 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Supplier"
+                      "Entity": "Product"
                     }
                   },
-                  "Property": "SupplierFullName"
+                  "Property": "ProductSupplierFullName"
                 }
               },
-              "queryRef": "Supplier.SupplierFullName",
-              "nativeQueryRef": "IČO",
+              "queryRef": "Product.ProductSupplierFullName",
+              "nativeQueryRef": "Dodavatel",
               "active": false,
-              "displayName": "IČO"
+              "displayName": "Dodavatel"
             }
           ]
         },
@@ -162,9 +162,21 @@
           },
           {
             "queryRefs": [
-              "Supplier.SupplierFullName"
+              "Product.ProductSupplierFullName"
             ],
             "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Product"
+                    }
+                  },
+                  "Property": "ProductSupplierFullName"
+                }
+              }
+            ],
             "isPinned": true
           }
         ],

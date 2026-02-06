@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Příjmy a výdeje dle IČO",
+                    "value": "Příjmy dle dodavatele",
                     "textStyle": {
                       "fontSize": "20pt"
                     }

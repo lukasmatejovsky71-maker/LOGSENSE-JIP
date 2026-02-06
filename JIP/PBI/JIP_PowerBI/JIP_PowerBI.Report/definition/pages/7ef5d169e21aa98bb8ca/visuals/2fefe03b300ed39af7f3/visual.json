@@ -13,26 +13,6 @@
     "visualType": "pivotTable",
     "query": {
       "queryState": {
-        "Columns": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Movement Type"
-                    }
-                  },
-                  "Property": "MovementTypeName"
-                }
-              },
-              "queryRef": "Movement Type.MovementTypeName",
-              "nativeQueryRef": "Typ pohybu",
-              "active": true,
-              "displayName": "Typ pohybu"
-            }
-          ]
-        },
         "Rows": {
           "projections": [
             {
@@ -40,16 +20,16 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Supplier"
+                      "Entity": "Product"
                     }
                   },
-                  "Property": "SupplierFullName"
+                  "Property": "ProductSupplierFullName"
                 }
               },
-              "queryRef": "Supplier.SupplierFullName",
-              "nativeQueryRef": "IČO",
+              "queryRef": "Product.ProductSupplierFullName",
+              "nativeQueryRef": "Dodavatel",
               "active": true,
-              "displayName": "IČO"
+              "displayName": "Dodavatel"
             },
             {
               "field": {
@@ -64,7 +44,7 @@
               },
               "queryRef": "Product.ProductFullName",
               "nativeQueryRef": "SKU",
-              "active": false,
+              "active": true,
               "displayName": "SKU"
             }
           ]
@@ -143,7 +123,7 @@
         "levels": [
           {
             "queryRefs": [
-              "Supplier.SupplierFullName"
+              "Product.ProductSupplierFullName"
             ],
             "isCollapsed": true,
             "identityKeys": [
@@ -151,10 +131,10 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Supplier"
+                      "Entity": "Product"
                     }
                   },
-                  "Property": "SupplierFullName"
+                  "Property": "ProductSupplierFullName"
                 }
               }
             ],
@@ -180,7 +160,20 @@
             "isPinned": true
           }
         ],
-        "root": {}
+        "root": {
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'#N/A - #N/A'"
+                  }
+                }
+              ],
+              "isToggled": true
+            }
+          ]
+        }
       }
     ],
     "objects": {
@@ -265,5 +258,79 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "f4d3b5fb0d43013ebf73",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Product"
+              }
+            },
+            "Property": "ProductFullName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "935d207f055ca1397c81",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Fact Material Movement"
+              }
+            },
+            "Property": "Material Movement Turnover Count"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5be1ed8e62606ae44581",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Fact Material Movement"
+              }
+            },
+            "Property": "Material Movement Turnover Units"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "7d9354c26cb70cb0f433",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Fact Material Movement"
+              }
+            },
+            "Property": "Material Movement Turnover Palletes"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f7f1b9fe66f7d2445414",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Fact Material Movement"
+              }
+            },
+            "Property": "Material Movement Turnover Full Palletes"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

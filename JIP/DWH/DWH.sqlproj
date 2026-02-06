@@ -160,6 +160,7 @@
     </None>
     <Build Include="dbo\Views\v_DimMovementType.sql" />
     <Build Include="dsa\Tables\Product.sql" />
+    <Build Include="dbo\Functions\f_GetFullName.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DWH.publish.xml" />
